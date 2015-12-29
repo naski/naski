@@ -1,6 +1,9 @@
 <?php
 
+// Classes des composants
 require __DIR__ . '/vendor/autoload.php';
+
+// Classes du framework et du projet
 require __DIR__ . '/core/autoload.php';
 
 $IM = new InstancesManager();
