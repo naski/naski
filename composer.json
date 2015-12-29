@@ -3,6 +3,7 @@
         "monolog/monolog": "1.0.*",
         "jenssegers/date": "^3.1",
         "phpunit/php-timer": "^1.0",
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "kriswallsmith/assetic": "^1.3"
     }
 }
