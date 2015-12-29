@@ -1,9 +1,5 @@
 <?php
 
-class BadQueryException extends Exception {
-
-}
-
 abstract class DatabaseAbstract {
 
     protected $_prefixe = '';
@@ -13,7 +9,7 @@ abstract class DatabaseAbstract {
     protected $_lastQuery = "";
     protected $_result;
 
-    public function connect(array) {
+    public function connect($array) {
 
     }
 
