@@ -1,4 +1,6 @@
 vendor/
+app/cache
+app/logs
 
 # Provisoirement
 composer.lock
