@@ -1,0 +1,6 @@
+{
+    "require": {
+        "monolog/monolog": "1.0.*",
+        "jenssegers/date": "^3.1"
+    }
+}
