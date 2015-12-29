@@ -10,4 +10,10 @@ class InstancesManager {
         $this->$nameInstance = $instance;
     }
 
+    public function putInstancesIn($object) {
+        foreach ($this as $key => $value) {
+            $object->$key = $value;
+        }
+    }
+
 }
