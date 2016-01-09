@@ -1,4 +1,5 @@
 {
+    "version": "dev-master",
     "name": "doelia/pdo",
     "description": "PHP Interface for SQL SQBD",
     "authors": [
@@ -14,6 +15,6 @@
     },
     "license": "MIT",
     "require": {
-    "php": ">=5.3.0"
-  },
+        "php": ">=5.3.0"
+    }
 }
