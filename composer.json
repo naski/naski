@@ -9,7 +9,8 @@
     ],
     "require": {
         "psr-0": {
-            "doeliaPDO": "src/"
+            "DoePdo": "src/"
         }
-    }
+    },
+    "version": "0.0.1"
 }
