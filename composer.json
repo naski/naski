@@ -11,10 +11,8 @@
     "require": {
         "psr-0": {
             "DoePdo": "src/"
-        }
-    },
-    "license": "MIT",
-    "require": {
+        },
         "php": ">=5.3.0"
-    }
+    },
+    "license": "MIT"
 }
