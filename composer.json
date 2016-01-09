@@ -12,5 +12,8 @@
             "DoePdo": "src/"
         }
     },
-    "version": "1.0.0"
+    "license": "MIT",
+    "require": {
+    "php": ">=5.3.0"
+  },
 }
