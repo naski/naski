@@ -1,0 +1,15 @@
+{
+    "name": "doelia/pdo",
+    "description": "PHP Interface for SQL SQBD",
+    "authors": [
+        {
+            "name": "Doelia",
+            "email": "kyxalia@gmail.com"
+        }
+    ],
+    "require": {
+        "psr-0": {
+            "doeliaPDO": "src/"
+        }
+    }
+}
