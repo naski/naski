@@ -8,10 +8,12 @@
             "email": "kyxalia@gmail.com"
         }
     ],
-    "require": {
+    "autoload": {
         "psr-0": {
             "DoePdo": "src/"
-        },
+        }
+    },
+    "require": {
         "php": ">=5.3.0"
     },
     "license": "MIT"
