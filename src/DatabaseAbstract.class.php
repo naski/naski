@@ -11,6 +11,7 @@ abstract class DatabaseAbstract {
     protected $_lastQuery = "";
     protected $_result;
     public $testVar;
+    public $testVar2;
 
     public function connect($array) {
 
