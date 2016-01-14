@@ -12,6 +12,7 @@ abstract class DatabaseAbstract {
     protected $_result;
     public $testVar;
     public $testVar2;
+    public $testVar3;
 
     public function connect($array) {
 
