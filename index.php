@@ -8,6 +8,11 @@ require __DIR__ . '/core/autoload.php';
 
 $IM = new InstancesManager();
 
+// Connexion SQL
+{
+    $pdo = new MySQLDatabase();
+}
+
 // Moteur de template twig
 {
     $loader = new Twig_Loader_Filesystem(__DIR__ . '/web/');
