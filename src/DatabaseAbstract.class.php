@@ -10,6 +10,7 @@ abstract class DatabaseAbstract {
 
     protected $_lastQuery = "";
     protected $_result;
+    public $testVar;
 
     public function connect($array) {
 
