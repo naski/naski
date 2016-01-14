@@ -9,8 +9,8 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "DoePdo": "src/"
+        "psr-4": {
+            "DoePdo\\": "src/"
         }
     },
     "require": {
