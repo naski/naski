@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "dev-master",
     "name": "doelia/pdo",
     "description": "PHP Interface for SQL SQBD",
     "authors": [
