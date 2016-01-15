@@ -62,7 +62,7 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
     {
         $q = $this->_db->query("SELECT * FROM tests");
         $l = $q->fetch();
-        $this->assertEquals($l['row1'], 'v11');
+        $this->assertEquals($l['row1'], 'v31');
     }
 
     /**
