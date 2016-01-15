@@ -18,13 +18,8 @@ abstract class AbstractDatabase
      */
     abstract public function connect($array);
 
-    public function disconnect()
-    {
-
-    }
-
     /**
-     * Traite la query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
+     *  Traite la query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
      */
     public function query($query)
     {

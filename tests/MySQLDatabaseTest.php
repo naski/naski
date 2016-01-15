@@ -50,4 +50,13 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
         $this->_db->query("INSERT into `tests` ( `row1`, `row2`, `row3`) VALUES ( 'v11', 'v12', 'v13')");
     }
 
+    /**
+     * @depends testInsert
+     */
+    public function testSelect() {
+        $q = $this->_db->query("SELECT * FROM tests");
+        $l = $q->fetch();
+        $this->assertEquals($l['row1'], 'v11');
+    }
+
 }
