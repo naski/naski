@@ -2,17 +2,12 @@
 
 namespace DoePdo;
 
-class PostgreSQLDatabase extends AbstractDatabase
+class PostgreSQLDatabase extends PdoDatabase
 {
 
-    protected function sendQuery($query)
+    public function getPrefixe()
     {
-        $result = pg_query($this->pdo, $query);
-		if ($this->result === false) {
-            $error = pg_last_error($this->pdo);
-			throw new BadQueryException($error);
-		}
-        return $result;
+        return "pgsql";
     }
 
 }

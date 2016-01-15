@@ -6,7 +6,6 @@ abstract class AbstractDatabase
 {
 
     protected $_prefixe = '';
-    protected $_pdo = null; // Objet PDO abstrait (Mysql...)
     protected $_nRequests = 0;
 
     protected $_lastQuery = "";
@@ -17,11 +16,6 @@ abstract class AbstractDatabase
      *  @param $array keys: host, dbname, username, password
      */
     abstract public function connect(array $array);
-
-    /**
-     *   Envoi la requete au serveur et retourne le résultat
-     */
-    abstract protected function sendQuery($query);
 
     /**
      *  Traite la query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
