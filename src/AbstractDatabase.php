@@ -45,7 +45,7 @@ abstract class AbstractDatabase
 			$keys .= '`'.$key.'`,';
 		}
 
-		$quotedValues = substr_replace($quotedValues ,"",-1);
+		$quotedValues = substr_replace($quotedValues, "", -1);
 		$keys = substr_replace($keys ,"", -1);
     	$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", $table, $keys, $quotedValues);
 
