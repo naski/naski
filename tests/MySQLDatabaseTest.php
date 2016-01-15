@@ -16,7 +16,7 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
             'host' => '127.0.0.1',
             'dbname' => 'test',
             'username' => 'root',
-            'password' => 'wugaxu',
+            'password' => '',
         ));
     }
 
@@ -63,6 +63,23 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
         $q = $this->_db->query("SELECT * FROM tests");
         $l = $q->fetch();
         $this->assertEquals($l['row1'], 'v11');
+    }
+
+    /**
+     * @depends testInsert
+     */
+    public function testUpdate()
+    {
+        $this->_db->update("tests",
+            array(
+                "row1" => "v11.1",
+                "row2" => "v12.1"
+            ),
+            "WHERE row1='v11'"
+        );
+        $q = $this->_db->query("SELECT * FROM tests");
+        $l = $q->fetch();
+        $this->assertEquals($l['row1'], 'v11.1');
     }
 
 }

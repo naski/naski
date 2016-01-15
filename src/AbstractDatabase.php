@@ -19,6 +19,11 @@ abstract class AbstractDatabase
     abstract public function connect(array $array);
 
     /**
+     *   Envoi la requete au serveur et retourne le résultat
+     */
+    abstract protected function sendQuery($query);
+
+    /**
      *  Traite la query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
      */
     public function query($query)
@@ -46,15 +51,25 @@ abstract class AbstractDatabase
 		}
 
 		$quotedValues = substr_replace($quotedValues, "", -1);
-		$keys = substr_replace($keys ,"", -1);
+		$keys = substr_replace($keys, "", -1);
     	$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", $table, $keys, $quotedValues);
 
 		return $this->query($query);
     }
 
-    /**
-     *   Envoi la requete au serveur et retourne le résultat
-     */
-    abstract protected function sendQuery($query);
+    public function update($table, $insertArray, $cond, $addQuotes = true)
+    {
+		$setter = '';
+
+		foreach ($insertArray as $key => $value) {
+			$setter .= "$key=";
+			$setter .= $addQuotes ? ("'$value',") : "$value,";
+		}
+
+		$setter = substr_replace($setter, "", -1);
+    	$query = sprintf("UPDATE %s SET %s %s", $table, $setter, $cond);
+
+		return $this->query($query);
+	}
 
 }
