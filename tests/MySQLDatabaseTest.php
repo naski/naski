@@ -8,17 +8,25 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
 {
     private $_bd;
 
-    public function testConnect()
+    protected function setUp()
     {
         $this->_db = new MySQLDatabase();
         $this->_db->connect(array(
             'host' => '127.0.0.1',
             'dbname' => 'test',
             'username' => 'root',
-            'password' => '',
+            'password' => 'wugaxu',
         ));
     }
 
+    public function testConnect()
+    {
+
+    }
+
+    /**
+     * @depends testConnect
+     */
     public function testCreateTable() {
         $this->_db->query("
         DROP TABLE IF EXISTS `tests`;
@@ -31,4 +39,5 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
         ");
     }
+
 }

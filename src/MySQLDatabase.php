@@ -23,7 +23,7 @@ class MySQLDatabase extends AbstractDatabase
         );
 
         try {
-            $this->pdo = new \PDO(
+            $this->_pdo = new \PDO(
                 'mysql:host='.$array['host'].';dbname='.$array['dbname'].'',
                 $array['username'],
                 $array['password'],
