@@ -34,8 +34,7 @@ abstract class AbstractDatabase
             $this->_result = $this->sendQuery($query);
             return $this->_result;
         } catch (BadQueryException $e) {
-            $message = $e->getMessage();
-            // TODO gérer les messages d'erreurs
+            throw $e;
         }
     }
 

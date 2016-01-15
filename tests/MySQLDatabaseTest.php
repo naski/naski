@@ -3,6 +3,7 @@
 require('bootstrap.php');
 
 use DoePdo\MySQLDatabase;
+use DoePdo\BadQueryException;
 
 class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
 {
@@ -27,7 +28,8 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
     /**
      * @depends testConnect
      */
-    public function testCreateTable() {
+    public function testCreateTable()
+    {
         $this->_db->query("
         DROP TABLE IF EXISTS `tests`;
         CREATE TABLE `tests` (
@@ -38,6 +40,14 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
           PRIMARY KEY (`ID`)
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
         ");
+    }
+
+    /**
+     * @depends testCreateTable
+     */
+    public function testInsert()
+    {
+        $this->_db->query("INSERT into `testss` ( `row1`, `row2`, `row3`) VALUES ( 'v11', 'v12', 'v13')");
     }
 
 }

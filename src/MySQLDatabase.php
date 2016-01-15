@@ -5,17 +5,6 @@ namespace DoePdo;
 class MySQLDatabase extends AbstractDatabase
 {
 
-    protected function sendQuery($query)
-    {
-        try {
-            return $this->_pdo->query($query);
-        }
-        catch (Exception $e) {
-			$error = $e->getMessage();
-			throw new BadQueryException($error);
-		}
-    }
-
     public function connect($array)
     {
         $options = array(
@@ -29,10 +18,22 @@ class MySQLDatabase extends AbstractDatabase
                 $array['password'],
                 $options
             );
+            $this->_pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); // Set Errorhandling to Exception
         }
-        catch (\PDOException $e) {
+        catch (\Exception $e) {
 			$error = $e->getMessage();
 			throw new ConnexionFailureException($error);
+		}
+    }
+
+    protected function sendQuery($query)
+    {
+        try {
+            return $this->_pdo->query($query);
+        }
+        catch (\Exception $e) {
+			$error = $e->getMessage();
+			throw new BadQueryException($error);
 		}
     }
 
