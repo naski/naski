@@ -2,7 +2,7 @@
 
 namespace DoePdo;
 
-abstract class PdoDatabase
+abstract class PdoDatabase extends AbstractDatabase
 {
 
     protected $_pdo = null; // Objet PDO abstrait (Mysql...)
