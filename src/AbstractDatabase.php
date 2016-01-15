@@ -2,7 +2,8 @@
 
 namespace DoePdo;
 
-abstract class DatabaseAbstract {
+abstract class AbstractDatabase
+{
 
     protected $_prefixe = '';
     protected $_pdo = null; // Objet PDO abstrait (Mysql...)
@@ -11,18 +12,22 @@ abstract class DatabaseAbstract {
     protected $_lastQuery = "";
     protected $_result;
 
-    public function connect($array) {
+    /**
+     *  throws ConnexionFailureException
+     *  @param $array keys: host, dbname, username, password
+     */
+    abstract public function connect($array);
 
-    }
-
-    public function disconnect() {
+    public function disconnect()
+    {
 
     }
 
     /**
      * Traite la query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
      */
-    public function query($query) {
+    public function query($query)
+    {
         $this->_nRequests++;
         $this->_lastQuery = $query;
         try {

@@ -2,9 +2,11 @@
 
 namespace DoePdo;
 
-class MySQLDatabase extends DatabaseAbstract {
+class MySQLDatabase extends AbstractDatabase
+{
 
-    protected function sendQuery($query) {
+    protected function sendQuery($query)
+    {
         try {
             return $this->_pdo->query($query);
         }
@@ -14,5 +16,24 @@ class MySQLDatabase extends DatabaseAbstract {
 		}
     }
 
+    public function connect($array)
+    {
+        $options = array(
+
+        );
+
+        try {
+            $this->pdo = new \PDO(
+                'mysql:host='.$array['host'].';dbname='.$array['dbname'].'',
+                $array['username'],
+                $array['password'],
+                $options
+            );
+        }
+        catch (\PDOException $e) {
+			$error = $e->getMessage();
+			throw new ConnexionFailureException($error);
+		}
+    }
 
 }

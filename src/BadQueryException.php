@@ -2,6 +2,7 @@
 
 namespace DoePdo;
 
-class BadQueryException extends Exception {
+class BadQueryException extends \Exception
+{
 
 }

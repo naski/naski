@@ -2,9 +2,11 @@
 
 namespace DoePdo;
 
-class PostgreSQLDatabase extends DatabaseAbstract {
+class PostgreSQLDatabase extends AbstractDatabase
+{
 
-    protected function sendQuery($query) {
+    protected function sendQuery($query)
+    {
         $result = pg_query($this->pdo, $query);
 		if ($this->result === false) {
             $error = pg_last_error($this->pdo);
