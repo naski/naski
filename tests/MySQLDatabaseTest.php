@@ -47,7 +47,7 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
      */
     public function testInsert()
     {
-        $this->_db->query("INSERT into `testss` ( `row1`, `row2`, `row3`) VALUES ( 'v11', 'v12', 'v13')");
+        $this->_db->query("INSERT into `tests` ( `row1`, `row2`, `row3`) VALUES ( 'v11', 'v12', 'v13')");
     }
 
 }
