@@ -5,7 +5,7 @@ namespace DoePdo;
 class MySQLDatabase extends AbstractDatabase
 {
 
-    public function connect($array)
+    public function connect(array $array)
     {
         $options = array(
 
