@@ -4,8 +4,8 @@ namespace DoePdo;
 
 class MySQLDatabase extends PdoDatabase
 {
-    
-    public function getPrefixe()
+
+    public function getPrefixe(): string
     {
         return "mysql";
     }

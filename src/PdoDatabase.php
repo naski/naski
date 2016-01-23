@@ -7,12 +7,12 @@ abstract class PdoDatabase extends AbstractDatabase
 
     protected $_pdo = null; // Objet PDO abstrait (Mysql...)
 
-    public abstract function getPrefixe();
+    public abstract function getPrefixe(): string;
 
     /**
      *   Envoi la requete au serveur et retourne le résultat
      */
-    protected function sendQuery($query)
+    protected function sendQuery(string $query)
     {
         try {
             return $this->_pdo->query($query);

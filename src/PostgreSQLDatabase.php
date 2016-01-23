@@ -5,7 +5,7 @@ namespace DoePdo;
 class PostgreSQLDatabase extends PdoDatabase
 {
 
-    public function getPrefixe()
+    public function getPrefixe(): string
     {
         return "pgsql";
     }
