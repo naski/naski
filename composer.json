@@ -5,7 +5,7 @@
     "authors": [
         {
             "name": "Doelia",
-            "email": "kyxalia@gmail.com"
+            "email": "doelia@doelia.fr"
         }
     ],
     "autoload": {
@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=7.0.0"
     },
     "license": "MIT"
 }
