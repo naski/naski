@@ -23,7 +23,7 @@ class PostgresDatabaseTest extends AbstractTester
      */
     public function testCreateTable()
     {
-        $this->_db->query("
+        $this->_db->query('
         DROP TABLE IF EXISTS "public"."tests";
         CREATE TABLE "public"."tests" (
         	"ID" int4 NOT NULL,
@@ -32,7 +32,7 @@ class PostgresDatabaseTest extends AbstractTester
         	"row3" int4
         );
         ALTER TABLE "public"."tests" ADD PRIMARY KEY ("ID") NOT DEFERRABLE INITIALLY IMMEDIATE;
-        ");
+        ');
     }
 
 
