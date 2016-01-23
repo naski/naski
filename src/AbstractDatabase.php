@@ -2,6 +2,8 @@
 
 namespace DoePdo;
 
+// Test private
+
 abstract class AbstractDatabase
 {
 
