@@ -7,11 +7,9 @@ namespace DoePdo;
 abstract class AbstractDatabase
 {
 
-    protected $_prefixe = '';
-    protected $_nRequests = 0;
-
-    protected $_lastQuery = "";
-    protected $_result;
+    protected $_nRequests = 0; // Nombre de requêtes exécutes depuis le début de l'instance
+    protected $_lastQuery = ""; // Dernière requête SQL exécutée
+    protected $_result; // Rsultat de la dernière requête SQL exécutée
 
     /**
      *  throws ConnexionFailureException
@@ -20,9 +18,9 @@ abstract class AbstractDatabase
     abstract public function connect(array $array);
 
     /**
-     *  Traite la query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
+     *  Traite la $query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
      */
-    public function query($query)
+    public function query(string $query)
     {
         $this->_nRequests++;
         $this->_lastQuery = $query;
@@ -36,7 +34,13 @@ abstract class AbstractDatabase
         }
     }
 
-    public function insert($table, $insertArray, $addQuotes = true)
+    /**
+     *  Insert un tableau clé/valeur dans la base de donnée
+     *  @param $tablename   Nom de la table
+     *  @param $insertArray Clés : noms des colonnes. Valeurs : valeurs du tuple
+     *  @param $addQuotes   Permet d'ajouter des quotes simples ' autour des valeurs
+     */
+    public function insert(string $tablename, array $insertArray, bool $addQuotes = true)
     {
         $quotedValues = '';
 		$keys = '';
@@ -48,12 +52,19 @@ abstract class AbstractDatabase
 
 		$quotedValues = substr_replace($quotedValues, "", -1);
 		$keys = substr_replace($keys, "", -1);
-    	$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", $table, $keys, $quotedValues);
+    	$query = sprintf("INSERT INTO %s (%s) VALUES (%s)", $tablename, $keys, $quotedValues);
 
 		return $this->query($query);
     }
 
-    public function update($table, $insertArray, $cond, $addQuotes = true)
+    /**
+     *  Met à jour les tuples d'une table, selon une condition
+     *  @param $tablename       Nom de la table
+     *  @param $insertArray     Clés : noms des colonnes. Valeurs : valeurs du tuple
+     *  @param $cond            Condition SQL à concatener à la requête
+     *  @param $addQuotes       Permet d'ajouter des quotes simples ' autour des valeurs
+     */
+    public function update(string $tablename, array $insertArray, string $cond, bool $addQuotes = true)
     {
 		$setter = '';
 
@@ -63,7 +74,7 @@ abstract class AbstractDatabase
 		}
 
 		$setter = substr_replace($setter, "", -1);
-    	$query = sprintf("UPDATE %s SET %s %s", $table, $setter, $cond);
+    	$query = sprintf("UPDATE %s SET %s %s", $tablename, $setter, $cond);
 
 		return $this->query($query);
 	}
