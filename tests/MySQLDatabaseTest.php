@@ -12,12 +12,7 @@ class MySQLDatabaseTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_db = new MySQLDatabase();
-        $this->_db->connect(array(
-            'host' => '127.0.0.1',
-            'dbname' => 'test',
-            'username' => 'root',
-            'password' => '',
-        ));
+        $this->_db->connect($GLOBALS['DB_MYSQL']);
     }
 
     public function testConnect()
