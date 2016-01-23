@@ -14,19 +14,7 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     /**
      * @depends testConnect
      */
-    public function testCreateTable()
-    {
-        $this->_db->query("
-        DROP TABLE IF EXISTS `tests`;
-        CREATE TABLE `tests` (
-          `ID` int(11) NOT NULL AUTO_INCREMENT,
-          `row1` varchar(255) DEFAULT NULL,
-          `row2` varchar(255) DEFAULT NULL,
-          `row3` int(11) DEFAULT NULL,
-          PRIMARY KEY (`ID`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-        ");
-    }
+    abstract public function testCreateTable();
 
     /**
      * @depends testCreateTable
