@@ -1,13 +1,10 @@
 <?php
 
 // Classes des composants
-require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 // Classes du framework et du projet
-require __DIR__ . '/core/autoload.php';
-
-// require 'vendor/doelia/pdo/src/DatabaseAbstract.class.php';
-// require 'vendor/doelia/pdo/src/MySQLDatabase.php';
+require_once __DIR__ . '/core/autoload.php';
 
 $IM = new InstancesManager();
 
