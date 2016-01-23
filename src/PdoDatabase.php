@@ -40,7 +40,7 @@ abstract class PdoDatabase extends AbstractDatabase
         }
         catch (\Exception $e) {
 			$error = $e->getMessage();
-			throw new ConnexionFailureException($error);
+			throw new ConnexionFailureException($error, $array);
 		}
     }
 
