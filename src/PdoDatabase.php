@@ -26,7 +26,8 @@ abstract class PdoDatabase extends AbstractDatabase
     public function connect(array $array)
     {
         $options = array(
-
+            \PDO::ATTR_TIMEOUT => "3", // Timeout en secondes
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         );
 
         try {
@@ -36,7 +37,6 @@ abstract class PdoDatabase extends AbstractDatabase
                 $array['password'],
                 $options
             );
-            $this->_pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); // Set Errorhandling to Exception
         }
         catch (\Exception $e) {
 			$error = $e->getMessage();
