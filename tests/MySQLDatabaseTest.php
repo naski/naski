@@ -7,14 +7,16 @@ use DoePdo\BadQueryException;
 
 class MySQLDatabaseTest extends AbstractTester
 {
-    protected $_bd;
 
     protected function setUp()
     {
+        if (!isset($GLOBALS['DB_MYSQL'])) {
+            $this->markTestSkipped('MySQL désactivé.');
+        }
+
         $this->_db = new MySQLDatabase();
         $this->_db->connect($GLOBALS['DB_MYSQL']);
     }
 
-    
 
 }
