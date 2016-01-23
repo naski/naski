@@ -18,6 +18,20 @@ class MySQLDatabaseTest extends AbstractTester
         $this->_db->connect($GLOBALS['DB_MYSQL']);
     }
 
+    /**
+     * @expectedException DoePdo\ConnexionFailureException
+     */
+    public function testBadConnexion() {
+        $datas = array(
+            'host' => '127.0.0.1',
+            'dbname' => 'tests',
+            'username' => 'root',
+            'password' => 'baaaaad'
+        );
+        $db = new MySQLDatabase();
+        $db->connect($datas);
+    }
+
     public function testCreateTable()
     {
         $this->_db->query("
