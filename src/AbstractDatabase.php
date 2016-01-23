@@ -43,7 +43,7 @@ abstract class AbstractDatabase
 
 		foreach ($insertArray as $key => $value) {
 			$quotedValues .= $addQuotes ? ("'$value',") : "$value,";
-			$keys .= '`'.$key.'`,';
+			$keys .= ''.$key.',';
 		}
 
 		$quotedValues = substr_replace($quotedValues, "", -1);
