@@ -1,0 +1,9 @@
+{
+    "main_mysql": {
+        "host": "localhost",
+        "dbname": "tests",
+        "username": "root",
+        "password": "wugaxu"
+    }
+
+}
