@@ -7,7 +7,7 @@ use DoePdo\BadQueryException;
 
 class MySQLDatabaseTest extends AbstractTester
 {
-    
+
     protected function setUp()
     {
         if (!isset($GLOBALS['DB_MYSQL'])) {
@@ -18,9 +18,6 @@ class MySQLDatabaseTest extends AbstractTester
         $this->_db->connect($GLOBALS['DB_MYSQL']);
     }
 
-    /**
-     * @depends testConnect
-     */
     public function testCreateTable()
     {
         $this->_db->query("

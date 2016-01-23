@@ -18,9 +18,6 @@ class PostgresDatabaseTest extends AbstractTester
         $this->_db->connect($GLOBALS['DB_POSTGRES']);
     }
 
-    /**
-     * @depends testConnect
-     */
     public function testCreateTable()
     {
         $this->_db->query('
