@@ -25,5 +25,6 @@ $IM = new InstancesManager();
 
 // Démo
 require 'web/demo/controllers/home.php';
+
 $ctrl = new HomeController();
 $ctrl->indexAction();
