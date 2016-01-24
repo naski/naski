@@ -1,4 +1,0 @@
-# Dépendances
-
-- Composer
-- Grunt ?
