@@ -56,4 +56,12 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
         $this->assertEquals($l['row1'], 'v11.1');
     }
 
+    /**
+     * @depends testInsert
+     */
+    public function testCounter()
+    {
+        $this->assertTrue($db->getRequestsNumber() > 0);
+    }
+
 }

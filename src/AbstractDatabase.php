@@ -122,4 +122,9 @@ abstract class AbstractDatabase
 		return $this->query($query);
 	}
 
+    public function getRequestsNumber() :int
+    {
+        return $this->_nRequests;
+    }
+
 }
