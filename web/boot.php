@@ -11,12 +11,15 @@ require_once __DIR__ . '/../core/boot/dependencies.php';
 // Classes des composants externes
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Classes du framework et du projet
-require_once __DIR__ . '/../core/autoload.php';
+// Classes du framework
+require_once __DIR__ . '/../core/classes/autoload.php';
 
 // Initialisation du framework
 require_once __DIR__ . '/../core/boot/tools.php';
 require_once __DIR__ . '/../core/boot/paths.php';
+
+// Classes du projet
+require_once __DIR__ . '/../src/classes/autoload.php';
 
 // Initialisation du projet
 require_once __DIR__ . '/../src/boot/instances.php';
