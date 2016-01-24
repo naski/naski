@@ -1,0 +1,16 @@
+{
+    "rules": [
+        {
+            "path": "/product",
+            "controller": "HomeController",
+            "method": "indexAction",
+            "params": [
+                {
+                    "name": "id",
+                    "validation_rules": "required|valid_cc",
+                    "filter_rules": "trim"
+                }
+            ]
+        }
+    ]
+}
