@@ -10,10 +10,15 @@ use Monolog\Handler\StreamHandler;
 
 use DoePdo\MySQLDatabase;
 
-$CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config.json');
-$CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config_' . $CONFIG->env . '.json');
-
 $IM = new InstancesManager();
+
+// Config
+{
+    $CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config.json');
+    $CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config_' . $CONFIG->env . '.json');
+
+    $IM->recordInstance('config', $CONFIG);
+}
 
 // Monolog
 {
@@ -38,9 +43,12 @@ $IM = new InstancesManager();
 // Moteur de template twig
 {
     $loader = new Twig_Loader_Filesystem($basepath = ROOT_SYSTEM . '/src/');
-    $twig = new Twig_Environment($loader, array(
+
+    $options = $CONFIG->cache_twig ? array(
         'cache' => ROOT_SYSTEM . '/app/cache/',
-    ));
+    ) : array();
+
+    $twig = new Twig_Environment($loader, $options);
 
     $IM->recordInstance('twig', $twig);
 }

@@ -1,3 +1,4 @@
 {
-    "show_php_errors": true
+    "show_php_errors": true,
+    "cache_twig": false
 }
