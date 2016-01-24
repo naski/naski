@@ -8,6 +8,8 @@
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
+use DoePdo\MySQLDatabase;
+
 $config_file = file_get_contents(ROOT_SYSTEM . 'app/config/config.json');
 $config_json = json_decode($config_file, $assoc = true);
 
@@ -28,7 +30,7 @@ $IM = new InstancesManager();
     $log = new Logger('mysql');
     $log->pushHandler(new StreamHandler(PATH_LOGS . 'mysql.log'));
 
-    $pdo = new DoePdo\MySQLDatabase($config_json['main_mysql'], $log);
+    $pdo = new MySQLDatabase($config_json['main_mysql'], $log);
     $pdo->forceConnect();
 
 }
