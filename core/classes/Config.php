@@ -1,8 +1,9 @@
 <?php
 
-class Config
+class Config implements ArrayAccess
 {
     private $_array = array();
+    private static $DEFAULT_VALUE = ""; // Valeur retournée si la clé demandée n'existe pas
 
     public function __construct()
     {
@@ -38,9 +39,18 @@ class Config
         }
     }
 
-    public function toArray(): array
-    {
-        return $this->_array;
+    public function offsetSet($offset, $value) { }
+
+    public function offsetExists($offset) { }
+
+    public function offsetUnset($offset) { }
+
+    public function offsetGet($offset) {
+        return $this->_array[$offset] ?? self::$DEFAULT_VALUE;
+    }
+
+    public function __get($key) {
+        return $this->$key ?? self::$DEFAULT_VALUE;
     }
 
 }

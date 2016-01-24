@@ -35,7 +35,7 @@ $IM = new InstancesManager();
     $log = new Logger('mysql');
     $log->pushHandler(new StreamHandler(PATH_LOGS . 'mysql.log'));
 
-    $pdo = new MySQLDatabase($CONFIG->main_mysql->toArray(), $log);
+    $pdo = new MySQLDatabase($CONFIG['main_mysql'], $log);
     $pdo->forceConnect();
 
 }
