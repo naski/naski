@@ -25,6 +25,7 @@ TODO
 Norme du code (Nommage) : http://www.php-fig.org/psr/psr-1/fr/ (PSR-1)
 Style du code (Formatage, prenthèses...) : http://www.php-fig.org/psr/psr-2/fr/ (PSR-2)
 
+- Les variables locales utilisées dans plusieurs fichiers doivent être considérées comme globales et doivent nommées en MAJUSCULES. Exemples : $CONFIG, $IM
 
 # FAQ Architecture des fichiers
 

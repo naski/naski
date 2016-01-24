@@ -5,11 +5,6 @@ class Config implements ArrayAccess
     private $_array = array();
     private static $DEFAULT_VALUE = ""; // Valeur retournée si la clé demandée n'existe pas
 
-    public function __construct()
-    {
-
-    }
-
     /**
      *  TODO Gérer les erreurs de fichier introuvale
      */
@@ -39,18 +34,21 @@ class Config implements ArrayAccess
         }
     }
 
+    public function __get($key)
+    {
+        return $this->$key ?? self::$DEFAULT_VALUE;
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->_array[$offset] ?? self::$DEFAULT_VALUE;
+    }
+
     public function offsetSet($offset, $value) { }
 
     public function offsetExists($offset) { }
 
     public function offsetUnset($offset) { }
 
-    public function offsetGet($offset) {
-        return $this->_array[$offset] ?? self::$DEFAULT_VALUE;
-    }
-
-    public function __get($key) {
-        return $this->$key ?? self::$DEFAULT_VALUE;
-    }
 
 }
