@@ -34,6 +34,7 @@ abstract class AbstractDatabase
 
     /**
      *  Insert un tableau clé/valeur dans la base de donnée
+     *  Une ligne à la fois
      *  @param $tablename   Nom de la table
      *  @param $insertArray Clés : noms des colonnes. Valeurs : valeurs du tuple
      *  @param $addQuotes   Permet d'ajouter des quotes simples ' autour des valeurs

@@ -27,7 +27,6 @@ class PostgresDatabaseTest extends AbstractTester
             	"row2" varchar(255) COLLATE "default",
             	"row3" int4
             );');
-        // $this->_db->query('ALTER TABLE "public"."tests" ADD PRIMARY KEY ("ID") NOT DEFERRABLE INITIALLY IMMEDIATE;');
     }
 
 
