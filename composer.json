@@ -1,10 +1,10 @@
 {
     "version": "dev-master",
-    "name": "doelia/pdo",
+    "name": "naski/pdo",
     "description": "PHP Interface for SQL SQBD",
     "authors": [
         {
-            "name": "Doelia",
+            "name": "Stéphane Wouters",
             "email": "doelia@doelia.fr"
         }
     ],
