@@ -1,7 +1,15 @@
 <?php
 
+/**
+ *  Instancie des entités nécessaires au framework
+ *  Dépend de paths.php et tools.php
+ */
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+
+$config_file = file_get_contents(ROOT_SYSTEM . 'app/config/config.json');
+$config_json = json_decode($config_file, $assoc = true);
 
 $IM = new InstancesManager();
 
@@ -10,15 +18,19 @@ $IM = new InstancesManager();
     $log = new Logger('name');
     $log->pushHandler(new StreamHandler(PATH_LOGS . 'tests.log', Logger::WARNING));
 
-    // add records to the log
-    $log->addWarning('Foo');
+    $log->addWarning('Foo', array('username' => 'Seldaek'));
     $log->addError('Bar');
+
 }
 
 // Connexion SQL
 {
-    $pdo = new DoePdo\MySQLDatabase();
-    $pdo->connect($config_json['main_mysql']);
+    $log = new Logger('mysql');
+    $log->pushHandler(new StreamHandler(PATH_LOGS . 'mysql.log'));
+
+    $pdo = new DoePdo\MySQLDatabase($config_json['main_mysql'], $log);
+    $pdo->forceConnect();
+
 }
 
 // Moteur de template twig
