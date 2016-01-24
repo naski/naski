@@ -2,8 +2,8 @@
 
 
 $CONFIG = new Config();
-$CONFIG->loadConfigFile('config.json');
-$CONFIG->loadConfigFile('naski/config_' . $CONFIG->env . '.json');
+$CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config.json');
+$CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'naski/config_' . $CONFIG->env . '.json');
 
 if ($CONFIG->show_php_errors) {
     // Démo

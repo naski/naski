@@ -9,12 +9,7 @@ class Config
 
     }
 
-    public function loadConfigFile(string $filename)
-    {
-        $this->loadJSONFile(ROOT_SYSTEM . 'app/config/'. $filename);
-    }
-
-    private function loadJSONFile(string $path)
+    public function loadJSONFile(string $path)
     {
         $content = file_get_contents($path);
         $this->loadJSON($content);
