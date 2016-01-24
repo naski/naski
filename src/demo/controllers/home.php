@@ -1,7 +1,5 @@
 <?php
 
-namespace Job;
-
 use Naski\Controller;
 
 class HomeController extends Controller {
@@ -12,5 +10,9 @@ class HomeController extends Controller {
             'demo_var' => 'Hey',
             "display" => $this->config->env
         ));
+    }
+
+    public function product($id = 0) {
+        echo $id;
     }
 }

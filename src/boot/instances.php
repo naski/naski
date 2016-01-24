@@ -11,6 +11,8 @@ use Monolog\Handler\StreamHandler;
 use Naski\Pdo\MySQLDatabase;
 use Naski\InstancesManager;
 
+use Pux\Executor;
+
 $IM = new InstancesManager();
 
 // Config
@@ -37,7 +39,6 @@ $IM = new InstancesManager();
     $log->pushHandler(new StreamHandler(PATH_LOGS . 'mysql.log'));
 
     $pdo = new MySQLDatabase($CONFIG['main_mysql'], $log);
-    $pdo->forceConnect();
 
     $pdo->query("SELECT 'foo'");
 

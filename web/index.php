@@ -1,5 +1,6 @@
 <?php
 
+use Pux\Executor;
 
 require_once 'boot.php';
 
@@ -7,8 +8,17 @@ require_once 'boot.php';
 
 require '../src/demo/controllers/home.php';
 
-$ctrl = new Job\HomeController();
-// $ctrl->indexAction();
+$MUX = new Pux\Mux;
 
+require '../src/boot/routing.php';
 
-require_once '../core/debug_bar/show.php';
+// require_once '../core/debug_bar/show.php';
+
+$path = '/' . ($_GET['route'] ?? '');
+$route = $MUX->dispatch($path);
+
+if ($route == null) {
+    die("Page '$path' introuvable");
+} else {
+    echo Executor::execute($route);
+}
