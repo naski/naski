@@ -1,7 +1,8 @@
 # Néttoie le repertoire en supprimant les fichier de cache/logs/tmp trop vieux
+# Mise en cron souhaité
 
 dir="$( dirname "$0" )"
-dir="$dir/.."
+dir="$dir/../.."
 echo "Repertoire traité : $dir"
 
 if [ "$1" = "all" ]; then
