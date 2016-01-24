@@ -16,6 +16,7 @@ Faire pointer un alias domaine racine sur /web/
 
 - Passer les classes en PSR 4 autoload
 - Autoload les fonctions
+- Mettre la classe Config dans un composant
 
 # Repertoires
 

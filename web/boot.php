@@ -5,11 +5,11 @@
  *  Ne produit aucun affichage si tout se passe bien.
  */
 
+ // Classes des composants externes
+require_once __DIR__ . '/../vendor/autoload.php';
+
 // Tests de dépendance
 require_once __DIR__ . '/../core/boot/dependencies.php';
-
-// Classes des composants externes
-require_once __DIR__ . '/../vendor/autoload.php';
 
 // Classes du framework
 require_once __DIR__ . '/../core/classes/autoload.php';
