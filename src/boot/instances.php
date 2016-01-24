@@ -38,6 +38,8 @@ $IM = new InstancesManager();
     $pdo = new MySQLDatabase($CONFIG['main_mysql'], $log);
     $pdo->forceConnect();
 
+    $pdo->query("SELECT 'foo'");
+
     $IM->recordDatabaseInstance('main_mysql', $pdo);
 
 }

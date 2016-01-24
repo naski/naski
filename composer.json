@@ -22,6 +22,6 @@
         "twbs/bootstrap": "^3.3",
         "kriswallsmith/assetic": "^1.3",
         "twig/twig": "^1.23",
-        "naski/pdo": "dev-master",
+        "naski/pdo": "dev-master"
     }
 }
