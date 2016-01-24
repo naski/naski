@@ -3,14 +3,19 @@
         {
             "path": "/product",
             "controller": "HomeController",
-            "method": "indexAction",
+            "method": "product",
             "params": [
                 {
                     "name": "id",
-                    "validation_rules": "required|valid_cc",
+                    "validation_rules": "required",
                     "filter_rules": "trim"
                 }
             ]
+        },
+        {
+            "path": "/",
+            "controller": "HomeController",
+            "method": "indexAction"
         }
     ]
 }
