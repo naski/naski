@@ -8,7 +8,8 @@
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-use DoePdo\MySQLDatabase;
+use Naski\Pdo\MySQLDatabase;
+use Naski\InstancesManager;
 
 $IM = new InstancesManager();
 

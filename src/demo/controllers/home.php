@@ -1,5 +1,7 @@
 <?php
 
+use Naski\Controller;
+
 class HomeController extends Controller {
 
     public function indexAction() {

@@ -1,6 +1,8 @@
 <?php
 
-class Config implements ArrayAccess
+namespace Naski\Config;
+
+class Config implements \ArrayAccess
 {
     private $_array = array();
     private static $DEFAULT_VALUE = ""; // Valeur retournée si la clé demandée n'existe pas

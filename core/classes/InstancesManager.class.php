@@ -1,12 +1,15 @@
 <?php
 
-use DoePdo\AbstractDatabase;
+namespace Naski;
+
+use Naski\Pdo\AbstractDatabase;
 
 class InstancesManager {
 
     public $_dbInstances = array();
 
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
