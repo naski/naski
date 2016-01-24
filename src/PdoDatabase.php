@@ -23,25 +23,25 @@ abstract class PdoDatabase extends AbstractDatabase
 		}
     }
 
-    public function connect(array $array)
+    /**
+     *  @override
+     */
+    public function connectAbstract()
     {
+        $array = $this->_connexionDatas;
+
         $options = array(
             \PDO::ATTR_TIMEOUT => "3", // Timeout en secondes
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         );
 
-        try {
-            $this->_pdo = new \PDO(
-                $this->getPrefixe().':host='.$array['host'].';dbname='.$array['dbname'].'',
-                $array['username'],
-                $array['password'],
-                $options
-            );
-        }
-        catch (\Exception $e) {
-			$error = $e->getMessage();
-			throw new ConnexionFailureException($error, $array);
-		}
+        $this->_pdo = new \PDO(
+            $this->getPrefixe().':host='.$array['host'].';dbname='.$array['dbname'].'',
+            $array['username'],
+            $array['password'],
+            $options
+        );
+
     }
 
 }

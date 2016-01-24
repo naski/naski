@@ -14,8 +14,8 @@ class PostgresDatabaseTest extends AbstractTester
             $this->markTestSkipped('Postgres désactivé.');
         }
 
-        $this->_db = new PostgreSQLDatabase();
-        $this->_db->connect($GLOBALS['DB_POSTGRES']);
+        $this->_db = new PostgreSQLDatabase($GLOBALS['DB_POSTGRES']);
+        $this->_db->forceConnect();
     }
 
     public function testCreateTable()

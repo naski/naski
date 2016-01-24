@@ -14,8 +14,22 @@ class MySQLDatabaseTest extends AbstractTester
             $this->markTestSkipped('MySQL désactivé.');
         }
 
-        $this->_db = new MySQLDatabase();
-        $this->_db->connect($GLOBALS['DB_MYSQL']);
+        $this->_db = new MySQLDatabase($GLOBALS['DB_MYSQL']);
+        $this->_db->forceConnect();
+    }
+
+    /**
+     * @expectedException DoePdo\ConnexionFailureException
+     */
+    public function testBadConnexion()
+    {
+        $db = new MySQLDatabase(array(
+            'host' => '127.0.0.1',
+            'dbname' => 'tests',
+            'username' => 'root',
+            'password' => 'baaaaad'
+        ));
+        $db->forceConnect();
     }
 
     public function testCreateTable()

@@ -30,19 +30,6 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException DoePdo\ConnexionFailureException
-     */
-    public function testBadConnexion() {
-        $datas = array(
-            'host' => '127.0.0.1',
-            'dbname' => 'tests',
-            'username' => 'root',
-            'password' => 'baaaaad'
-        );
-        $this->_db->connect($datas);
-    }
-
-    /**
      * @depends testInsert
      */
     public function testSelect()

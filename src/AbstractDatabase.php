@@ -2,24 +2,67 @@
 
 namespace DoePdo;
 
+use Monolog\Logger;
+
 abstract class AbstractDatabase
 {
+    protected $_logger = null;
+    protected $_connexionDatas = array();
+
+    protected $_isConnected = false;
 
     protected $_nRequests = 0; // Nombre de requêtes exécutes depuis le début de l'instance
     protected $_lastQuery = ""; // Dernière requête SQL exécutée
-    protected $_result; // Rsultat de la dernière requête SQL exécutée
+    protected $_result = null; // Rsultat de la dernière requête SQL exécutée
+
+    /**
+     *  @param $array keys: host, dbname, username, password
+     */
+    public function __construct(array $connexionDatas, Logger $logger = null) {
+        if ($logger == null) {
+            $logger = new Logger('unused_logger');
+        }
+        $this->_logger = $logger;
+
+        $this->_connexionDatas = $connexionDatas;
+    }
+
+
+    abstract protected function connectAbstract();
 
     /**
      *  throws ConnexionFailureException
-     *  @param $array keys: host, dbname, username, password
      */
-    abstract public function connect(array $array);
+    private function connect() {
+        try {
+            $this->connectAbstract();
+            $this->_isConnected = true;
+        }
+        catch (\Exception $e) {
+            $message = $e->getMessage();
+            $e = new ConnexionFailureException($message, $this->_connexionDatas);
+            $this->_logger->critical($message . ' ' . $e->connexionDatasString);
+            throw $e;
+        }
+    }
+
+    /**
+     *  throws ConnexionFailureException
+     */
+    public function forceConnect() {
+        $this->connect();
+    }
 
     /**
      *  Traite la $query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
+     *  throws ConnexionFailureException, BadQueryException
      */
     public function query(string $query)
     {
+        if (!$this->_isConnected) {
+            $this->connect();
+        }
+
         $this->_nRequests++;
         $this->_lastQuery = $query;
         try {
@@ -28,6 +71,7 @@ abstract class AbstractDatabase
         } catch (BadQueryException $e) {
             $message = $e->getMessage();
             $message .= "\nQuery : " . $query;
+            $this->_logger->error($message);
             throw new BadQueryException($message);
         }
     }
