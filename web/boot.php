@@ -6,7 +6,7 @@
  */
 
 // Tests de dépendance
-require_once __DIR__ . '/../core/Boot/dependencies.php';
+require_once __DIR__ . '/../core/boot/dependencies.php';
 
 // Classes des composants externes
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -15,6 +15,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../core/autoload.php';
 
 // Initialisation du framework
-require_once __DIR__ . '/../core/Boot/tools.php';
-require_once __DIR__ . '/../core/Boot/paths.php';
-require_once __DIR__ . '/../core/Boot/instances.php';
+require_once __DIR__ . '/../core/boot/tools.php';
+require_once __DIR__ . '/../core/boot/paths.php';
+
+// Initialisation du projet
+require_once __DIR__ . '/../src/boot/instances.php';

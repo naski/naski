@@ -28,10 +28,10 @@ Dossier web/assets/
 
 **Où mettre mes fichiers CSS ?**
 Il vaut mieux utiliser les fichiers .less situés dans /src/less qui générera les assets.  
-Si c'est un fichier CSS statique, l'ajouter dans /assets/
+Si c'est un fichier CSS statique, l'ajouter dans /web/assets/
 
 **Où créer une nouvelle classe métier ?**
-Dossier src/Classes
+Dossier src/classes
 
 **Comment créer un nouveau web service ?**
 
@@ -46,6 +46,6 @@ Les composants externes sont dans le dossier /vendor/. Ne jamais modifier le con
 Faire la modification sur le GIT du composant externe, puis faire un *composer install* sur le projet.
 
 **Où ajouter de nouvelles constantes métiers ? (URL distante, logins API externe...)**
-Créer un fichier .php dans Boot/ puis l'inclure dans /web/index.php
+Créer un fichier .php dans /src/boot/ puis l'inclure dans /web/index.php
 
 # FAQ Utilisation du framework

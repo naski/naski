@@ -5,5 +5,5 @@
  *  TODO Utiliser les namespaces
  */
 
-require_once __DIR__ . '/' . 'Framework/InstancesManager.class.php';
-require_once __DIR__ . '/' . 'Framework/Controller.class.php';
+require_once __DIR__ . '/' . 'classes/InstancesManager.class.php';
+require_once __DIR__ . '/' . 'classes/Controller.class.php';
