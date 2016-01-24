@@ -3,19 +3,22 @@
 require('bootstrap.php');
 
 use DoePdo\MySQLDatabase;
+use DoePdo\AbstractDatabase;
 use DoePdo\BadQueryException;
 
 class MySQLDatabaseTest extends AbstractTester
 {
 
-    protected function setUp()
+    public function testConnect() :AbstractDatabase
     {
         if (!isset($GLOBALS['DB_MYSQL'])) {
             $this->markTestSkipped('MySQL désactivé.');
         }
 
-        $this->_db = new MySQLDatabase($GLOBALS['DB_MYSQL']);
-        $this->_db->forceConnect();
+        $db = new MySQLDatabase($GLOBALS['DB_MYSQL']);
+        $db->forceConnect();
+
+        return $db;
     }
 
     /**
@@ -32,9 +35,12 @@ class MySQLDatabaseTest extends AbstractTester
         $db->forceConnect();
     }
 
-    public function testCreateTable()
+    /**
+     * @depends testConnect
+     */
+    public function testCreateTable(AbstractDatabase $db) :AbstractDatabase
     {
-        $this->_db->query("
+        $db->query("
         DROP TABLE IF EXISTS tests;
         CREATE TABLE `tests` (
           `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -44,6 +50,7 @@ class MySQLDatabaseTest extends AbstractTester
           PRIMARY KEY (`ID`)
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
         ");
+        return $db;
     }
 
 

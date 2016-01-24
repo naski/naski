@@ -1,67 +1,69 @@
 <?php
 
 use DoePdo\BadQueryException;
+use DoePdo\AbstractDatabase;
+
 
 abstract class AbstractTester extends PHPUnit_Framework_TestCase
 {
     protected $_bd;
 
-    public function testConnect()
-    {
-        $this->assertTrue(true);
-    }
+    abstract public function testConnect() :AbstractDatabase;
 
     /**
      * @depends testConnect
      */
-    abstract public function testCreateTable();
+    abstract public function testCreateTable(AbstractDatabase $db) :AbstractDatabase;
 
     /**
      * @depends testCreateTable
      */
-    public function testInsert()
+    public function testInsert(AbstractDatabase $db) :AbstractDatabase
     {
-        $this->_db->insert("tests",
+        $db->insert("tests",
             array(
                 "row1" => "v11",
                 "row2" => "v12"
             )
         );
+        return $db;
     }
 
     /**
      * @depends testInsert
      */
-    public function testSelect()
+    public function testSelect(AbstractDatabase $db) :AbstractDatabase
     {
-        $q = $this->_db->query("SELECT * FROM tests");
+        $q = $db->query("SELECT * FROM tests");
         $l = $q->fetch();
         $this->assertEquals($l['row1'], 'v11');
+        return $db;
     }
 
     /**
      * @depends testInsert
      */
-    public function testUpdate()
+    public function testUpdate(AbstractDatabase $db) :AbstractDatabase
     {
-        $this->_db->update("tests",
+        $db->update("tests",
             array(
                 "row1" => "v11.1",
                 "row2" => "v12.1"
             ),
             "WHERE row1='v11'"
         );
-        $q = $this->_db->query("SELECT * FROM tests");
+        $q = $db->query("SELECT * FROM tests");
         $l = $q->fetch();
         $this->assertEquals($l['row1'], 'v11.1');
+        return $db;
     }
 
     /**
-     * @depends testInsert
+     * @depends testUpdate
      */
-    public function testCounter()
+    public function testCounter(AbstractDatabase $db)
     {
-        $this->assertGreaterThan(0, $this->_db->getRequestsNumber());
+        $this->assertGreaterThan(0, $db->getRequestsNumber());
     }
 
 }

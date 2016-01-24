@@ -3,30 +3,38 @@
 require('bootstrap.php');
 
 use DoePdo\PostgreSQLDatabase;
+use DoePdo\AbstractDatabase;
 use DoePdo\BadQueryException;
 
 class PostgresDatabaseTest extends AbstractTester
 {
 
-    protected function setUp()
+
+    public function testConnect() :AbstractDatabase
     {
         if (!isset($GLOBALS['DB_POSTGRES'])) {
             $this->markTestSkipped('Postgres désactivé.');
         }
 
-        $this->_db = new PostgreSQLDatabase($GLOBALS['DB_POSTGRES']);
-        $this->_db->forceConnect();
+        $db = new PostgreSQLDatabase($GLOBALS['DB_POSTGRES']);
+        $db->forceConnect();
+
+        return $db;
     }
 
-    public function testCreateTable()
+    /**
+     * @depends testConnect
+     */
+    public function testCreateTable(AbstractDatabase $db) :AbstractDatabase
     {
-        $this->_db->query('DROP TABLE IF EXISTS "public"."tests";');
-        $this->_db->query('CREATE TABLE "public"."tests" (
+        $db->query('DROP TABLE IF EXISTS "public"."tests";');
+        $db->query('CREATE TABLE "public"."tests" (
             	"ID" SERIAL PRIMARY KEY,
             	"row1" varchar(255) COLLATE "default",
             	"row2" varchar(255) COLLATE "default",
             	"row3" int4
             );');
+        return $db;
     }
 
 
