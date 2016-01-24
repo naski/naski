@@ -14,6 +14,8 @@ Faire pointer un alias domaine racine sur /web/
 
 # TODO
 
+- Passer les classes en PSR 4 autoload
+- Autoload les fonctions
 
 # Repertoires
 
