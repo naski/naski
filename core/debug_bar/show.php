@@ -1,7 +1,5 @@
 <?php
 
-namespace Bla;
-
 $loader = new \Twig_Loader_Filesystem($basepath = ROOT_SYSTEM . '/core/debug_bar');
 $twig = new \Twig_Environment($loader);
 
