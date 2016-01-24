@@ -1,5 +1,7 @@
 <?php
 
+namespace Naski;
+
 function sumProperties(array $arr, $property)
 {
     $sum = 0;

@@ -7,7 +7,7 @@ require_once 'boot.php';
 
 require '../src/demo/controllers/home.php';
 
-$ctrl = new HomeController();
+$ctrl = new Job\HomeController();
 // $ctrl->indexAction();
 
 

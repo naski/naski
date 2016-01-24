@@ -1,5 +1,7 @@
 <?php
 
+namespace Job;
+
 use Naski\Controller;
 
 class HomeController extends Controller {
