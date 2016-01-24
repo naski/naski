@@ -8,6 +8,8 @@ require_once 'boot.php';
 
 require '../src/demo/controllers/home.php';
 
+$_POST = $GUMP->sanitize($_POST);
+
 $MUX = new Pux\Mux;
 
 require '../src/boot/routing.php';
