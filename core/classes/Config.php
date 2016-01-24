@@ -18,7 +18,7 @@ class Config
         $this->loadJSON($content);
     }
 
-    private function loadJSON($json)
+    private function loadJSON(string $json)
     {
         $array = json_decode($json, $assoc = true);
         $this->loadArray($array);
@@ -38,7 +38,7 @@ class Config
         }
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return $this->_array;
     }
