@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  Instancie des entités nécessaires au framework
+ *  Instancie des entités nécessaires au projet
  *  Dépend de paths.php et tools.php
  */
 
