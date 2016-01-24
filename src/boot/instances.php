@@ -10,6 +10,8 @@ use Monolog\Handler\StreamHandler;
 
 use DoePdo\MySQLDatabase;
 
+$CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config.json');
+$CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config_' . $CONFIG->env . '.json');
 
 $IM = new InstancesManager();
 

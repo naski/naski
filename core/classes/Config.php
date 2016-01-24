@@ -9,6 +9,9 @@ class Config
 
     }
 
+    /**
+     *  TODO Gérer les erreurs de fichier introuvale
+     */
     public function loadJSONFile(string $path)
     {
         $content = file_get_contents($path);
