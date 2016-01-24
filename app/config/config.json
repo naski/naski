@@ -4,6 +4,6 @@
         "dbname": "tests",
         "username": "root",
         "password": "wugaxu"
-    }
-
+    },
+    "env": "dev"
 }

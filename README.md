@@ -12,6 +12,9 @@ Configurer les droits du repertoire (linux uniquement) :
 
 Faire pointer un alias domaine racine sur /web/
 
+# TODO
+
+
 # Repertoires
 
 TODO
