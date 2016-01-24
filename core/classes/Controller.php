@@ -7,7 +7,8 @@ abstract class Controller {
     public $inputs = array(); // Tableau clé/valeur de $POST nettoyé
     public $_postValid = true;
 
-    public function __construct(array $rule = null) {
+    public function __construct(array $rule = null)
+    {
         global $IM;
         $IM->putInstancesIn($this);
 
@@ -44,9 +45,5 @@ abstract class Controller {
         }
         return $rules;
     }
-
-
-
-
 
 }
