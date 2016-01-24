@@ -1,7 +1,7 @@
 <?php
 
-use DoePdo\BadQueryException;
-use DoePdo\AbstractDatabase;
+use Naski\Pdo\BadQueryException;
+use Naski\Pdo\AbstractDatabase;
 
 
 abstract class AbstractTester extends PHPUnit_Framework_TestCase

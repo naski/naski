@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "DoePdo\\": "src/"
+            "Naski\\Pdo\\": "src/"
         }
     },
     "require": {

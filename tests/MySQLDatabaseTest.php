@@ -2,9 +2,9 @@
 
 require('bootstrap.php');
 
-use DoePdo\MySQLDatabase;
-use DoePdo\AbstractDatabase;
-use DoePdo\BadQueryException;
+use Naski\Pdo\MySQLDatabase;
+use Naski\Pdo\AbstractDatabase;
+use Naski\Pdo\BadQueryException;
 
 class MySQLDatabaseTest extends AbstractTester
 {
@@ -22,7 +22,7 @@ class MySQLDatabaseTest extends AbstractTester
     }
 
     /**
-     * @expectedException DoePdo\ConnexionFailureException
+     * @expectedException Naski\Pdo\ConnexionFailureException
      */
     public function testBadConnexion()
     {

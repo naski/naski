@@ -1,6 +1,6 @@
 <?php
 
-namespace DoePdo;
+namespace Naski\Pdo;
 
 use Monolog\Logger;
 

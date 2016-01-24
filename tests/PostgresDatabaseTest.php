@@ -2,9 +2,9 @@
 
 require('bootstrap.php');
 
-use DoePdo\PostgreSQLDatabase;
-use DoePdo\AbstractDatabase;
-use DoePdo\BadQueryException;
+use Naski\Pdo\PostgreSQLDatabase;
+use Naski\Pdo\AbstractDatabase;
+use Naski\Pdo\BadQueryException;
 
 class PostgresDatabaseTest extends AbstractTester
 {
