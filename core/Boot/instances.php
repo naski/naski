@@ -37,7 +37,7 @@ $IM = new InstancesManager();
 
 // Moteur de template twig
 {
-    $loader = new Twig_Loader_Filesystem(ROOT_SYSTEM . '/web/');
+    $loader = new Twig_Loader_Filesystem($basepath = ROOT_SYSTEM . '/src/');
     $twig = new Twig_Environment($loader, array(
         'cache' => ROOT_SYSTEM . '/app/cache/',
     ));

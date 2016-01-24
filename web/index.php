@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../core/Boot/dependancies.php';
+require_once __DIR__ . '/../core/Boot/dependencies.php';
 
 // Classes des composants externes
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -17,7 +17,7 @@ require_once __DIR__ . '/../core/Boot/instances.php';
 
 // Démo
 
-require '../web/demo/controllers/home.php';
+require '../src/demo/controllers/home.php';
 
 $ctrl = new HomeController();
 $ctrl->indexAction();
