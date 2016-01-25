@@ -9,6 +9,7 @@ class Routing
 {
     private $_mux;
     private $_rulesArray = array(); // array<Rule>
+    private $_404Rule = null;
 
     public function __construct()
     {
@@ -24,8 +25,12 @@ class Routing
 
     public function addRule(Rule $rule)
     {
-        $this->addToMux($rule);
-        $this->_rulesArray[] = $rule;
+        if ($rule->path != '*') { // TODO choisir la synthaxe (à voir avec le multi site)
+            $this->addToMux($rule);
+            $this->_rulesArray[] = $rule;
+        } else {
+            $this->_404Rule = $rule;
+        }
     }
 
     private function addToMux(Rule $rule)
@@ -47,8 +52,15 @@ class Routing
     public function process(string $path)
     {
         $route = $this->_mux->dispatch($path);
-        if ($route == null) {
-            echo ("Route de '".$path."' introuvable"); // TODO gérer le 404
+        if ($route === null) {
+            if ($this->_404Rule !== null) {
+                $classname = $this->_404Rule->controller;
+                $methodeName = $this->_404Rule->action;
+                $ctrl = new $classname($route);
+                $ctrl->$methodeName($this->_404Rule);
+            } else {
+                echo "\nbaaad\n";
+            }
         } else {
             echo Executor::execute($route);
         }

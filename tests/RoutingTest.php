@@ -56,6 +56,21 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($ROUTING->routeFind('/test'));
     }
 
+    public function testRouting404() {
+
+        $this->expectOutputString("\nNot Found\n");
+
+        $ROUTING = new Routing();
+
+        $ROUTING->addRule(new Rule(array(
+            'path' => '*',
+            "controller" => 'TestController',
+            "action" => 'notFoundAction',
+        )));
+
+        $ROUTING->process('/baaad');
+    }
+
     // public function testRoutingHttps() {
     //
     //     $_SERVER['HTTP_HOST'] = 'vps.doelia.fr';

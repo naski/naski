@@ -16,4 +16,9 @@ class TestController extends Controller
     {
         echo "\nHello\n";
     }
+
+    public function notFoundAction()
+    {
+        echo "\nNot Found\n";
+    }
 }
