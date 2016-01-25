@@ -2,8 +2,6 @@
 
 namespace Naski\Routing;
 
-use Naski\Config\Config;
-
 class Rule
 {
     public $type = 'any';
@@ -28,14 +26,5 @@ class Rule
         if (!class_exists($this->controller)) {
             throw new BadRuleException('Le controlleur '.$this->controller." n'existe pas");
         }
-    }
-
-    public static function createRulesFromConfig(Config $config): array
-    {
-        $rules = array();
-        foreach ($config['rules'] as $r) {
-            $rules[] = new Rule($r);
-        }
-        return $rules;
     }
 }

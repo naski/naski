@@ -2,7 +2,6 @@
 
 namespace Naski\Routing;
 
-use Naski\Config\Config;
 use Pux\Mux;
 use Pux\Executor;
 
