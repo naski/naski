@@ -9,7 +9,7 @@ require_once 'boot.php';
 
 require '../src/demo/controllers/home.php';
 
-$_POST = $GUMP->sanitize($_POST);
+// $_POST = $GUMP->sanitize($_POST);
 
 $ROUTING = new Routing();
 

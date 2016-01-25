@@ -6,6 +6,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/doelia/pdo"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/doelia/routing"
         }
     ],
     "authors": [
@@ -30,8 +34,7 @@
         "twbs/bootstrap": "^3.3",
         "kriswallsmith/assetic": "^1.3",
         "twig/twig": "^1.23",
-        "corneltek/pux": "~1.5",
-        "wixel/gump": "dev-master",
-        "naski/pdo": "dev-master"
+        "naski/pdo": "dev-master",
+        "naski/routing": "dev-master"
     }
 }

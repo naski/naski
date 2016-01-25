@@ -14,8 +14,6 @@ Faire pointer un alias domaine racine sur /web/
 
 # TODO
 
-- Routing : Gérer des subroutes et le domain
-- Faire mieux la validation des POSTs
 - Voir l'inclusion de la debug bar dans un autre template
 
 # Repertoires

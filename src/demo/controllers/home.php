@@ -1,6 +1,6 @@
 <?php
 
-use Naski\Controller;
+use Naski\Routing\Controller;
 
 class HomeController extends Controller
 {
