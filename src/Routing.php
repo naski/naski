@@ -9,7 +9,6 @@ class Routing
 {
     private $_mux;
     private $_rulesArray = array(); // array<Rule>
-    private $_404Rule = null;
 
     public function __construct()
     {
@@ -26,12 +25,8 @@ class Routing
 
     public function addRule(Rule $rule)
     {
-        if (strpos($rule->path, '*') === false) { // S'il ne contient pas d'*
-            self::addToMux($rule, $this->_mux);
-            $this->_rulesArray[] = $rule;
-        } else {
-            $this->_404Rule = $rule;
-        }
+        self::addToMux($rule, $this->_mux);
+        $this->_rulesArray[] = $rule;
     }
 
     private static function addToMux(Rule $rule, Mux $mux)
@@ -54,14 +49,7 @@ class Routing
     {
         $route = $this->_mux->dispatch($path);
         if ($route === null) {
-            if ($this->_404Rule !== null) {
-                $classname = $this->_404Rule->controller;
-                $methodeName = $this->_404Rule->action;
-                $ctrl = new $classname($route);
-                $ctrl->$methodeName($this->_404Rule);
-            } else {
-                return false;
-            }
+            return false;
         } else {
             echo Executor::execute($route);
         }
