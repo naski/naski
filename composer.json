@@ -1,0 +1,23 @@
+{
+    "version": "dev-master",
+    "name": "naski/routing",
+    "description": "Système de routing complet basé sur Pux et GUMP",
+    "authors": [
+        {
+            "name": "Stéphane Wouters",
+            "email": "doelia@doelia.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Naski\\Routing\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "monolog/monolog": "^1.17",
+        "corneltek/pux": "~1.5",
+        "wixel/gump": "dev-master"
+    },
+    "license": "MIT"
+}
