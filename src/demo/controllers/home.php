@@ -14,6 +14,11 @@ class HomeController extends Controller
         ));
     }
 
+    public function home()
+    {
+        echo "Home page";
+    }
+
     public function productAction()
     {
         if (!$this->inputValid()) {

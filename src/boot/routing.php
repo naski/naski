@@ -21,6 +21,12 @@ $mainRules = new Config();
 $mainRules->loadJSONFile(ROOT_SYSTEM . 'src/demo/routing.json');
 addRulesFromConfig($ROUTING, $mainRules);
 
+$ROUTING->addRule(new Rule(array(
+    'path' => '*',
+    'controller' => 'HomeController',
+    'action' => 'home'
+)));
+
 $path = '/' . ($_GET['route'] ?? '');
 if (!$ROUTING->process($path)) {
     die('Aucune route trouvée.');
