@@ -1,6 +1,7 @@
 {
     "version": "dev-master",
     "name": "naski/routing",
+    "type": "library",
     "description": "Système de routing complet basé sur Pux et GUMP",
     "authors": [
         {
