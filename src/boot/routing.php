@@ -1,15 +1,11 @@
 <?php
 
 use Naski\Config\Config;
+use Naski\Routing\Rule;
 
-$routing = new Config();
-$routing->loadJSONFile(ROOT_SYSTEM . 'src/demo/routing.json');
+$mainRules = new Config();
+$mainRules->loadJSONFile(ROOT_SYSTEM . 'src/demo/routing.json');
 
-foreach ($routing['rules'] as $rule) {
-    $type = $rule['type'] ?? 'any';
-    $MUX->$type(
-        $rule['path'],
-        [$rule['controller'], $rule['method']],
-        ['constructor_args' => [$rule]]
-    );
-}
+$rules = Rule::createRulesFromConfig($mainRules);
+
+$ROUTING->addRules($rules);

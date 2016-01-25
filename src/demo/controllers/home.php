@@ -14,7 +14,7 @@ class HomeController extends Controller
         ));
     }
 
-    public function product()
+    public function productAction()
     {
         if (!$this->inputValid()) {
             echo "Erreur, formulaire invalide";

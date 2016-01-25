@@ -1,6 +1,7 @@
 <?php
 
 use Pux\Executor;
+use Naski\Routing\Routing;
 
 require_once 'boot.php';
 
@@ -10,17 +11,11 @@ require '../src/demo/controllers/home.php';
 
 $_POST = $GUMP->sanitize($_POST);
 
-$MUX = new Pux\Mux;
+$ROUTING = new Routing();
 
 require '../src/boot/routing.php';
 
 // require_once '../core/debug_bar/show.php';
 
 $path = '/' . ($_GET['route'] ?? '');
-$route = $MUX->dispatch($path);
-
-if ($route == null) {
-    die("Page '$path' introuvable");
-} else {
-    echo Executor::execute($route);
-}
+$ROUTING->process($path);

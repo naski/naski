@@ -1,13 +1,14 @@
 <?php
 
 namespace Naski;
+use Naski\Routing\Rule;
 
 abstract class Controller {
 
     public $inputs = array(); // Tableau clé/valeur de $POST nettoyé
-    public $_postValid = true;
+    protected $_postValid = true;
 
-    public function __construct(array $rule = null)
+    public function __construct(Rule $rule = null)
     {
         global $IM;
         $IM->putInstancesIn($this);
@@ -17,7 +18,7 @@ abstract class Controller {
         }
     }
 
-    private function setInputs(array $rule)
+    private function setInputs(Rule $rule)
     {
         $this->gump->validation_rules(self::buildGumpRules($rule, 'validation_rules'));
         $this->gump->filter_rules(self::buildGumpRules($rule, 'filter_rules'));
@@ -37,10 +38,10 @@ abstract class Controller {
         return $this->_postValid;
     }
 
-    private static function buildGumpRules(array $rule, string $name) :array
+    private static function buildGumpRules(Rule $rule, string $name) :array
     {
         $rules = array();
-        foreach ($rule['params'] ?? array() as $param) {
+        foreach ($rule->params ?? array() as $param) {
             $rules[$param['name']] = $param[$name] ?? '';
         }
         return $rules;

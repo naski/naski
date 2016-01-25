@@ -2,8 +2,8 @@
     "rules": [
         {
             "path": "/product",
-            "controller": "HomeController",
-            "method": "product",
+            "controller": "HomeCointroller",
+            "action": "productAction",
             "params": [
                 {
                     "name": "id",
@@ -15,7 +15,7 @@
         {
             "path": "/",
             "controller": "HomeController",
-            "method": "indexAction"
+            "action": "indexAction"
         }
     ]
 }
