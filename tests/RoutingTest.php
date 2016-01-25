@@ -9,9 +9,7 @@ class RoutingTest extends PHPUnit_Framework_TestCase
 {
     public function testRouting()
     {
-        // $mainRules = new Config();
-        // $mainRules->loadJSONFile(ROOT_SYSTEM . 'src/demo/routing.json');
-        // $rules = Rule::createRulesFromConfig($mainRules);
+        $this->expectOutputString("\nHello\n");
 
         $ROUTING = new Routing();
 
