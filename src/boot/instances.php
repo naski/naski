@@ -11,8 +11,6 @@ use Monolog\Handler\StreamHandler;
 use Naski\Pdo\MySQLDatabase;
 use Naski\InstancesManager;
 
-use Pux\Executor;
-
 $IM = new InstancesManager();
 
 // Config

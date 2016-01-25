@@ -1,4 +1,5 @@
 {
+    "subpath": "/test",
     "rules": [
         {
             "path": "/product",
@@ -16,8 +17,7 @@
             "path": "/",
             "controller": "HomeController",
             "action": "indexAction"
-        }
-        ,
+        },
         {
             "path": "*",
             "controller": "HomeController",

@@ -16,6 +16,7 @@ Faire pointer un alias domaine racine sur /web/
 
 - Voir l'inclusion de la debug bar dans un autre template
 - Gérer les droits d'accès à une route
+- Faire un test d'api REST
 
 # Repertoires
 
