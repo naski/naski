@@ -24,6 +24,9 @@ abstract class Controller {
     private function setInputs(Rule $rule)
     {
         $gump = new \GUMP();
+
+        $_POST = $gump->sanitize($_POST);
+
         $gump->validation_rules(self::buildGumpRules($rule, 'validation_rules'));
         $gump->filter_rules(self::buildGumpRules($rule, 'filter_rules'));
 
