@@ -15,10 +15,6 @@ class Routing
     {
         $this->_mux = new Mux;
         $this->_path = $path;
-
-        if (!isset($_SERVER["HTTPS"])) {
-            $_SERVER["HTTPS"] = false;
-        }
     }
 
     public function addRules(array $rules)

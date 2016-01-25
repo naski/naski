@@ -55,4 +55,22 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = 'go.doelia.fr';
         $this->assertFalse($ROUTING->routeFind());
     }
+
+    // public function testRoutingHttps() {
+    //
+    //     $_SERVER['HTTP_HOST'] = 'vps.doelia.fr';
+    //
+    //     $ROUTING = new Routing('/test');
+    //
+    //     $ROUTING->addRule(new Rule(array(
+    //         'path' => '/test',
+    //         "controller" => 'TestController',
+    //         "action" => 'testAction',
+    //         "httpsOnly" => true
+    //     )));
+    //
+    //     $this->assertFalse($ROUTING->routeFind());
+    //     $_SERVER['HTTPS'] = true;
+    //     $this->assertTrue($ROUTING->routeFind());
+    // }
 }
