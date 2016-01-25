@@ -16,9 +16,10 @@ class Routing
         $this->_mux = new Mux;
     }
 
-    public function addRules(array $rules)
+    public function addRules(array $rules, string $subpath = "")
     {
-        foreach ($rules as $rule) {
+        foreach ($rules as &$rule) {
+            $rule->path = $subpath . $rule->path;
             $this->addRule($rule);
         }
     }
@@ -26,14 +27,14 @@ class Routing
     public function addRule(Rule $rule)
     {
         if ($rule->path != '*') { // TODO choisir la synthaxe (à voir avec le multi site)
-            $this->addToMux($rule);
+            self::addToMux($rule, $this->_mux);
             $this->_rulesArray[] = $rule;
         } else {
             $this->_404Rule = $rule;
         }
     }
 
-    private function addToMux(Rule $rule)
+    private static function addToMux(Rule $rule, Mux $mux)
     {
         $type = $rule->type ?? 'any';
 
@@ -46,7 +47,7 @@ class Routing
             $options['domain'] = $rule->domain;
         }
 
-        $this->_mux->$type($rule->path, $called, $options);
+        $mux->$type($rule->path, $called, $options);
     }
 
     public function process(string $path): bool
