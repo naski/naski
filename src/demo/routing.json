@@ -4,6 +4,7 @@
             "path": "/product",
             "controller": "HomeController",
             "action": "productAction",
+            "httpsOnly": true,
             "params": [
                 {
                     "name": "id",

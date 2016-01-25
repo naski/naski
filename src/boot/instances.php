@@ -58,9 +58,3 @@ $IM = new InstancesManager();
 
     $IM->recordInstance('twig', $twig);
 }
-
-// GUMP
-{
-    $GUMP = new GUMP();
-    $IM->recordInstance('gump', $GUMP);
-}
