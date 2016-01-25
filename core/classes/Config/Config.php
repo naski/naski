@@ -22,7 +22,6 @@ class Config implements \ArrayAccess
     private function loadJSON(string $json)
     {
         $array = json_decode($json, $assoc = true);
-        // echo "load... $json";
         $array = $array ?? array();
         $this->loadArray($array);
     }
