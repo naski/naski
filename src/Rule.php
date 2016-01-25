@@ -8,6 +8,8 @@ class Rule
     public $path = "undefined";
     public $controller = "undefined";
     public $action = "undefined";
+    public $domain = "*"; // Pour les sous-domaines, entrer foo.*
+    public $httpsOnly = false;
     public $params = array(); // array<array>
 
     public function __construct(array $a)
@@ -15,7 +17,23 @@ class Rule
         foreach ($a as $key => $value) {
             $this->$key = $value;
         }
+        $this->processDomain();
         $this->verificate();
+    }
+
+    private function processDomain()
+    {
+        try {
+            if ($this->domain != '*' && strpos($this->domain, '*') !== false) {
+                $domain = $_SERVER['HTTP_HOST'];
+                $suffixe = strstr($domain, '.'); // vps.doelia.fr -> .doelia.fr
+                $subdomain = explode('.*', $this->domain)[0];
+                $this->domain = $subdomain . $suffixe;
+            }
+        } catch (\Exception $e) {
+            throw new BadRuleException('Champ domaine '.$this->domain." invalide : " . $e->getMessage());
+        }
+
     }
 
     /**
