@@ -14,9 +14,8 @@ Faire pointer un alias domaine racine sur /web/
 
 # TODO
 
-- Passer les classes en PSR 4 autoload
-- Autoload les fonctions
-- Changer le namespace de pdo
+- Routing : Gérer des subroutes et le domain
+- Faire mieux la validation des POSTs
 - Voir l'inclusion de la debug bar dans un autre template
 
 # Repertoires

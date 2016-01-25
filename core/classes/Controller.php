@@ -6,7 +6,7 @@ use Naski\Routing\Rule;
 abstract class Controller {
 
     public $inputs = array(); // Tableau clé/valeur de $POST nettoyé
-    protected $_postValid = true;
+    private $_postValid = true;
 
     public function __construct(Rule $rule = null)
     {
