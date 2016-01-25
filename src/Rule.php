@@ -17,9 +17,22 @@ class Rule
         foreach ($a as $key => $value) {
             $this->$key = $value;
         }
+
+        $this->clean();
+        $this->verificate();
+    }
+
+    public function clean()
+    {
         $this->processDomain();
         $this->path = str_replace('*', "(/:no1(/:no2(/:no3(/:no4(/:no5)))))", $this->path);
-        $this->verificate();
+
+        // Retrait du dernier '/'
+        if ($this->path && $this->path[strlen($this->path)-1] == '/' && $this->path != '/') {
+            $this->path = substr($this->path, 0, -1);
+        }
+
+        $this->path = str_replace('/(/', "(/", $this->path);
     }
 
     private function processDomain()
