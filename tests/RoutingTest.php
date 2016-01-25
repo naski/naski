@@ -7,6 +7,20 @@ use Naski\Routing\Rule;
 
 class RoutingTest extends PHPUnit_Framework_TestCase
 {
+
+    public function testHomePage()
+    {
+        $ROUTING = new Routing();
+
+        $ROUTING->addRule(new Rule(array(
+            'path' => '/',
+            "controller" => 'TestController',
+            "action" => 'testAction'
+        )));
+
+        $this->assertTrue($ROUTING->routeFind('/'));
+    }
+
     public function testRouting()
     {
         $this->expectOutputString("\nHello\n");
@@ -90,8 +104,30 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($ROUTING->routeFind('/site1/gogo/gaga'));
         $this->assertTrue($ROUTING->routeFind('/site1/gogo/gaga/bobo.xml'));
         $this->assertTrue($ROUTING->routeFind('/site1'));
+        $this->assertTrue($ROUTING->routeFind('/site1/'));
         $this->assertFalse($ROUTING->routeFind('/site2'));
         $this->assertFalse($ROUTING->routeFind('/site2/toto'));
+    }
+
+    public function testRoutingSubSite2() {
+
+        $ROUTING = new Routing();
+
+        $ROUTING->addRules(
+            array(
+                new Rule(array(
+                    'path' => '/product/*',
+                    "controller" => 'TestController',
+                    "action" => 'notFoundAction',
+                ))
+            ),
+            $subpath = '/site1'
+        );
+
+        $this->assertTrue($ROUTING->routeFind('/site1/product'));
+        $this->assertTrue($ROUTING->routeFind('/site1/product/23'));
+        $this->assertFalse($ROUTING->routeFind('/site2/product/23'));
+        $this->assertFalse($ROUTING->routeFind('/site1/bouh'));
     }
 
     // public function testRoutingHttps() {

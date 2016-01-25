@@ -48,6 +48,10 @@ class Routing
 
     public function process(string $path): bool
     {
+        if ($path && $path[strlen($path)-1] == '/' && $path != '/') {
+            $path = substr($path, 0, -1);
+        }
+
         $route = $this->_mux->dispatch($path);
         if ($route === null) {
             return false;
@@ -60,6 +64,9 @@ class Routing
 
     public function routeFind(string $path): bool
     {
+        if ($path && $path[strlen($path)-1] == '/' && $path != '/') {
+            $path = substr($path, 0, -1);
+        }
         return ($this->_mux->dispatch($path) !== null);
     }
 
