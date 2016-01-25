@@ -68,7 +68,7 @@ class RoutingTest extends PHPUnit_Framework_TestCase
             "action" => 'notFoundAction',
         )));
 
-        $ROUTING->process('/baaad');
+        $ROUTING->process('/baaad/toto');
     }
 
     public function testRoutingSubSite() {
