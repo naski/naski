@@ -18,6 +18,9 @@ class Rule
             $this->$key = $value;
         }
         $this->processDomain();
+        if ($this->path == "*") {
+            $this->path = "(/:no1(/:no2(/:no3(/:no4(/:no5)))))";
+        }
         $this->verificate();
     }
 

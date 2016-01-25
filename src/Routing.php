@@ -26,7 +26,7 @@ class Routing
 
     public function addRule(Rule $rule)
     {
-        if ($rule->path != '*') { // TODO choisir la synthaxe (à voir avec le multi site)
+        if (strpos($rule->path, '*') === false) { // S'il ne contient pas d'*
             self::addToMux($rule, $this->_mux);
             $this->_rulesArray[] = $rule;
         } else {
