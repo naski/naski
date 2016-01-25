@@ -16,6 +16,3 @@ $ROUTING = new Routing();
 require '../src/boot/routing.php';
 
 // require_once '../core/debug_bar/show.php';
-
-$path = '/' . ($_GET['route'] ?? '');
-$ROUTING->process($path);
