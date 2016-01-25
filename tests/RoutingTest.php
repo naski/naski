@@ -11,7 +11,7 @@ class RoutingTest extends PHPUnit_Framework_TestCase
     {
         $this->expectOutputString("\nHello\n");
 
-        $ROUTING = new Routing('/test');
+        $ROUTING = new Routing();
 
         $ROUTING->addRule(new Rule(array(
             'path' => '/test',
@@ -19,14 +19,14 @@ class RoutingTest extends PHPUnit_Framework_TestCase
             "action" => 'testAction'
         )));
 
-        $ROUTING->process();
+        $ROUTING->process('/test');
 
     }
 
     public function testRoutingWithDomain() {
         $_SERVER['HTTP_HOST'] = 'vps.doelia.fr';
 
-        $ROUTING = new Routing('/test');
+        $ROUTING = new Routing();
 
         $ROUTING->addRule(new Rule(array(
             'path' => '/test',
@@ -35,14 +35,14 @@ class RoutingTest extends PHPUnit_Framework_TestCase
             "domain" => 'vps.doelia.com'
         )));
 
-        $this->assertFalse($ROUTING->routeFind());
+        $this->assertFalse($ROUTING->routeFind('/test'));
     }
 
     public function testRoutingWithSubDomain() {
 
         $_SERVER['HTTP_HOST'] = 'vps.doelia.fr';
 
-        $ROUTING = new Routing('/test');
+        $ROUTING = new Routing();
 
         $ROUTING->addRule(new Rule(array(
             'path' => '/test',
@@ -51,9 +51,9 @@ class RoutingTest extends PHPUnit_Framework_TestCase
             "domain" => 'vps.*'
         )));
 
-        $this->assertTrue($ROUTING->routeFind());
+        $this->assertTrue($ROUTING->routeFind('/test'));
         $_SERVER['HTTP_HOST'] = 'go.doelia.fr';
-        $this->assertFalse($ROUTING->routeFind());
+        $this->assertFalse($ROUTING->routeFind('/test'));
     }
 
     // public function testRoutingHttps() {

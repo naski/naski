@@ -9,12 +9,10 @@ class Routing
 {
     private $_mux;
     private $_rulesArray = array(); // array<Rule>
-    private $_path; // URL enregistrée du client
 
-    public function __construct(string $path)
+    public function __construct()
     {
         $this->_mux = new Mux;
-        $this->_path = $path;
     }
 
     public function addRules(array $rules)
@@ -46,19 +44,19 @@ class Routing
         $this->_mux->$type($rule->path, $called, $options);
     }
 
-    public function process()
+    public function process(string $path)
     {
-        $route = $this->_mux->dispatch($this->_path);
+        $route = $this->_mux->dispatch($path);
         if ($route == null) {
-            echo ("Route de '".$this->_path."' introuvable"); // TODO gérer le 404
+            echo ("Route de '".$path."' introuvable"); // TODO gérer le 404
         } else {
             echo Executor::execute($route);
         }
     }
 
-    public function routeFind(): bool
+    public function routeFind(string $path): bool
     {
-        return ($this->_mux->dispatch($this->_path) !== null);
+        return ($this->_mux->dispatch($path) !== null);
     }
 
     public function getRules(): array
