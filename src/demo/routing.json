@@ -4,7 +4,6 @@
             "path": "/product",
             "controller": "HomeController",
             "action": "productAction",
-            "httpsOnly": true,
             "params": [
                 {
                     "name": "id",
@@ -17,6 +16,12 @@
             "path": "/",
             "controller": "HomeController",
             "action": "indexAction"
+        }
+        ,
+        {
+            "path": "*",
+            "controller": "HomeController",
+            "action": "badAction"
         }
     ]
 }

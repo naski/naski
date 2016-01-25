@@ -22,4 +22,9 @@ class HomeController extends Controller
             print_r($this->inputs);
         }
     }
+
+    public function badAction()
+    {
+        echo "Page introuvable";
+    }
 }

@@ -15,6 +15,7 @@ Faire pointer un alias domaine racine sur /web/
 # TODO
 
 - Voir l'inclusion de la debug bar dans un autre template
+- Gérer les droits d'accès à une route
 
 # Repertoires
 
