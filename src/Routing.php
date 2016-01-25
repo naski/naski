@@ -19,7 +19,7 @@ class Routing
     {
         foreach ($rules as &$rule) {
             $rule->path = $subpath . $rule->path;
-            $rule->path = str_replace('//', "/", $rule->path);
+            $rule->path = str_replace('/(/', "(/", $rule->path);
             $this->addRule($rule);
         }
     }
