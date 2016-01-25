@@ -6,7 +6,4 @@ require_once 'boot.php';
 
 require '../src/demo/controllers/home.php';
 
-
-
-
 require '../src/boot/routing.php';
