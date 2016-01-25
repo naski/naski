@@ -2,7 +2,7 @@
     "rules": [
         {
             "path": "/product",
-            "controller": "HomeCointroller",
+            "controller": "HomeController",
             "action": "productAction",
             "params": [
                 {
