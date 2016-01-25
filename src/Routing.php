@@ -49,7 +49,7 @@ class Routing
         $this->_mux->$type($rule->path, $called, $options);
     }
 
-    public function process(string $path)
+    public function process(string $path): bool
     {
         $route = $this->_mux->dispatch($path);
         if ($route === null) {
@@ -59,11 +59,13 @@ class Routing
                 $ctrl = new $classname($route);
                 $ctrl->$methodeName($this->_404Rule);
             } else {
-                echo "\nbaaad\n";
+                return false;
             }
         } else {
             echo Executor::execute($route);
         }
+
+        return true;
     }
 
     public function routeFind(string $path): bool
