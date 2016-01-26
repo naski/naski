@@ -1,3 +1,3 @@
 <?php
 
-echo "Site 2";
+echo 'Site 2';

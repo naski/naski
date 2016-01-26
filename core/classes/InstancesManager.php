@@ -4,8 +4,8 @@ namespace Naski;
 
 use Naski\Pdo\AbstractDatabase;
 
-class InstancesManager {
-
+class InstancesManager
+{
     public $_dbInstances = array();
 
     public function recordInstance(string $instanceName, $instance)
@@ -30,5 +30,4 @@ class InstancesManager {
             $object->$key = $value;
         }
     }
-
 }

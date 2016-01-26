@@ -8,6 +8,7 @@ function sumProperties(array $arr, $property)
     foreach ($arr as $object) {
         $sum += $object->{$property} ?? 0;
     }
+
     return $sum;
 }
 
@@ -17,5 +18,6 @@ function sumCalls(array $arr, $property)
     foreach ($arr as $object) {
         $sum += $object->{$property}();
     }
+
     return $sum;
 }

@@ -2,12 +2,10 @@
 
 /**
  *  Instancie des entités nécessaires au projet
- *  Dépend de paths.php et tools.php
+ *  Dépend de paths.php et tools.php.
  */
-
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-
 use Naski\Pdo\MySQLDatabase;
 use Naski\InstancesManager;
 
@@ -15,8 +13,8 @@ $IM = new InstancesManager();
 
 // Config
 {
-    $CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config.json');
-    $CONFIG->loadJSONFile(ROOT_SYSTEM . 'app/config/'. 'config_' . $CONFIG->env . '.json');
+    $CONFIG->loadJSONFile(ROOT_SYSTEM.'app/config/'.'config.json');
+    $CONFIG->loadJSONFile(ROOT_SYSTEM.'app/config/'.'config_'.$CONFIG->env.'.json');
 
     $IM->recordInstance('config', $CONFIG);
 }
@@ -24,7 +22,7 @@ $IM = new InstancesManager();
 // Monolog
 {
     $log = new Logger('name');
-    $log->pushHandler(new StreamHandler(PATH_LOGS . 'tests.log', Logger::WARNING));
+    $log->pushHandler(new StreamHandler(PATH_LOGS.'tests.log', Logger::WARNING));
 
     $log->addWarning('Foo', array('username' => 'Seldaek'));
     $log->addError('Bar');
@@ -34,7 +32,7 @@ $IM = new InstancesManager();
 // Connexion SQL
 {
     $log = new Logger('mysql');
-    $log->pushHandler(new StreamHandler(PATH_LOGS . 'mysql.log'));
+    $log->pushHandler(new StreamHandler(PATH_LOGS.'mysql.log'));
 
     $pdo = new MySQLDatabase($CONFIG['main_mysql'], $log);
 
@@ -46,10 +44,10 @@ $IM = new InstancesManager();
 
 // Moteur de template twig
 {
-    $loader = new Twig_Loader_Filesystem($basepath = ROOT_SYSTEM . '/src/websites/');
+    $loader = new Twig_Loader_Filesystem($basepath = ROOT_SYSTEM.'/src/websites/');
 
     $options = $CONFIG->cache_twig ? array(
-        'cache' => ROOT_SYSTEM . '/app/cache/',
+        'cache' => ROOT_SYSTEM.'/app/cache/',
     ) : array();
 
     $twig = new Twig_Environment($loader, $options);
