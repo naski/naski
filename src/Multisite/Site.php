@@ -5,6 +5,7 @@ namespace Naski\Routing\Multisite;
 use Naski\Config\Config;
 use Naski\Routing\Routing;
 use Naski\Routing\Rule;
+use Psr\Http\Message\UriInterface;
 
 class Site
 {
@@ -39,7 +40,7 @@ class Site
         }
     }
 
-    public function exec($rootDir, $path)
+    public function exec($rootDir, UriInterface $uri)
     {
         $SITE = $this; // Utilisable dans le fichier inclus
         require $rootDir . $this->initFile;
@@ -52,7 +53,7 @@ class Site
 
             $routing = Routing::buildFromConfig($config);
 
-            if (!$routing->process($this->getNewPath($path))) {
+            if (!$routing->process($this->getNewPath($uri->getPath()))) {
                 throw new \Exception("Aucune route n'a été trouvée");
             }
         }
@@ -68,8 +69,9 @@ class Site
         return $path;
     }
 
-    public function match($domain, $path, $isHttps = false) // TODO gérer le https
+    public function match(UriInterface $uri) // TODO gérer le https
     {
+        $path = $uri->getPath();
         if ($this->conditions['path'] ?? '') {
             if ($this->getNewPath($path) == $path) {
                 return false;

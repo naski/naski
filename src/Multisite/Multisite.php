@@ -5,6 +5,7 @@ namespace Naski\Routing\Multisite;
 use Naski\Config\Config;
 use Naski\Routing\Routing;
 use Naski\Routing\Rule;
+use Psr\Http\Message\UriInterface;
 
 class Multisite
 {
@@ -31,11 +32,11 @@ class Multisite
         $this->_websites[] = $site;
     }
 
-    public function process(string $domain, string $path)
+    public function process(UriInterface $uri)
     {
         foreach ($this->_websites as $w) {
-            if ($w->match($domain, $path)) {
-                $w->exec($this->_root, $path);
+            if ($w->match($uri)) {
+                $w->exec($this->_root, $uri);
                 return $w;
             }
         }

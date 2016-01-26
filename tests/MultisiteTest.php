@@ -7,6 +7,7 @@ use Naski\Routing\Rule;
 use Naski\Config\Config;
 use Naski\Routing\Multisite\Multisite;
 use Naski\Routing\Multisite\Site;
+use League\Uri\Schemes\Http as HttpUri;
 
 class MultisiteTest extends PHPUnit_Framework_TestCase
 {
@@ -18,7 +19,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
             'name' => 'Site 1',
             'initFile' =>  'initSite.php',
         )));
-        $out = $multisite->process('doelia.fr', '/');
+        $out = $multisite->process(HttpUri::createFromString("http://doelia.fr/"));
 
         $this->expectOutputString("Site 1");
     }
@@ -38,11 +39,11 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
             'initFile' =>  'initSite.php',
         )));
 
-        $out = $multisite->process('doelia.fr', '/');
+        $out = $multisite->process(HttpUri::createFromString("http://doelia.fr/"));
         $this->assertEquals($out, $site1);
         $this->assertNotEquals($out, $site2);
 
-        $out = $multisite->process('doelia.fr', '/site2/gogo');
+        $out = $multisite->process(HttpUri::createFromString("http://doelia.fr/site2/gogo"));
         $this->assertEquals($out, $site2);
         $this->assertNotEquals($out, $site1);
     }
@@ -52,7 +53,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         $websites = new Config();
         $websites->loadJSONFile(__DIR__ . '/multisite.json');
         $multisite = MultiSite::buildFromConfig($websites, __DIR__);
-        $out = $multisite->process('doelia.fr', '/product');
+        $out = $multisite->process(HttpUri::createFromString("http://doelia.fr/product"));
         $this->assertEquals($out->name, "Site 1");
         $this->assertNotEquals($out->name, "Site 2");
     }
