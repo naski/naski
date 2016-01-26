@@ -16,13 +16,12 @@ class Config implements \ArrayAccess
         $this->loadJSON($content);
     }
 
-    /**
-     *  TODO Vérifier la validité du JSON
-     */
     public function loadJSON(string $json)
     {
         $array = json_decode($json, $assoc = true);
-        $array = $array ?? array();
+        if ($array === null) {
+            throw new BadJsonSynthaxeException('Le json est mal formé.');
+        }
         $this->loadArray($array);
     }
 

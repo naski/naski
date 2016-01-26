@@ -1,22 +1,27 @@
 <?php
 
 use Naski\Config\Config;
-use Webmozart\Json\JsonValidator;
+use Naski\Routing\Routing;
+use Naski\Routing\Rule;
 
 $path = '/' . ($_GET['route'] ?? '');
 
 $websitesJson = '
 {
-    "rootPath": "src/websites/"
+    "rootPath": "src/websites/",
     "websites": [
         {
             "name": "Site 2",
             "access": {
-                "path": "^/site2/(.*)"
+                "path": "^/site2(.*)"
             },
             "src": "site2/",
+            "initFile": "init.php"
+        },
+        {
+            "demo": "Démo",
+            "src": "demo/",
             "initFile": "init.php",
-            "controllers": "controllers/",
             "router": "routing.json"
         }
     ]
@@ -27,19 +32,36 @@ $websitesJson = '
 $websites = new Config();
 $websites->loadJSON($websitesJson);
 
-$validator = new JsonValidator();
-$errors = $validator->validate($websites->toArray(), ROOT_SYSTEM . 'core/multisite-schema.json');
-
-if (count($errors) > 0) {
-    echo "bbbd";
-}
-
-var_dump($websites);
-
 $rootDir = ROOT_SYSTEM . $websites['rootPath'];
 foreach ($websites['websites'] as $w) {
-    if (($result = preg_replace('#' . $w['access']['path'] . "#", '${1}', $path)) != $path) {
-        $path = $result;
-        require $rootDir . $w['src'] . $w['initFile'];
+
+    $useThis = true;
+    if ($w['access']['path'] ?? '') {
+        $regex = '#' . $w['access']['path'] . "#";
+        $result = preg_replace($regex, '${1}', $path);
+        if ($result != $path) {
+            $path = $result;
+        } else {
+            $useThis = false;
+        }
     }
+
+    if ($useThis) {
+        require $rootDir . $w['src'] . $w['initFile'];
+
+        if ($w['router'] ?? '') {
+            $routingFile = $rootDir . $w['src'] . $w['router'];
+            $routing = new Routing();
+            $routing->addRules(Naski\getRulesFromJsonFile($routingFile));
+
+            if (!$routing->process($path)) {
+                die('Aucune route trouvée.');
+            }
+        }
+
+        exit();
+    }
+
 }
+
+die('Aucun site trouvé.');
