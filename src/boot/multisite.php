@@ -1,16 +1,36 @@
 <?php
 
+use Naski\Config\Config;
+
 $path = '/' . ($_GET['route'] ?? '');
 
-$exploded = explode('/', $path);
+$websitesJson = '
+{
+    "rootPath": "src/websites/"
+    "websites": [
+        {
+            "name": "Site 2",
+            "access": {
+                "path": "^/site2/(.*)"
+            },
+            "src": "site2/",
+            "initFile": "init.php",
+            "controllers": "controllers/",
+            "router": "routing.json"
+        }
+    ]
+}
+';
 
-$firtPart = $exploded[1] ?? '';
+$websites = new Config();
+$websites->loadJSON($websitesJson);
 
-if ($firtPart == 'site2') {
-    $newArray = array_slice($exploded, 2);
-    $path = implode('/', $exploded);
-    require ROOT_SYSTEM . 'src/websites/' . $firtPart . '/init.php';
-} else {
-    $path = $path;
-    require ROOT_SYSTEM . 'src/websites/' . 'demo' . '/init.php';
+var_dump($websites);
+
+$rootDir = ROOT_SYSTEM . $websites['rootPath'];
+foreach ($websites['websites'] as $w) {
+    if (($result = preg_replace('#' . $w['access']['path'] . "#", '${1}', $path)) != $path) {
+        $path = $result;
+        require $rootDir . $w['src'] . $w['initFile'];
+    }
 }
