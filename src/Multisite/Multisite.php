@@ -35,7 +35,7 @@ class Multisite
     {
         foreach ($this->_websites as $w) {
             if ($w->match($domain, $path)) {
-                $w->exec($this->_root);
+                $w->exec($this->_root, $path);
                 return $w;
             }
         }

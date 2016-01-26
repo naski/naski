@@ -39,7 +39,7 @@ class Site
         }
     }
 
-    public function exec($rootDir)
+    public function exec($rootDir, $path)
     {
         $SITE = $this; // Utilisable dans le fichier inclus
         require $rootDir . $this->initFile;
@@ -52,7 +52,7 @@ class Site
 
             $routing = Routing::buildFromConfig($config);
 
-            if (!$routing->process($this->getNewPath())) {
+            if (!$routing->process($this->getNewPath($path))) {
                 throw new \Exception("Aucune route n'a été trouvée");
             }
         }

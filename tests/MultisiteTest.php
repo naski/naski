@@ -4,6 +4,7 @@ require_once('bootstrap.php');
 
 use Naski\Routing\Routing;
 use Naski\Routing\Rule;
+use Naski\Config\Config;
 use Naski\Routing\Multisite\Multisite;
 use Naski\Routing\Multisite\Site;
 
@@ -44,6 +45,16 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         $out = $multisite->process('doelia.fr', '/site2/gogo');
         $this->assertEquals($out, $site2);
         $this->assertNotEquals($out, $site1);
+    }
+
+    public function testLoadFile()
+    {
+        $websites = new Config();
+        $websites->loadJSONFile(__DIR__ . '/multisite.json');
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+        $out = $multisite->process('doelia.fr', '/product');
+        $this->assertEquals($out->name, "Site 1");
+        $this->assertNotEquals($out->name, "Site 2");
     }
 
 

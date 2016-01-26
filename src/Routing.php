@@ -2,6 +2,7 @@
 
 namespace Naski\Routing;
 
+use Naski\Config\Config;
 use FastRoute;
 
 class Routing
