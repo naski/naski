@@ -1,13 +1,13 @@
 <?php
 
-ini_set("display_errors", 1);
+ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $_SERVER['REQUEST_METHOD'] = 'GET';
 
-if (@!include __DIR__ . '/../vendor/autoload.php') {
-	echo 'Install PDO Tester using `composer update`';
-	exit(1);
+if (@!include __DIR__.'/../vendor/autoload.php') {
+    echo 'Install PDO Tester using `composer update`';
+    exit(1);
 }
 
 use Naski\Routing\Controller;

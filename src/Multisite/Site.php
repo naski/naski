@@ -4,14 +4,13 @@ namespace Naski\Routing\Multisite;
 
 use Naski\Config\Config;
 use Naski\Routing\Routing;
-use Naski\Routing\Rule;
 use Psr\Http\Message\UriInterface;
 
 class Site
 {
     public $name = null;
     public $initFile = null; // Chemin relatif
-    public $routingFile = ""; // Chemin relatif
+    public $routingFile = ''; // Chemin relatif
     public $conditions = array();
 
     public function __construct(array $a)
@@ -29,7 +28,7 @@ class Site
 
     /**
      *  // TODO Écrire tout les tests
-     *  Tester l'existance des fichiers donnés
+     *  Tester l'existance des fichiers donnés.
      */
     private function verificate()
     {
@@ -43,10 +42,10 @@ class Site
     public function exec($rootDir, UriInterface $uri)
     {
         $SITE = $this; // Utilisable dans le fichier inclus
-        require $rootDir . $this->initFile;
+        require $rootDir.$this->initFile;
 
         if ($this->routingFile ?? '') {
-            $routingFile = $rootDir . $this->routingFile;
+            $routingFile = $rootDir.$this->routingFile;
 
             $config = new Config();
             $config->loadJSONFile($routingFile);
@@ -62,10 +61,12 @@ class Site
     public function getNewPath($path): string
     {
         if ($this->conditions['path'] ?? '') {
-            $regex = '#' . $this->conditions['path'] . "#";
+            $regex = '#'.$this->conditions['path'].'#';
             $result = preg_replace($regex, '${1}', $path);
+
             return $result;
         }
+
         return $path;
     }
 
@@ -78,7 +79,7 @@ class Site
             }
         }
         if ($this->conditions['host'] ?? '') {
-            $regex = '#' . $this->conditions['host'] . "#";
+            $regex = '#'.$this->conditions['host'].'#';
             if (!preg_match($regex, $uri->getHost())) {
                 return false;
             }
@@ -88,9 +89,7 @@ class Site
                 return false;
             }
         }
+
         return true;
     }
-
-
-
 }

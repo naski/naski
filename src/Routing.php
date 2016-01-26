@@ -17,13 +17,14 @@ class Routing
         foreach ($config['rules'] as $r) {
             $obj->addRule(new Rule($r));
         }
+
         return $obj;
     }
 
     public function __construct()
     {
         if (!isset($_SERVER['REQUEST_METHOD'])) {
-            throw new \Exception("Impossible de router une requête non HTTP");
+            throw new \Exception('Impossible de router une requête non HTTP');
         }
     }
 
@@ -43,10 +44,11 @@ class Routing
         }
     }
 
-    private function createDispatcher() {
+    private function createDispatcher()
+    {
         global $that;
         $that = $this;
-        $this->_dispatcher = \FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+        $this->_dispatcher = \FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
             global $that;
             foreach ($that->getRules() as $rule) {
                 $r->addRoute($rule->type, $rule->path, $rule);
@@ -66,20 +68,25 @@ class Routing
                 if ($processIt) {
                     self::processRule($handler, $vars);
                 }
+
                 return true;
                 break;
             default:
                 if ($this->_defaultRule != null) {
                     self::processRule($this->_defaultRule, array());
+
                     return true;
                 }
+
                 return false;
                 break;
         }
+
         return false;
     }
 
-    private static function processRule(Rule $rule, array $vars) {
+    private static function processRule(Rule $rule, array $vars)
+    {
         $controllerName = $rule->controller;
         $ctrl = new $controllerName($rule);
         call_user_func_array(array($ctrl, $rule->action), $vars);
@@ -94,6 +101,4 @@ class Routing
     {
         return $this->_rulesArray;
     }
-
-
 }

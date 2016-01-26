@@ -2,10 +2,8 @@
 
 namespace Naski\Routing;
 
-use Naski\Routing\Rule;
-
-abstract class Controller {
-
+abstract class Controller
+{
     public $inputs = array(); // Tableau clé/valeur de $POST nettoyé
     private $_postValid = true;
 
@@ -51,7 +49,7 @@ abstract class Controller {
         foreach ($rule->params ?? array() as $param) {
             $rules[$param['name']] = $param[$name] ?? '';
         }
+
         return $rules;
     }
-
 }

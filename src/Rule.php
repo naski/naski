@@ -5,9 +5,9 @@ namespace Naski\Routing;
 class Rule
 {
     public $type = ['GET', 'POST'];
-    public $path = "undefined";
-    public $controller = "undefined";
-    public $action = "undefined";
+    public $path = 'undefined';
+    public $controller = 'undefined';
+    public $action = 'undefined';
     public $params = array(); // array<array>
 
     public function __construct(array $a)
@@ -20,7 +20,7 @@ class Rule
     }
 
     /**
-     *  // TODO Écrire tout les tests
+     *  // TODO Écrire tout les tests.
      */
     private function verificate()
     {
