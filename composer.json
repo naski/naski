@@ -23,7 +23,8 @@
             "Naski\\": "core/classes/"
         },
         "files": [
-            "core/functions/functions.php"
+            "core/functions/functions.php",
+            "core/functions/redundancy.php"
         ]
     },
     "require": {

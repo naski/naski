@@ -25,6 +25,7 @@ Faire pointer un alias domaine racine sur /web/
         - Inclure le init.init
         - Intialiser correctement twig
 - Faire un test d'api REST
+- Étudier le système de log debug qui s'affiche quand nécessaire
 
 # Repertoires
 
