@@ -4,6 +4,8 @@ require_once 'boot.php';
 
 // Démo
 
-require '../src/demo/controllers/home.php';
+if (!IS_HTTP) {
+    die('Ce site est accesible uniquement en HTTP');
+}
 
-require '../src/boot/routing.php';
+require '../src/boot/multisite.php';

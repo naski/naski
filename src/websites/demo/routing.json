@@ -1,5 +1,4 @@
 {
-    "subpath": "/test",
     "rules": [
         {
             "path": "/product",
