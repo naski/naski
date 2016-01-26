@@ -1,8 +1,6 @@
 <?php
 
-use Naski\Pdo\BadQueryException;
 use Naski\Pdo\AbstractDatabase;
-
 
 abstract class AbstractTester extends PHPUnit_Framework_TestCase
 {
@@ -20,12 +18,13 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
      */
     public function testInsert(AbstractDatabase $db) :AbstractDatabase
     {
-        $db->insert("tests",
+        $db->insert('tests',
             array(
-                "row1" => "v11",
-                "row2" => "v12"
+                'row1' => 'v11',
+                'row2' => 'v12',
             )
         );
+
         return $db;
     }
 
@@ -34,9 +33,10 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
      */
     public function testSelect(AbstractDatabase $db) :AbstractDatabase
     {
-        $q = $db->query("SELECT * FROM tests");
+        $q = $db->query('SELECT * FROM tests');
         $l = $q->fetch();
         $this->assertEquals($l['row1'], 'v11');
+
         return $db;
     }
 
@@ -45,16 +45,17 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
      */
     public function testUpdate(AbstractDatabase $db) :AbstractDatabase
     {
-        $db->update("tests",
+        $db->update('tests',
             array(
-                "row1" => "v11.1",
-                "row2" => "v12.1"
+                'row1' => 'v11.1',
+                'row2' => 'v12.1',
             ),
             "WHERE row1='v11'"
         );
-        $q = $db->query("SELECT * FROM tests");
+        $q = $db->query('SELECT * FROM tests');
         $l = $q->fetch();
         $this->assertEquals($l['row1'], 'v11.1');
+
         return $db;
     }
 
@@ -65,5 +66,4 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     {
         $this->assertGreaterThan(0, $db->getRequestsNumber());
     }
-
 }

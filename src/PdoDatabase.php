@@ -4,23 +4,21 @@ namespace Naski\Pdo;
 
 abstract class PdoDatabase extends AbstractDatabase
 {
-
     protected $_pdo = null; // Objet PDO abstrait (Mysql...)
 
-    public abstract function getPrefixe(): string;
+    abstract public function getPrefixe(): string;
 
     /**
-     *   Envoi la requete au serveur et retourne le résultat
+     *   Envoi la requete au serveur et retourne le résultat.
      */
     protected function sendQuery(string $query)
     {
         try {
             return $this->_pdo->query($query);
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+            throw new BadQueryException($error);
         }
-        catch (\Exception $e) {
-			$error = $e->getMessage();
-			throw new BadQueryException($error);
-		}
     }
 
     /**
@@ -31,8 +29,8 @@ abstract class PdoDatabase extends AbstractDatabase
         $array = $this->_connexionDatas;
 
         $options = array(
-            \PDO::ATTR_TIMEOUT => "3", // Timeout en secondes
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+            \PDO::ATTR_TIMEOUT => '3', // Timeout en secondes
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
         );
 
         $this->_pdo = new \PDO(
@@ -41,7 +39,5 @@ abstract class PdoDatabase extends AbstractDatabase
             $array['password'],
             $options
         );
-
     }
-
 }

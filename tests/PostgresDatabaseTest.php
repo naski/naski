@@ -1,15 +1,12 @@
 <?php
 
-require('bootstrap.php');
+require 'bootstrap.php';
 
 use Naski\Pdo\PostgreSQLDatabase;
 use Naski\Pdo\AbstractDatabase;
-use Naski\Pdo\BadQueryException;
 
 class PostgresDatabaseTest extends AbstractTester
 {
-
-
     public function testConnect() :AbstractDatabase
     {
         if (!isset($GLOBALS['DB_POSTGRES'])) {
@@ -34,8 +31,7 @@ class PostgresDatabaseTest extends AbstractTester
             	"row2" varchar(255) COLLATE "default",
             	"row3" int4
             );');
+
         return $db;
     }
-
-
 }
