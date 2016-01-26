@@ -42,6 +42,7 @@
         "naski/pdo": "dev-master",
         "naski/config": "dev-master",
         "naski/routing": "2.0.*-dev",
-        "webmozart/json": "^1.2"
+        "webmozart/json": "^1.2",
+        "league/uri": "^4.0"
     }
 }
