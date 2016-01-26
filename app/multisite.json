@@ -1,0 +1,17 @@
+{
+    "rootPath": "src/websites/",
+    "websites": [
+        {
+            "name": "Site 2",
+            "conditions": {
+                "path": "^/site2(.*)"
+            },
+            "initFile": "site2/init.php"
+        },
+        {
+            "name": "Démo",
+            "initFile": "demo/init.php",
+            "routingFile": "demo/routing.json"
+        }
+    ]
+}

@@ -8,11 +8,6 @@ class InstancesManager {
 
     public $_dbInstances = array();
 
-    public function __construct()
-    {
-
-    }
-
     public function recordInstance(string $instanceName, $instance)
     {
         $this->$instanceName = $instance;
