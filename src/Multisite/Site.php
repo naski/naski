@@ -9,8 +9,8 @@ use Naski\Routing\Rule;
 class Site
 {
     public $name = null;
-    public $initFile = null; // Chemin absolu
-    public $routerFile = ""; // Chemin absolu
+    public $initFile = null; // Chemin relatif
+    public $routingFile = ""; // Chemin relatif
     public $conditions = array();
 
     public function __construct(array $a)
@@ -44,8 +44,8 @@ class Site
         $SITE = $this; // Utilisable dans le fichier inclus
         require $rootDir . $this->initFile;
 
-        if ($this->routerFile ?? '') {
-            $routingFile = $rootDir . $this->routerFile;
+        if ($this->routingFile ?? '') {
+            $routingFile = $rootDir . $this->routingFile;
 
             $config = new Config();
             $config->loadJSONFile($routingFile);
