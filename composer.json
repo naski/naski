@@ -9,6 +9,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/doelia/naski-config"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/doelia/routing"
         }
     ],
@@ -36,6 +40,7 @@
         "kriswallsmith/assetic": "^1.3",
         "twig/twig": "^1.23",
         "naski/pdo": "dev-master",
+        "naski/config": "dev-master",
         "naski/routing": "2.0.*-dev",
         "webmozart/json": "^1.2"
     }
