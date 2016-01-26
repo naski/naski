@@ -9,6 +9,14 @@
             "initFile": "initSite.php"
         },
         {
+            "name": "Site HTTPS",
+            "conditions": {
+                "path": "^/sitehttps",
+                "https": true
+            },
+            "initFile": "initSite.php"
+        },
+        {
             "name": "Site 1",
             "initFile": "initSite.php",
             "routingFile": "routing.json"

@@ -58,5 +58,16 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals($out->name, "Site 2");
     }
 
+    public function testHttps()
+    {
+        $websites = new Config();
+        $websites->loadJSONFile(__DIR__ . '/multisite.json');
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+        $out = $multisite->process(HttpUri::createFromString("https://doelia.fr/sitehttps"));
+        $this->assertEquals($out->name, "Site HTTPS");
+        $out = $multisite->process(HttpUri::createFromString("http://doelia.fr/sitehttps"));
+        $this->assertNotEquals($out->name, "Site HTTPS");
+    }
+
 
 }

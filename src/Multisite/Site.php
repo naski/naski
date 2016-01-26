@@ -77,6 +77,11 @@ class Site
                 return false;
             }
         }
+        if ($this->conditions['https'] ?? false) {
+            if ($uri->getScheme() != 'https') {
+                return false;
+            }
+        }
         return true;
     }
 
