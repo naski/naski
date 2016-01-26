@@ -7,9 +7,6 @@ class Config implements \ArrayAccess
     private $_array = array();
     private static $DEFAULT_VALUE = ""; // Valeur retournée si la clé demandée n'existe pas
 
-    /**
-     *  TODO Gérer les erreurs de fichier introuvale
-     */
     public function loadJSONFile(string $path)
     {
         $content = file_get_contents($path);
