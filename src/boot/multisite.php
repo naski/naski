@@ -9,6 +9,5 @@ $websites->loadJSONFile(ROOT_SYSTEM . 'app/multisite.json');
 
 $multisite = MultiSite::buildFromConfig($websites, ROOT_SYSTEM);
 
-// $path = '/' . ($_GET['route'] ?? '');
 $uri = HttpUri::createFromServer($_SERVER);
 $multisite->process($uri);
