@@ -12,6 +12,9 @@ class Routing
 
     public function __construct()
     {
+        if (!isset($_SERVER['REQUEST_METHOD'])) {
+            throw new \Exception("Impossible de router une requête non HTTP");
+        }
     }
 
     public function addRules(array $rules)
@@ -36,7 +39,7 @@ class Routing
         $this->_dispatcher = \FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
             global $that;
             foreach ($that->getRules() as $rule) {
-                $r->addRoute('GET', $rule->path, $rule);
+                $r->addRoute($rule->type, $rule->path, $rule);
             }
         });
     }
@@ -44,7 +47,7 @@ class Routing
     public function process(string $path, $processIt = true): bool
     {
         $this->createDispatcher();
-        $httpMethod = 'GET'; // TODO
+        $httpMethod = $_SERVER['REQUEST_METHOD'];
         $routeInfo = $this->_dispatcher->dispatch($httpMethod, $path);
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::FOUND:
