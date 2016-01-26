@@ -15,7 +15,15 @@ Faire pointer un alias domaine racine sur /web/
 # TODO
 
 - Voir l'inclusion de la debug bar dans un autre template
-- Gérer les droits d'accès à une route
+- Multisite
+    - Gestion des permissions
+    - Routing : domaine, subdomaine, path, HTTPS
+        - Utiliser une lib URI
+    - Auto gestion
+        - Lire le fichier de route
+        - Inclure les controlleurs
+        - Inclure le init.init
+        - Intialiser correctement twig
 - Faire un test d'api REST
 
 # Repertoires
