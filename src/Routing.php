@@ -10,7 +10,7 @@ class Routing
     private $_rulesArray = array(); // array<Rule>
     private $_defaultRule = null;
 
-    public function buildFromConfig(Config $config) :self
+    public static function buildFromConfig(Config $config) :self
     {
         $obj = new self();
         foreach ($config['rules'] as $r) {
