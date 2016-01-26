@@ -9,7 +9,7 @@ class Config implements \ArrayAccess
 
     public function loadJSONFile(string $path)
     {
-        $content = file_get_contents($path);
+        $content = @file_get_contents($path);
         if ($content === false) {
             throw new FileNotFoundException("Le fichier $path est introuvale.");
         }
