@@ -41,6 +41,7 @@ class Site
 
     public function exec($rootDir)
     {
+        $SITE = $this; // Utilisable dans le fichier inclus
         require $rootDir . $this->initFile;
 
         if ($this->routerFile ?? '') {

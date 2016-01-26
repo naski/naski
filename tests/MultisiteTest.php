@@ -10,7 +10,19 @@ use Naski\Routing\Multisite\Site;
 class MultisiteTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testOne()
+    public function testDisplay()
+    {
+        $multisite = new Multisite(__DIR__ . '/');
+        $multisite->addSite($site1 = new Site(array(
+            'name' => 'Site 1',
+            'initFile' =>  'initSite.php',
+        )));
+        $out = $multisite->process('doelia.fr', '/');
+
+        $this->expectOutputString("Site 1");
+    }
+
+    public function testMatch()
     {
         $multisite = new Multisite(__DIR__ . '/');
         $multisite->addSite($site2 = new Site(array(
