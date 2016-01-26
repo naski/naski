@@ -59,7 +59,7 @@ class Site
         }
     }
 
-    public function getNewPath($path)
+    public function getNewPath($path): string
     {
         if ($this->conditions['path'] ?? '') {
             $regex = '#' . $this->conditions['path'] . "#";
@@ -69,11 +69,17 @@ class Site
         return $path;
     }
 
-    public function match(UriInterface $uri) // TODO gérer le https
+    public function match(UriInterface $uri): bool
     {
         $path = $uri->getPath();
         if ($this->conditions['path'] ?? '') {
             if ($this->getNewPath($path) == $path) {
+                return false;
+            }
+        }
+        if ($this->conditions['host'] ?? '') {
+            $regex = '#' . $this->conditions['host'] . "#";
+            if (!preg_match($regex, $uri->getHost())) {
                 return false;
             }
         }
@@ -84,6 +90,7 @@ class Site
         }
         return true;
     }
+
 
 
 }

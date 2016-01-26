@@ -11,8 +11,14 @@
         {
             "name": "Site HTTPS",
             "conditions": {
-                "path": "^/sitehttps",
                 "https": true
+            },
+            "initFile": "initSite.php"
+        },
+        {
+            "name": "Site privé",
+            "conditions": {
+                "host": "vps.*"
             },
             "initFile": "initSite.php"
         },
