@@ -1,6 +1,7 @@
 <?php
 
 use Naski\Config\Config;
+use Webmozart\Json\JsonValidator;
 
 $path = '/' . ($_GET['route'] ?? '');
 
@@ -22,8 +23,16 @@ $websitesJson = '
 }
 ';
 
+
 $websites = new Config();
 $websites->loadJSON($websitesJson);
+
+$validator = new JsonValidator();
+$errors = $validator->validate($websites->toArray(), ROOT_SYSTEM . 'core/multisite-schema.json');
+
+if (count($errors) > 0) {
+    echo "bbbd";
+}
 
 var_dump($websites);
 

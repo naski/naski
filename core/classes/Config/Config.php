@@ -40,6 +40,11 @@ class Config implements \ArrayAccess
         }
     }
 
+    public function toArray(): array
+    {
+        return $this->_array;
+    }
+
     public function __get($key)
     {
         return $this->$key ?? self::$DEFAULT_VALUE;

@@ -36,6 +36,7 @@
         "kriswallsmith/assetic": "^1.3",
         "twig/twig": "^1.23",
         "naski/pdo": "dev-master",
-        "naski/routing": "2.0.*-dev"
+        "naski/routing": "2.0.*-dev",
+        "webmozart/json": "^1.2"
     }
 }
