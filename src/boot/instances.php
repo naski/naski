@@ -2,14 +2,16 @@
 
 /**
  *  Instancie des entités nécessaires au projet
- *  Dépend de paths.php et tools.php.
  */
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Naski\Pdo\MySQLDatabase;
 use Naski\InstancesManager;
 
 $IM = new InstancesManager();
+
+PHP_Timer::start();
 
 // Config
 {
