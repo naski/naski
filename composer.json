@@ -14,10 +14,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/doelia/routing"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/doelia/naski-multisite"
         }
     ],
     "authors": [
@@ -46,7 +42,6 @@
         "naski/pdo": "dev-master",
         "naski/config": "dev-master",
         "naski/routing": "dev-master",
-        "naski/multisite": "dev-master",
         "webmozart/json": "^1.2",
         "league/uri": "^4.0"
     }
