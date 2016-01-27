@@ -57,7 +57,7 @@ Il est possible de spécifier directement dans la règle la liste des parametres
 - `$this->inputValid()` pour savoir si les paramètres sont valides
 - `$this->inputs['key']` pour accèder à un paramètre filtré
 
-A utiliser uniquement comme sécurité côté serveur, préférer la validation côté client pour l'aspect esthétique.
+Prévu uniquement comme test de sécurité côté serveur, préférer la validation côté client pour l'aspect esthétique.
 
 ```php
 $routing >addRule(new Rule(array(
@@ -79,7 +79,7 @@ $routing >addRule(new Rule(array(
 )));
 ```
 
-Voir [wixel/gump](https://github.com/Wixel/GUMP) pour les synthaxes de validation_rules et filter_rules.
+Voir [wixel/gump](https://github.com/Wixel/GUMP) pour les synthaxes de *validation_rules* et *filter_rules*.
 
 ### Exemple de controleur
 
