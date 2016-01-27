@@ -9,8 +9,9 @@ use Psr\Http\Message\UriInterface;
 class Site
 {
     public $name = null;
-    public $initFile = null; // Chemin relatif
-    public $routingFile = ''; // Chemin relatif
+    public $src = null; // Chemin relatif, finisant par /
+    public $initFile = null; // Chemin relatif à $src
+    public $routingFile = ''; // Chemin relatif à $src
     public $conditions = array();
 
     public function __construct(array $a)
@@ -42,10 +43,10 @@ class Site
     public function exec($rootDir, UriInterface $uri)
     {
         $SITE = $this; // Utilisable dans le fichier inclus
-        require $rootDir.$this->initFile;
+        require $rootDir.$this->src.$this->initFile;
 
         if ($this->routingFile ?? '') {
-            $routingFile = $rootDir.$this->routingFile;
+            $routingFile = $rootDir.$this->src.$this->routingFile;
 
             $config = new Config();
             $config->loadJSONFile($routingFile);

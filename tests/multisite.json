@@ -6,6 +6,7 @@
             "conditions": {
                 "path": "^/site2(.*)"
             },
+            "src": "./",
             "initFile": "initSite.php"
         },
         {
@@ -13,6 +14,7 @@
             "conditions": {
                 "https": true
             },
+            "src": "./",
             "initFile": "initSite.php"
         },
         {
@@ -20,10 +22,12 @@
             "conditions": {
                 "host": "vps.*"
             },
+            "src": "./",
             "initFile": "initSite.php"
         },
         {
             "name": "Site 1",
+            "src": "./",
             "initFile": "initSite.php",
             "routingFile": "routing.json"
         }

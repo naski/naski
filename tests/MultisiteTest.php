@@ -14,6 +14,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         $multisite = new Multisite(__DIR__.'/');
         $multisite->addSite($site1 = new Site(array(
             'name' => 'Site 1',
+            'src' => './',
             'initFile' => 'initSite.php',
         )));
         $out = $multisite->process(HttpUri::createFromString('http://doelia.fr/'));
@@ -26,6 +27,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         $multisite = new Multisite(__DIR__.'/');
         $multisite->addSite($site2 = new Site(array(
             'name' => 'Site 2',
+            'src' => './',
             'conditions' => array(
                 'path' => '^/site2(.*)',
             ),
@@ -33,6 +35,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         )));
         $multisite->addSite($site1 = new Site(array(
             'name' => 'Site 1',
+            'src' => './',
             'initFile' => 'initSite.php',
         )));
 
