@@ -4,6 +4,7 @@ require_once 'bootstrap.php';
 
 use Naski\Routing\Routing;
 use Naski\Routing\Rule;
+use Naski\Config\Config;
 
 class RoutingTest extends PHPUnit_Framework_TestCase
 {
@@ -56,5 +57,16 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($ROUTING->routeFind('/baad'));
         $this->assertTrue($ROUTING->routeFind('/baad/'));
         $this->assertTrue($ROUTING->routeFind('/baad/toto'));
+    }
+
+    public function testPostRule()
+    {
+        $config = new Config();
+        $config->loadJSONFile(__DIR__.'/routing_post.json');
+        $routing = Routing::buildFromConfig($config);
+        $_POST['username'] = 'john';
+        $_POST['password'] = 'john';
+        $routing->process('/login');
+        $this->expectOutputString("ok");
     }
 }

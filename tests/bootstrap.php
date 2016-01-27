@@ -23,4 +23,13 @@ class TestController extends Controller
     {
         echo "\nNot Found\n";
     }
+
+    public function loginAction()
+    {
+        if (!$this->inputValid()) {
+            echo "bad";
+        } else {
+            echo "ok";
+        }
+    }
 }

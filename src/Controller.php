@@ -9,11 +9,6 @@ abstract class Controller
 
     public function __construct(Rule $rule = null)
     {
-        global $IM;
-        if ($IM != null) {
-            $IM->putInstancesIn($this);
-        }
-
         if ($rule != null) {
             $this->setInputs($rule);
         }
@@ -47,7 +42,12 @@ abstract class Controller
     {
         $rules = array();
         foreach ($rule->params ?? array() as $param) {
-            $rules[$param['name']] = $param[$name] ?? '';
+            if (!($param[$name] ?? '') && $name == 'validation_rules') {
+                $param[$name] = 'required';
+            }
+            if ($param[$name] ?? '') {
+                $rules[$param['name']] = $param[$name] ?? '';
+            }
         }
 
         return $rules;
