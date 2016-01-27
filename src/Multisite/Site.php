@@ -43,6 +43,7 @@ class Site
     public function exec($rootDir, UriInterface $uri)
     {
         $SITE = $this; // Utilisable dans le fichier inclus
+        $PATH = $this->getNewPath($uri->getPath());
         require $rootDir.$this->src.$this->initFile;
 
         if ($this->routingFile ?? '') {
@@ -53,7 +54,7 @@ class Site
 
             $routing = Routing::buildFromConfig($config);
 
-            if (!$routing->process($this->getNewPath($uri->getPath()))) {
+            if (!$routing->process($PATH)) {
                 throw new \Exception("Aucune route n'a été trouvée");
             }
         }

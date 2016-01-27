@@ -25,6 +25,9 @@
 Les régles sont testées par le router dans l'ordre où elles sont déclarées. La première qui match avec le *path* indiqué est exécutée et la méthode *action* du controleur *controler* sera appelée.
 
 ```php
+use Naski\Routing\Routing;
+use Naski\Routing\Rule;
+
 $routing = new Routing();
 
 $routing >addRule(new Rule(array(
