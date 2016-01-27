@@ -4,9 +4,9 @@
 
 
 ## Fonctionnalités
-- Routing d'un path dans une liste de régles
+- Routing d'un *path* dans une liste de régles
     - Système de controleur/action
-    - Parametrage URL avec récupération dans le controleur (*exemple : product/23*)
+    - Parametrage URL avec récupération dans le controleur *(exemple : product/23) -> productAction($id))*
     - Gestion des formulaires POST avec détection et netoyage des entrées
 - Gestion multi-site
     - Conditions d'entrée configurable via regex : path, domaine, https...
@@ -21,6 +21,7 @@
 ## Routing
 
 ### Exemple de routing
+Les régles sont testées par le router dans l'ordre où elles sont déclarées. La première qui match avec le *path* indiqué est exécutée et la méthode *action* du controleur *controler* sera appelée.
 
 ```php
 $routing = new Routing();
@@ -48,11 +49,11 @@ $routing >addRule(new Rule(array(
 // Executera la bonne action en fonction du path
 $routing->process($_SERVER[REQUEST_URI]);
 ```
-Voir [nikic/FastRoute](https://github.com/nikic/FastRoute) pour plus d'exemples sur la synthaxe.
+Voir [nikic/FastRoute](https://github.com/nikic/FastRoute) pour les posiblités de synthaxe du path.
 
 ### Formulaires POST
 Il est possible de spécifier directement dans la règle la liste des parametres POST attendue, avec des régles de validation et de filtre.  
-Les parametres se récupérent dans le controlleur avec *$this->inputs['key']* . Le test se fait avec *$this->inputValid()*. À utiliser uniquement comme sécurité côté serveur, préférer la validation côté client pour l'aspect estétique.
+Les parametres se récupérent dans le controlleur avec `$this->inputs['key']` . Le test se fait avec `$this->inputValid()`. À utiliser uniquement comme sécurité côté serveur, préférer la validation côté client pour l'aspect estétique.
 
 ```php
 $routing >addRule(new Rule(array(
@@ -151,6 +152,6 @@ $routing->process($_SERVER[REQUEST_URI]);
 
 ## Multi-sites
 
-Si votre application est décomposée de plusieurs "sous-sites", vous pouvez utilser le composant Naski Multi-site intégré pour gérer les appels.
+Si votre application est décomposée de plusieurs "sous-sites", vous pouvez utilser le composant Naski Multi-site intégré pour relier des règles d'accès (domaine, path, https...) à des actions.
 
 // TODO
