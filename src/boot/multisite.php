@@ -1,7 +1,7 @@
 <?php
 
 use Naski\Config\Config;
-use Naski\Routing\MultiSite\MultiSite;
+use Naski\Routing\Multisite\Multisite;
 use League\Uri\Schemes\Http as HttpUri;
 
 $websites = new Config();
