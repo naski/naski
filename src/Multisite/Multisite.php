@@ -34,8 +34,8 @@ class Multisite
     {
         foreach ($this->_websites as $w) {
             if ($w->match($uri)) {
+                $SITE = $w;
                 $w->exec($this->_root, $uri);
-
                 return $w;
             }
         }
