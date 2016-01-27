@@ -22,7 +22,7 @@
 
 ### Exemple de routing
 
-```
+```php
 $routing = new Routing();
 
 $routing >addRule(new Rule(array(
@@ -54,7 +54,7 @@ Voir [nikic/FastRoute](https://github.com/nikic/FastRoute) pour plus d'exemples 
 Il est possible de spécifier directement dans la règle la liste des parametres POST attendue, avec des régles de validation et de filtre.  
 Les parametres se récupérent dans le controlleur avec *$this->inputs['key']* . Le test se fait avec *$this->inputValid()*. À utiliser uniquement comme sécurité côté serveur, préférer la validation côté client pour l'aspect estétique.
 
-```
+```php
 $routing >addRule(new Rule(array(
     'path' => 'formulare',
     'controller' => 'MyController',
@@ -78,7 +78,7 @@ Voir [wixel/gump](https://github.com/Wixel/GUMP) pour les synthaxes de validatio
 
 ### Exemple de controleur
 
-```
+```php
 use Naski\Routing\Controller;
 
 class TestController extends Controller
@@ -113,7 +113,7 @@ class TestController extends Controller
 
 ### Chargement depuis un fichier
 routing.json :
-```
+```json
 {
     "rules": [
         {
@@ -133,16 +133,12 @@ routing.json :
             "controller": "HomeController",
             "action": "indexAction"
         },
-        {
-            "path": "*",
-            "controller": "HomeController",
-            "action": "badAction"
-        }
+        ...
     ]
 }
 ```
 boot.php :
- ```
+```php
 use Naski\Config\Config;
 use Naski\Routing\Routing;
 
