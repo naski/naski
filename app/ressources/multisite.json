@@ -6,12 +6,21 @@
             "conditions": {
                 "path": "^/site2(.*)"
             },
-            "src": "site2/",
+            "src": "browser/site2/",
             "initFile": "init.php"
         },
         {
+            "name": "Login",
+            "conditions": {
+                "path": "^/ws/account(.*)"
+            },
+            "src": "rest/login/",
+            "initFile": "init.php",
+            "routingFile": "routing.json"
+        },
+        {
             "name": "Démo",
-            "src": "demo/",
+            "src": "browser/demo/",
             "initFile": "init.php",
             "routingFile": "routing.json"
         }

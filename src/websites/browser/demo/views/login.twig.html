@@ -1,0 +1,10 @@
+{% extends 'default.twig' %}
+
+{% block body %}
+<h1>Veuillez vous connecter</h1>
+<form action="{{ ROOT_URL }}login" method="POST">
+    Login: <input type="text" name="username" value="doelia"><br>
+    Password: <input type="password" name="password" value="wugaxu"><br>
+    <input type="submit">
+</form>
+{% endblock %}

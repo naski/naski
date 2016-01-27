@@ -24,7 +24,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Naski\\": "core/classes/"
+            "Naski\\": "core/classes/",
+            "Job\\": "src/classes/"
         },
         "files": [
             "core/functions/functions.php",

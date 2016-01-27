@@ -1,0 +1,14 @@
+{
+    "rules": [
+        {
+            "path": "/login/{user}/{password}",
+            "controller": "LoginController",
+            "action": "loginAction"
+        },
+        {
+            "path": "*",
+            "controller": "LoginController",
+            "action": "noAction"
+        }
+    ]
+}

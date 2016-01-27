@@ -1,0 +1,14 @@
+{
+    "rules": [
+        {
+            "path": "/",
+            "controller": "HomeController",
+            "action": "indexAction"
+        },
+        {
+            "path": "*",
+            "controller": "HomeController",
+            "action": "badAction"
+        }
+    ]
+}
