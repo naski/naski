@@ -53,8 +53,11 @@ $routing->process($_SERVER[REQUEST_URI]);
 Voir [nikic/FastRoute](https://github.com/nikic/FastRoute) pour les posiblités de synthaxe du path.
 
 ### Formulaires POST
-Il est possible de spécifier directement dans la règle la liste des parametres POST attendue, avec des régles de validation et de filtre.  
-Les parametres se récupérent dans le controlleur avec `$this->inputs['key']` . Le test se fait avec `$this->inputValid()`. À utiliser uniquement comme sécurité côté serveur, préférer la validation côté client pour l'aspect estétique.
+Il est possible de spécifier directement dans la règle la liste des parametres POST attendue, avec des régles de validation et de filtre. Ces conditions ne sont pas prisent en compte dans le routing et doivent être testées manuellement dans le contrôleur :
+- `$this->inputValid()` pour savoir si les paramètres sont valides
+- `$this->inputs['key']` pour accèder à un paramètre filtré
+
+A utiliser uniquement comme sécurité côté serveur, préférer la validation côté client pour l'aspect esthétique.
 
 ```php
 $routing >addRule(new Rule(array(
