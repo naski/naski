@@ -5,7 +5,7 @@ use Naski\Routing\Multisite\Multisite;
 use League\Uri\Schemes\Http as HttpUri;
 
 $websites = new Config();
-$websites->loadJSONFile(ROOT_SYSTEM.'app/multisite.json');
+$websites->loadJSONFile(ROOT_SYSTEM.'app/ressources/multisite.json');
 
 $multisite = MultiSite::buildFromConfig($websites, ROOT_SYSTEM);
 

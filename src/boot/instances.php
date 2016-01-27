@@ -13,8 +13,8 @@ $IM = new InstancesManager();
 
 // Config
 {
-    $CONFIG->loadJSONFile(ROOT_SYSTEM.'app/config/'.'config.json');
-    $CONFIG->loadJSONFile(ROOT_SYSTEM.'app/config/'.'config_'.$CONFIG->env.'.json');
+    $CONFIG->loadJSONFile(ROOT_SYSTEM.'app/ressources/config/'.'config.json');
+    $CONFIG->loadJSONFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$CONFIG->env.'.json');
 
     $IM->recordInstance('config', $CONFIG);
 }
@@ -44,7 +44,8 @@ $IM = new InstancesManager();
 
 // Moteur de template twig
 {
-    $loader = new Twig_Loader_Filesystem($basepath = ROOT_SYSTEM.'/src/websites/');
+    $loader = new Twig_Loader_Filesystem($basepath = ROOT_SYSTEM);
+    $loader->addPath(ROOT_SYSTEM.'app/ressources/views/');
 
     $options = $CONFIG->cache_twig ? array(
         'cache' => ROOT_SYSTEM.'/app/cache/',

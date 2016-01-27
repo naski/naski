@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>My Webpage</title>
-    </head>
-    <body>
-        <h1>My Webpage</h1>
-        {{ demo_var }}
-        Environnement : {{ display }}
+{% extends 'default.twig' %}
 
-        <form action="/product" method="POST">
-            <input type="text" name="id" value="3">
-
-        </form>
-    </body>
-</html>
+{% block body %}
+<h1>Hey</h1>
+{% endblock %}

@@ -6,12 +6,14 @@
             "conditions": {
                 "path": "^/site2(.*)"
             },
-            "initFile": "site2/init.php"
+            "src": "site2/",
+            "initFile": "init.php"
         },
         {
             "name": "Démo",
-            "initFile": "demo/init.php",
-            "routingFile": "demo/routing.json"
+            "src": "demo/",
+            "initFile": "init.php",
+            "routingFile": "routing.json"
         }
     ]
 }
