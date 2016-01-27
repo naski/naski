@@ -6,7 +6,7 @@
 ## Fonctionnalités
 - Routing d'un *path* dans une liste de régles
     - Système de controleur/action
-    - Parametrage URL avec récupération dans le controleur *(exemple : product/23) -> productAction($id))*
+    - Parametrage URL avec récupération dans le controleur *(exemple : 'product/23' appelera productAction($id))*
     - Gestion des formulaires POST avec détection et netoyage des entrées
 - Gestion multi-site
     - Conditions d'entrée configurable via regex : path, domaine, https...
@@ -16,6 +16,7 @@
 
 - [nikic/FastRoute](https://github.com/nikic/FastRoute) pour le routing
 - [wixel/gump](https://github.com/Wixel/GUMP) pour la validation des parametres
+- [naski/config](https://github.com/doelia/naski-config) pour la configuration depuis des fichiers JSON (optionel)
 
 
 ## Routing
@@ -57,7 +58,7 @@ Les parametres se récupérent dans le controlleur avec `$this->inputs['key']` .
 
 ```php
 $routing >addRule(new Rule(array(
-    'path' => 'formulare',
+    'path' => '/form',
     'controller' => 'MyController',
     'action' => 'formAction',
     'params' => array(
