@@ -19,29 +19,6 @@ $IM = new InstancesManager();
     $IM->recordInstance('config', $CONFIG);
 }
 
-// Monolog
-{
-    $log = new Logger('name');
-    $log->pushHandler(new StreamHandler(PATH_LOGS.'tests.log', Logger::WARNING));
-
-    $log->addWarning('Foo', array('username' => 'Seldaek'));
-    $log->addError('Bar');
-
-}
-
-// Connexion SQL
-{
-    $log = new Logger('mysql');
-    $log->pushHandler(new StreamHandler(PATH_LOGS.'mysql.log'));
-
-    $pdo = new MySQLDatabase($CONFIG['main_mysql'], $log);
-
-    $pdo->query("SELECT 'foo'");
-
-    $IM->recordDatabaseInstance('main_mysql', $pdo);
-
-}
-
 // Moteur de template twig
 {
     $loader = new Twig_Loader_Filesystem($basepath = ROOT_SYSTEM);

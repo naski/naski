@@ -17,4 +17,5 @@ require_once __DIR__.'/../core/boot/paths.php';
 require_once __DIR__.'/../core/boot/init.php';
 
 // Initialisation du projet
+require_once __DIR__.'/../src/boot/loadBundles.php';
 require_once __DIR__.'/../src/boot/instances.php';

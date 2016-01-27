@@ -10,4 +10,4 @@ $websites->loadJSONFile(ROOT_SYSTEM.'app/ressources/multisite.json');
 $multisite = MultiSite::buildFromConfig($websites, ROOT_SYSTEM);
 
 $uri = HttpUri::createFromServer($_SERVER);
-$multisite->process($uri);
+$site = $multisite->process($uri);

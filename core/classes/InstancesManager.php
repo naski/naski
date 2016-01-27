@@ -6,6 +6,7 @@ use Naski\Pdo\AbstractDatabase;
 
 class InstancesManager
 {
+    public $counter = 0;
     public $_dbInstances = array();
 
     public function recordInstance(string $instanceName, $instance)

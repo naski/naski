@@ -12,8 +12,9 @@ class HomeController extends Controller
 
     private function displayLoginForm()
     {
+        global $IM;
         $template = $this->twig->loadTemplate('login.twig.html');
-        echo $template->render($this->getBaseParams());
+        echo $template->render($this->getTwigParams());
     }
 
     public function badAction()

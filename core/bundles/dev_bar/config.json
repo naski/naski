@@ -1,0 +1,9 @@
+{
+    "name": "DevBar",
+    "alias": "devBar",
+    "class": "DevBarBundle",
+    "required": [
+        "bundle.php"
+    ],
+    "twig_path": "./"
+}
