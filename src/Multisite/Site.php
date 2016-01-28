@@ -75,7 +75,7 @@ class Site
             $routingFile = $rootDir.$this->src.$this->routingFile;
 
             $config = new Config();
-            $config->loadJSONFile($routingFile);
+            $config->loadFile($routingFile);
 
             $routing = Routing::buildFromConfig($config);
 
