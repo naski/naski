@@ -7,7 +7,7 @@ class DevBarBundle extends Bundle
     public function getRequestsNumber()
     {
         global $IM;
-        return \Naski\sumCalls($IM->getDatabaseInstances(), 'getRequestsNumber');
+        return \Naski\sumCalls($IM->getInstancesOfType('\\Naski\\Pdo\\AbstarctDatabase'), 'getRequestsNumber');
     }
 
     public function getTime(): string
@@ -18,9 +18,7 @@ class DevBarBundle extends Bundle
 
     public function load()
     {
-        global $CONFIG, $IM;
         $this->setVariable('twig_params', array(
-            'IM' => $IM,
             'bundle' => $this
         ));
     }

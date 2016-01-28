@@ -34,10 +34,14 @@ class Controller extends \Naski\Routing\Controller {
 
     private function loadBaseTwigParams()
     {
+        global $IM;
         $this->addTwigParams(array(
             'globals' => array(
                 'ROOT_URL' => 'http://predict.dev3/' // TODO
             )
+        ));
+        $this->addTwigParams(array(
+            'IM' => $IM
         ));
     }
 

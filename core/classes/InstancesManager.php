@@ -2,26 +2,22 @@
 
 namespace Naski;
 
-use Naski\Pdo\AbstractDatabase;
-
 class InstancesManager
 {
-    public $_dbInstances = array();
-
     public function recordInstance(string $instanceName, $instance)
     {
         $this->$instanceName = $instance;
     }
 
-    public function recordDatabaseInstance(string $instanceName, AbstractDatabase $instance)
+    public function getInstancesOfType(string $type)
     {
-        $this->_dbInstances[] = $instance;
-        $this->recordInstance($instanceName, $instance);
-    }
-
-    public function getDatabaseInstances() :array
-    {
-        return $this->_dbInstances;
+        $list = array();
+        foreach ($this as $key => $value) {
+            if ($key instanceof $type) {
+                $list[] = $value;
+            }
+        }
+        return $list;
     }
 
     public function putInstancesIn($object)
