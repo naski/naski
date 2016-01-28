@@ -17,4 +17,10 @@ abstract class Bundle
         return $this->$key;
     }
 
+    public function addHisTemplatesToTwig($twig)
+    {
+        $pathTwig = $this->directory.$this->config->twig_path;
+        $twig->getLoader()->addPath($pathTwig, $this->config->alias);
+    }
+
 }

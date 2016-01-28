@@ -44,9 +44,7 @@ class Controller extends \Naski\Routing\Controller {
     {
         $devBarBundle = BundleManager::getInstance()->getBundle('devBar');
         $devBarBundle->load();
-
+        $devBarBundle->addHisTemplatesToTwig($this->twig);
         $this->addTwigParams($devBarBundle->getVariable('twig_params'));
-        $pathTwig = $devBarBundle->directory.$devBarBundle->config->twig_path;
-        $this->twig->getLoader()->addPath($pathTwig, 'devBar');
     }
 }
