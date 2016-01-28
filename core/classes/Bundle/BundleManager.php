@@ -39,7 +39,7 @@ class BundleManager
     public function loadBundle(string $dirBundle)
     {
         $config = new Config();
-        $config->loadJSONFile($dirBundle.'config.json');
+        $config->loadFile($dirBundle.'config.json');
 
         require_once $dirBundle.'autoload.php';
 
