@@ -2,6 +2,11 @@
 
 namespace Naski\Routing;
 
+/**
+ * Controlleur à hériter pour chacun des controlleurs métiers créés
+ *
+ * @author Stéphane Wouters <doelia@doelia.fr>
+ */
 abstract class Controller
 {
     public $inputs = array(); // Tableau clé/valeur de $POST nettoyé

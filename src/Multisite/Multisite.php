@@ -5,6 +5,12 @@ namespace Naski\Routing\Multisite;
 use Naski\Config\Config;
 use Psr\Http\Message\UriInterface;
 
+/**
+ * Représente un ensemble de Site
+ *
+ * @author Stéphane Wouters <doelia@doelia.fr>
+ * 
+ */
 class Multisite
 {
     private $root = null; // Chemin absolu
@@ -39,7 +45,7 @@ class Multisite
     /**
      * Teste la liste des sites chargés dans l'ordre et execute le premier qui match
      * @param  UriInterface $uri L'URI qui sert de test
-     * @return Site Une instnace du site chargé            
+     * @return Site Une instnace du site chargé
      */
     public function process(UriInterface $uri)
     {

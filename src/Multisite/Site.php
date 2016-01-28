@@ -6,6 +6,13 @@ use Naski\Config\Config;
 use Naski\Routing\Routing;
 use Psr\Http\Message\UriInterface;
 
+/**
+ * Représente un site web avec ses conditions d'accès à respecter et ses instructions à exécuter
+ * Un site web peut être aussi bien une page web qu'une webservice
+ *
+ * @author Stéphane Wouters <doelia@doelia.fr>
+ * 
+ */
 class Site
 {
     public $name = null;

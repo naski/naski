@@ -2,6 +2,11 @@
 
 namespace Naski\Routing;
 
+/**
+ * Représente une régle pour un routing, possédant ses conditions et son action à déclancher
+ *
+ * @author Stéphane Wouters <doelia@doelia.fr>
+ */
 class Rule
 {
     public $type = ['GET', 'POST'];

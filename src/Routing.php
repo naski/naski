@@ -5,6 +5,11 @@ namespace Naski\Routing;
 use Naski\Config\Config;
 use FastRoute;
 
+/**
+ * Permet de définir un ensemble de régle puis d'exécuter la bonne régle depuis un path
+ *
+ * @author Stéphane Wouters <doelia@doelia.fr>
+ */
 class Routing
 {
     private $_dispatcher;
