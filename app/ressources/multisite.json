@@ -19,6 +19,14 @@
             "routingFile": "routing.json"
         },
         {
+            "name": "Mon site",
+            "conditions": {
+                "path": "^/tata(.*)"
+            },
+            "src": "monsite2/",
+            "initFile": "go.php"
+        },
+        {
             "name": "Démo",
             "src": "browser/demo/",
             "initFile": "init.php",

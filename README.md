@@ -1,5 +1,7 @@
 # Présentation
 
+Ce framework met à disposition des fonctionnalités et outils imbriquables, sans l'obligation de les utiliser.
+
 Composants intégrés
 - [Assetic](https://github.com/kriswallsmith/assetic), framework de gestion d'assets
 - [Twig](http://twig.sensiolabs.org/), moteur de template
@@ -9,7 +11,7 @@ Fonctionnalités :
 - Respect des normes [PHP-PSR](http://www.php-fig.org/psr/)
 - Gestion multisite avec [Naski/Routing](https://github.com/Doelia/naski-routing)
 - Routing d'URL intégrant le MVC avec [Naski/Routing](https://github.com/Doelia/naski-routing)
-- Système de chargement de config JSON avec [Naski/Config](https://github.com/Doelia/naski-config)
+- Chargement de config JSON avec [Naski/Config](https://github.com/Doelia/naski-config)
 - Interface de communication avec des bases de données avec [Naski/Pdo](https://github.com/Doelia/naski-pdo)
 - Système de "Bundles" pour découper les fonctionnalités en modules
 

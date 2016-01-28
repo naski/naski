@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * 	Permet de déclarer des constantes pour l'emplacement des fichiers ou dossiers
+ *  Ne doit pas dépendre du framework
  *  Tous les chemins doivent terminer par un /.
  */
 
