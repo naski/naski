@@ -1,13 +1,13 @@
 <?php
 
-use Naski\Bundle\Bundle;
+use Naski\Bundle\DisplayBundle;
 
-class DevBarBundle extends Bundle
+class DevBarBundle extends DisplayBundle
 {
     public function getRequestsNumber(): int
     {
         global $IM;
-        return \Naski\sumCalls($IM->getInstancesOfType('\\Naski\\Pdo\\AbstarctDatabase'), 'getRequestsNumber');
+        return \Naski\sumCalls($IM->getInstancesOfType('\\Naski\\Pdo\\AbstractDatabase'), 'getRequestsNumber');
     }
 
     public function getTime(): string
@@ -16,10 +16,10 @@ class DevBarBundle extends Bundle
         return PHP_Timer::secondsToTimeString($time);
     }
 
-    public function load()
+    public function getTwigParamsOveride(): array
     {
-        $this->setVariable('twig_params', array(
+        return array(
             'bundle' => $this
-        ));
+        );
     }
 }

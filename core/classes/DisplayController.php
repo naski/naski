@@ -4,6 +4,8 @@ namespace Naski;
 
 use Naski\Routing\Rule;
 use Naski\Bundle\BundleManager;
+use Naski\Bundle\Bundle;
+use Naski\Bundle\DisplayBundle;
 
 class DisplayController extends Controller {
 
@@ -15,7 +17,7 @@ class DisplayController extends Controller {
         parent::__construct($rule);
 
         $this->loadBaseTwigParams();
-        $this->loadDevBar();
+        $this->useBundle('devBar');
     }
 
     protected function loadTemplate(string $file)
@@ -46,11 +48,14 @@ class DisplayController extends Controller {
         ));
     }
 
-    private function loadDevBar()
+    protected function useBundle(string $alias)
     {
-        $devBarBundle = BundleManager::getInstance()->getBundle('devBar');
-        $devBarBundle->load();
-        $devBarBundle->addHisTemplatesToTwig($this->twig);
-        $this->addTwigParams($devBarBundle->getVariable('twig_params'));
+        $bundle = BundleManager::getInstance()->getBundle($alias);
+        $bundle->load();
+        if ($bundle instanceof DisplayBundle) {
+            $bundle->addHisTemplatesToTwig($this->twig);
+            $this->addTwigParams($bundle->getTwigParams());
+        }
     }
+
 }

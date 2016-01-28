@@ -7,20 +7,22 @@ abstract class Bundle
     public $directory; // Chemin absolue
     public $config;
 
+    private $_vars = array();
+
+    /**
+     * Prête à l'overide
+     * @return void
+     */
+    public function load() { }
+
     protected function setVariable($key, $value)
     {
-        $this->$key = $value;
+        $this->_vars[$key] = $value;
     }
 
     public function getVariable($key)
     {
-        return $this->$key;
-    }
-
-    public function addHisTemplatesToTwig($twig)
-    {
-        $pathTwig = $this->directory.$this->config->twig_path;
-        $twig->getLoader()->addPath($pathTwig, $this->config->alias);
+        return $this->_vars[$key] ?? null;
     }
 
 }

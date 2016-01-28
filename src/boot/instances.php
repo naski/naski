@@ -7,6 +7,7 @@
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Naski\Pdo\MySQLDatabase;
+use Naski\Bundle\BundleManager;
 
 PHP_Timer::start();
 
