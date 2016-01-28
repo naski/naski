@@ -62,7 +62,7 @@ class RoutingTest extends PHPUnit_Framework_TestCase
     public function testPostRule()
     {
         $config = new Config();
-        $config->loadJSONFile(__DIR__.'/routing_post.json');
+        $config->loadFile(__DIR__.'/routing_post.json');
         $routing = Routing::buildFromConfig($config);
         $_POST['username'] = 'john';
         $_POST['password'] = 'john';

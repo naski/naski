@@ -51,7 +51,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     public function testLoadFile()
     {
         $websites = new Config();
-        $websites->loadJSONFile(__DIR__.'/multisite.json');
+        $websites->loadFile(__DIR__.'/multisite.json');
         $multisite = MultiSite::buildFromConfig($websites, __DIR__);
         $out = $multisite->process(HttpUri::createFromString('http://doelia.fr/product'));
         $this->assertEquals($out->name, 'Site 1');
@@ -61,7 +61,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     public function testHttps()
     {
         $websites = new Config();
-        $websites->loadJSONFile(__DIR__.'/multisite.json');
+        $websites->loadFile(__DIR__.'/multisite.json');
         $multisite = MultiSite::buildFromConfig($websites, __DIR__);
         $out = $multisite->process(HttpUri::createFromString('https://doelia.fr/'));
         $this->assertEquals($out->name, 'Site HTTPS');
@@ -72,7 +72,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     public function testHost()
     {
         $websites = new Config();
-        $websites->loadJSONFile(__DIR__.'/multisite.json');
+        $websites->loadFile(__DIR__.'/multisite.json');
         $multisite = MultiSite::buildFromConfig($websites, __DIR__);
         $out = $multisite->process(HttpUri::createFromString('http://vps.doelia.fr/'));
         $this->assertEquals($out->name, 'Site privé');
@@ -86,7 +86,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     public function testInitFileNotFound()
     {
         $websites = new Config();
-        $websites->loadJSONFile(__DIR__.'/multisite_bad.json');
+        $websites->loadFile(__DIR__.'/multisite_bad.json');
         $multisite = MultiSite::buildFromConfig($websites, __DIR__);
     }
 
@@ -96,7 +96,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     public function testRoutingFileNotFound()
     {
         $websites = new Config();
-        $websites->loadJSONFile(__DIR__.'/multisite_badRouting.json');
+        $websites->loadFile(__DIR__.'/multisite_badRouting.json');
         $multisite = MultiSite::buildFromConfig($websites, __DIR__);
     }
 }
