@@ -18,6 +18,7 @@ class Controller extends \Naski\Routing\Controller {
             $IM->putInstancesIn($this);
         }
 
+        $this->loadBaseTwigParams();
         $this->loadDevBar();
     }
 
@@ -26,18 +27,18 @@ class Controller extends \Naski\Routing\Controller {
         $this->_twigsParams = array_merge($array, $this->_twigsParams);
     }
 
-    public function loadBaseTwigParams()
+    public function getTwigParams()
+    {
+        return $this->_twigsParams;
+    }
+
+    private function loadBaseTwigParams()
     {
         $this->addTwigParams(array(
             'globals' => array(
                 'ROOT_URL' => 'http://predict.dev3/' // TODO
             )
         ));
-    }
-
-    public function getTwigParams()
-    {
-        return $this->_twigsParams;
     }
 
     private function loadDevBar()
