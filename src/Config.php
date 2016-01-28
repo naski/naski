@@ -97,8 +97,9 @@ class Config implements \ArrayAccess
         return $this->get($key);
     }
 
-    public function offsetExists($offset) {
-        return ($this->_subs[$key] ?? null) !== null;
+    public function offsetExists($key)
+    {
+        return isset($this->_subs[$key]);
     }
 
     public function offsetSet($offset, $value) { }
