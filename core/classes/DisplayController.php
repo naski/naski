@@ -7,6 +7,19 @@ use Naski\Bundle\BundleManager;
 use Naski\Bundle\Bundle;
 use Naski\Bundle\DisplayBundle;
 
+/**
+ * Représente un controlleur qui réalise un affichage sur une page
+ *
+ * Faire hériter de ce controlleur permet d'accéder à des bundles,
+ * d'accéder aux variables globales dans les templates, etc
+ *
+ * Pour faire un rendu, utiliser obligatoirement les méthodes de cette classe :
+ * loadTemplate(), addTwigParams() et render()
+ * Ne pas accéder à Twig directement
+ *
+ * @author Stéphane Wouters <doelia@doelia.fr>
+ *
+ */
 class DisplayController extends Controller {
 
     private $_twigsParams = array();
@@ -48,6 +61,12 @@ class DisplayController extends Controller {
         ));
     }
 
+    /**
+     * Permet de charger un bundle dans le rendu de Twig
+     * Le bundle doit être chargé dans la mémoire
+     *
+     * @param  string $alias L'alias du bundle
+     */
     protected function useBundle(string $alias)
     {
         $bundle = BundleManager::getInstance()->getBundle($alias);
