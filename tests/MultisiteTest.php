@@ -79,4 +79,24 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         $out = $multisite->process(HttpUri::createFromString('http://doelia.fr/'));
         $this->assertNotEquals($out->name, 'Site privé');
     }
+
+    /**
+     * @expectedException Naski\Config\FileNotFoundException
+     */
+    public function testInitFileNotFound()
+    {
+        $websites = new Config();
+        $websites->loadJSONFile(__DIR__.'/multisite_bad.json');
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+    }
+
+    /**
+     * @expectedException Naski\Config\FileNotFoundException
+     */
+    public function testRoutingFileNotFound()
+    {
+        $websites = new Config();
+        $websites->loadJSONFile(__DIR__.'/multisite_badRouting.json');
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+    }
 }

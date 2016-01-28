@@ -9,11 +9,11 @@ use Psr\Http\Message\UriInterface;
  * Représente un ensemble de Site
  *
  * @author Stéphane Wouters <doelia@doelia.fr>
- * 
+ *
  */
 class Multisite
 {
-    private $root = null; // Chemin absolu
+    private $_root = null; // Chemin absolu
     private $_websites = array(); // array<array>
 
     /**
@@ -40,6 +40,7 @@ class Multisite
     public function addSite(Site $site)
     {
         $this->_websites[] = $site;
+        $site->verificateFiles($this->_root);
     }
 
     /**

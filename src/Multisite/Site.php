@@ -3,6 +3,7 @@
 namespace Naski\Routing\Multisite;
 
 use Naski\Config\Config;
+use Naski\Config\FileNotFoundException;
 use Naski\Routing\Routing;
 use Psr\Http\Message\UriInterface;
 
@@ -11,7 +12,7 @@ use Psr\Http\Message\UriInterface;
  * Un site web peut être aussi bien une page web qu'une webservice
  *
  * @author Stéphane Wouters <doelia@doelia.fr>
- * 
+ *
  */
 class Site
 {
@@ -34,15 +35,26 @@ class Site
         $this->verificate();
     }
 
-    /**
-     *  // TODO Écrire tout les tests
-     *  Tester l'existance des fichiers donnés.
-     */
     private function verificate()
     {
         foreach ($this as $key => $value) {
             if ($value === null) {
                 throw new \Exception("La propriété $key n'est pas référencée.");
+            }
+        }
+    }
+
+    public function verificateFiles(string $rootDir)
+    {
+        $filename = $rootDir.$this->src.$this->initFile;
+        if (!file_exists($filename)) {
+            throw new FileNotFoundException('Le fichier d\'initialisation '.$filename.' n\'existe pas');
+        }
+
+        if ($this->routingFile ?? '') {
+            $filename = $rootDir.$this->src.$this->routingFile;
+            if (!file_exists($filename)) {
+                throw new FileNotFoundException('Le fichier de routing '.$filename.' n\'existe pas');
             }
         }
     }
