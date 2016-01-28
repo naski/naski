@@ -71,7 +71,7 @@ class Config implements \ArrayAccess
     }
 
     /**
-    * Peut retourner une nouvelle sous config, la valeur, ou '' si la clé n'existe pas
+    * Retoune un array ou la valeur correspondante
     * @param  string $key La clé voulue
     * @return mixed
     */
@@ -98,7 +98,7 @@ class Config implements \ArrayAccess
     }
 
     public function offsetExists($offset) {
-        return isset($this->_subs[$key]);
+        return $this->_subs[$key] ?? null;
     }
 
     public function offsetSet($offset, $value) { }
