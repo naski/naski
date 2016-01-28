@@ -2,7 +2,7 @@
 
 namespace Naski\Config;
 
-class BadJsonSynthaxeException extends \Exception
+class BadJsonSynthaxeException extends NaskiConfigException
 {
-    
+
 }

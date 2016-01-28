@@ -2,7 +2,7 @@
 
 namespace Naski\Config;
 
-class FileNotFoundException extends \Exception
+class FileNotFoundException extends NaskiConfigException
 {
-    
+
 }

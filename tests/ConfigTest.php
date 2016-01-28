@@ -9,7 +9,31 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     public function testConfig()
     {
         $config = new Config();
-        $config->loadJSONFile(__DIR__.'/config.json');
+        $config->loadFile(__DIR__.'/config.json');
+    }
+
+    public function testYmlConfig()
+    {
+        $config = new Config();
+        $config->loadFile(__DIR__.'/config.yml');
+
+        $this->assertEquals($config->var1, 'toto');
+        $this->assertEquals($config->var404, '');
+        $this->assertEquals($config['var404'], '');
+        $this->assertEquals($config['var404']['toto'], '');
+        $this->assertEquals($config->boolean, true);
+        $this->assertEquals($config->tab[1], 'gogo');
+
+    }
+
+
+    /**
+     * @expectedException Naski\Config\UnknownExtensionException
+     */
+    public function testNotFoundExtensionConfig()
+    {
+        $config = new Config();
+        $config->loadFile(__DIR__.'/notfound.bobo');
     }
 
     /**
@@ -18,7 +42,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     public function testNotFoundConfig()
     {
         $config = new Config();
-        $config->loadJSONFile(__DIR__.'/notfound.json');
+        $config->loadFile(__DIR__.'/notfound.json');
     }
 
     /**
@@ -27,6 +51,6 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     public function testBadJson()
     {
         $config = new Config();
-        $config->loadJSONFile(__DIR__.'/bad.json');
+        $config->loadFile(__DIR__.'/bad.json');
     }
 }
