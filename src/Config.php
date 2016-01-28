@@ -5,7 +5,7 @@ namespace Naski\Config;
 class Config implements \ArrayAccess
 {
 
-    private $_subs = array(); // Sous objects Config
+    private $_subs = array();
 
     /**
      * Charge un fichier dans la config. L'extention est dynamiquement chargée.
@@ -58,27 +58,16 @@ class Config implements \ArrayAccess
 
     private function loadArray(array $array)
     {
-        foreach ($array as $key => $value) {
-            if (is_array($value)) {
-                $this->_subs[$key] = new Config();
-                $this->_subs[$key]->loadArray($value);
-            } else {
-                $this->_subs[$key] = $value;
-            }
-        }
+        $this->_subs = array_merge($this->_subs, $array);
     }
 
     /**
-     * Convertit l'ensemble de la hiérarchie des valeurs dans un tableau
+     * Retourne l'ensemble de la hiérarchie des valeurs dans un array
      * @return array Le tableau complet
      */
     public function toArray(): array
     {
-        $a = array();
-        foreach ($this->_subs as $key => $value) {
-            $a[$key] = ($value instanceof Config) ? $value->toArray() : $value;
-        }
-        return $a;
+        return $this->_subs;
     }
 
     /**
@@ -88,7 +77,7 @@ class Config implements \ArrayAccess
     */
     public function get($key)
     {
-        return $this->_subs[$key] ?? new NullValue();
+        return $this->_subs[$key] ?? null;
     }
 
     public function __get($key)
@@ -106,7 +95,7 @@ class Config implements \ArrayAccess
     }
 
     public function offsetSet($offset, $value) { }
-    
+
     public function offsetUnset($offset) { }
 
 

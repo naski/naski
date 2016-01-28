@@ -1,7 +1,7 @@
 {
     "name": "naski/config",
     "type": "library",
-    "description": "Chargeur de config au format JSON",
+    "description": "Chargeur de config au format JSON/YML",
     "authors": [
         {
             "name": "Stéphane Wouters",

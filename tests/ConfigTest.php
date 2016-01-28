@@ -17,13 +17,21 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $config = new Config();
         $config->loadFile(__DIR__.'/config.yml');
 
-        $this->assertEquals($config->var1, 'toto');
-        $this->assertEquals($config->var404, '');
-        $this->assertEquals($config['var404'], '');
-        $this->assertEquals($config['var404']['toto'], '');
-        $this->assertEquals($config->boolean, true);
-        $this->assertEquals($config->tab[1], 'gogo');
+        $this->assertEquals($config['var1'], 'toto');
+        $this->assertEquals($config['var404'], null);
+        $this->assertEquals($config['boolean'], true);
+        $this->assertEquals($config['tab'][1], 'gogo');
+    }
 
+    public function testLoop()
+    {
+        $config = new Config();
+        $config->loadFile(__DIR__.'/config.json');
+        $cpt = 0;
+        foreach ($config['array1'] as $value) {
+            $cpt++;
+        }
+        $this->assertEquals($cpt, 7);
     }
 
 
