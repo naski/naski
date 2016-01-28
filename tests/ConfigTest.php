@@ -10,6 +10,8 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     {
         $config = new Config();
         $config->loadFile(__DIR__.'/config.json');
+        $this->assertEquals($config['sub']['var11'], 'ok');
+        $this->assertEquals($config->sub->var11, 'ok');
     }
 
     public function testYmlConfig()
@@ -18,6 +20,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $config->loadFile(__DIR__.'/config.yml');
 
         $this->assertEquals($config['var1'], 'toto');
+        $this->assertEquals($config->var1, 'toto');
         $this->assertEquals($config['var404'], null);
         $this->assertEquals($config['boolean'], true);
         $this->assertEquals($config['tab'][1], 'gogo');

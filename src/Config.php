@@ -82,7 +82,14 @@ class Config implements \ArrayAccess
 
     public function __get($key)
     {
-        return $this->get($key);
+        $value = $this->get($key);
+        if (is_array($value)) {
+            $config = new self();
+            $config->loadArray($value);
+            return $config;
+        } else {
+            return $value;
+        }
     }
 
     public function offsetGet($key)
