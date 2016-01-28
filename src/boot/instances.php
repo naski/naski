@@ -16,7 +16,6 @@ global $IM;
 {
     $IM->config->loadJSONFile(ROOT_SYSTEM.'app/ressources/config/'.'config.json');
     $IM->config->loadJSONFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$IM->config->env.'.json');
-
 }
 
 // Moteur de template twig

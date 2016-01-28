@@ -4,7 +4,7 @@ use Naski\Bundle\Bundle;
 
 class DevBarBundle extends Bundle
 {
-    public function getRequestsNumber()
+    public function getRequestsNumber(): int
     {
         global $IM;
         return \Naski\sumCalls($IM->getInstancesOfType('\\Naski\\Pdo\\AbstarctDatabase'), 'getRequestsNumber');
