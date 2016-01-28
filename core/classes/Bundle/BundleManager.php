@@ -31,7 +31,12 @@ class BundleManager
         return $this->_bundles[$key];
     }
 
-    public function loadBundle($dirBundle)
+    /**
+     * Charge un bundle dans la mémoire pour qu'il soit accécible, mais ne l'exécute pas
+     * @param  string $dirBundle Le chemin absolue vers le bundle, finisant par un /
+     * @return void
+     */
+    public function loadBundle(string $dirBundle)
     {
         $config = new Config();
         $config->loadJSONFile($dirBundle.'config.json');
@@ -39,6 +44,7 @@ class BundleManager
         require_once $dirBundle.'autoload.php';
 
         $nameClass = $config->class;
+
         $bundle = new $nameClass();
 
         $bundle->config = $config;

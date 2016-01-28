@@ -1,9 +1,9 @@
 <?php
 
-use Naski\Controller;
+use Naski\DisplayController;
 use Job\User;
 
-class HomeController extends Controller
+class HomeController extends DisplayController
 {
     public function indexAction()
     {
@@ -12,9 +12,11 @@ class HomeController extends Controller
 
     private function displayLoginForm()
     {
-        global $IM;
-        $template = $this->twig->loadTemplate('login.twig.html');
-        echo $template->render($this->getTwigParams());
+        $this->loadTemplate('login.twig.html');
+        $this->addTwigParams(array(
+            'var_demo' => "It's work!"
+        ));
+        echo $this->render();
     }
 
     public function badAction()

@@ -2,6 +2,16 @@
 
 namespace Naski;
 
+/**
+ * Permet de stocker et d'accéder de manière globale à des instances
+ * Évite de devoir utiliser le pattern singleton pour chaque classe
+ *
+ * Par convention, on nomera $IM la variable globale de l'InstanceManager
+ *
+ * On accède à une instance avec une key directement : $IM->key
+ *
+ * @author Stéphane Wouters <doelia@doelia.fr>
+ */
 class InstancesManager
 {
 
