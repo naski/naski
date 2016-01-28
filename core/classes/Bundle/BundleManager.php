@@ -36,9 +36,7 @@ class BundleManager
         $config = new Config();
         $config->loadJSONFile($dirBundle.'config.json');
 
-        foreach ($config->required as $file) {
-            require_once $dirBundle.$file;
-        }
+        require_once $dirBundle.'autoload.php';
 
         $nameClass = $config->class;
         $bundle = new $nameClass();

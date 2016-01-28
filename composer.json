@@ -28,8 +28,7 @@
             "Job\\": "src/classes/"
         },
         "files": [
-            "core/functions/functions.php",
-            "core/functions/redundancy.php"
+            "core/functions/functions.php"
         ]
     },
     "require": {
