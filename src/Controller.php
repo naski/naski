@@ -33,6 +33,10 @@ abstract class Controller
         }
     }
 
+    /**
+     * Test si tout les entrées POST respectent la régle
+     * @return bool Vrai si toutes les régles sont respectées
+     */
     public function inputValid() :bool
     {
         return $this->_postValid;

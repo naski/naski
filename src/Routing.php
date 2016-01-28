@@ -11,6 +11,11 @@ class Routing
     private $_rulesArray = array(); // array<Rule>
     private $_defaultRule = null;
 
+    /**
+     * Instancie un routing à partir d'une Config
+     * @param  Config $config La config à charger, voir des exemples pour le schéma
+     * @return self         Le Routing instancié
+     */
     public static function buildFromConfig(Config $config) :self
     {
         $obj = new self();
@@ -28,6 +33,10 @@ class Routing
         }
     }
 
+    /**
+     * Ajoute un ensemble de régles
+     * @param array $rules L'ensemble des Rules à ajouter
+     */
     public function addRules(array $rules)
     {
         foreach ($rules as &$rule) {
@@ -35,6 +44,10 @@ class Routing
         }
     }
 
+    /**
+     * Ajoute une règle à la stack
+     * @param Rule $rule La régle à ajouter
+     */
     public function addRule(Rule $rule)
     {
         if ($rule->path == '*') {
@@ -56,6 +69,12 @@ class Routing
         });
     }
 
+    /**
+     * Exécute la première règle qui match avec le path donné
+     * @param  string $path      Le chemin à tester
+     * @param  bool $processIt Permet d'éxécuter ou non la règle
+     * @return bool            Si une régle à été trouvée
+     */
     public function process(string $path, $processIt = true): bool
     {
         $this->createDispatcher();
@@ -92,11 +111,20 @@ class Routing
         call_user_func_array(array($ctrl, $rule->action), $vars);
     }
 
+    /**
+     * Permet de savoir si une route existe
+     * @param  string $path Le path à tester
+     * @return bool       Vrai si une route est trouvée
+     */
     public function routeFind(string $path): bool
     {
         return $this->process($path, false);
     }
 
+    /**
+     * Retourne d'ensemble des régles
+     * @return array Le tableau des régles
+     */
     public function getRules(): array
     {
         return $this->_rulesArray;

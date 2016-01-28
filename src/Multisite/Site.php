@@ -40,7 +40,13 @@ class Site
         }
     }
 
-    public function exec($rootDir, UriInterface $uri)
+    /**
+     * Execute le site et déclanche son initilasiation
+     * @param  string       $rootDir Le chemin absolue de l'emplacement des sites
+     * @param  UriInterface $uri     l'URI du client
+     * @return void
+     */
+    public function exec(string $rootDir, UriInterface $uri)
     {
         $SITE = $this; // Utilisable dans le fichier inclus
         $PATH = $this->getNewPath($uri->getPath());
@@ -60,7 +66,12 @@ class Site
         }
     }
 
-    public function getNewPath($path): string
+    /**
+     * Retourne le nouveau chemin calculé à partir de la regex PATH
+     * @param  string $path L'ancien chemin
+     * @return string       Le nouveau chemin
+     */
+    public function getNewPath(string $path): string
     {
         if ($this->conditions['path'] ?? '') {
             $regex = '#'.$this->conditions['path'].'#';
@@ -72,6 +83,11 @@ class Site
         return $path;
     }
 
+    /**
+     * Teste si le site respecte toutes les conditions d'une URI
+     * @param  UriInterface $uri L'URI cliente à tester
+     * @return bool            Vrai si ce site match
+     */
     public function match(UriInterface $uri): bool
     {
         $path = $uri->getPath();
