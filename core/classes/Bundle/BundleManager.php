@@ -32,8 +32,8 @@ class BundleManager
     }
 
     /**
-     * Charge un bundle dans la mémoire pour qu'il soit accécible, mais ne l'exécute pas
-     * @param  string $dirBundle Le chemin absolue vers le bundle, finisant par un /
+     * Charge un bundle dans la mémoire pour qu'il soit accessible, mais ne l'exécute pas
+     * @param  string $dirBundle Le chemin absolue vers le bundle à charger, finisant par un /
      * @return void
      */
     public function loadBundle(string $dirBundle)
