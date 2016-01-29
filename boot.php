@@ -21,15 +21,24 @@ require_once __DIR__.'/core/boot/init.php';
 require_once __DIR__.'/src/boot/instances.php';
 
 function exception_handler($e) {
-    // var_dump(debug_backtrace());
+    global $IM;
+    // die('pas bien');
     try {
         throw $e;
     // } catch (\Naski\Config\FileNotFoundException $exception) {
     //     echo "Bouh";
     } catch (\Exception $exception) {
-        // throw $e;
-        var_dump($exception->getTrace());
-        echo "Exception non attrapée : " , $exception->getMessage(), "\n";
+
+        $bundle = \Naski\Bundle\BundleManager::getInstance()->getBundle('errors');
+        $bundle->load();
+        $bundle->addException($exception);
+
+
+        $bundle->addHisTemplatesToTwig($IM->twig);
+        $template = $IM->twig->loadTemplate('@errors/view.twig');
+        echo $template->render($bundle->getTwigParams());
+
+        // var_dump($exception);
     }
 
 }

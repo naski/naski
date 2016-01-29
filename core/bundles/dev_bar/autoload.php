@@ -4,6 +4,7 @@ use Naski\Bundle\DisplayBundle;
 
 class DevBarBundle extends DisplayBundle
 {
+
     public function getRequestsNumber(): int
     {
         global $IM;
@@ -16,10 +17,4 @@ class DevBarBundle extends DisplayBundle
         return PHP_Timer::secondsToTimeString($time);
     }
 
-    public function getTwigParamsOveride(): array
-    {
-        return array(
-            'bundle' => $this
-        );
-    }
 }

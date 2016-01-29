@@ -1,0 +1,4 @@
+name: DevBar
+alias: devBar
+class: DevBarBundle
+twig_path: ./

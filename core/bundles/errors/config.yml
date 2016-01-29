@@ -1,0 +1,3 @@
+name: Afficheur d'erreurs
+alias: errors
+class: ErrorBundle
