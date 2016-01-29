@@ -17,4 +17,4 @@ websites:
         name: Démo
         src: browser/demo/
         initFile: init.php
-        routngFile: routing.json
+        routingFile: routing.json
