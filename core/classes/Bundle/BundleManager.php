@@ -52,6 +52,7 @@ class BundleManager
         $bundle->directory = $dirBundle;
 
         $this->recordNewBundle($bundle);
+        $bundle->onEnable();
 
         return $bundle;
     }

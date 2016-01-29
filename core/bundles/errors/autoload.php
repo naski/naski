@@ -13,7 +13,7 @@ class ErrorBundle extends DisplayBundle
 {
     public $exception;
 
-    public function load()
+    public function exec()
     {
         global $IM;
         set_exception_handler(array($this, 'onException'));

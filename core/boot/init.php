@@ -23,4 +23,4 @@ $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/naski/'.'default.json')
 }
 
 $bundle = BundleManager::getInstance()->getBundle('errors');
-$bundle->load();
+$bundle->exec();
