@@ -3,6 +3,7 @@
 namespace Naski;
 
 use Naski\Bundle\DisplayBundle;
+use Naski\Bundle\BundleManager;
 
 
 class MainTwig
@@ -18,7 +19,7 @@ class MainTwig
         $this->_twigInstance = new \Twig_Environment($loader, $twigOption);
 
         $this->loadBaseTwigParams();
-
+        $this->useBundle('devBar');
     }
 
     private function loadBaseTwigParams()
@@ -32,6 +33,13 @@ class MainTwig
         $this->addTwigParams(array(
             'IM' => $IM
         ));
+    }
+
+    // TODO Écrire des verifs
+    public function useBundle(string $alias)
+    {
+        $bundle = BundleManager::getInstance()->getBundle($alias);
+        $this->loadBundle($bundle);
     }
 
     public function loadBundle(DisplayBundle $bundle)

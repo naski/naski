@@ -26,6 +26,9 @@ class BundleManager
 
     public function getBundle(string $key): Bundle
     {
+        if (!isset($this->_bundles[$key])) {
+            throw new \Exception('Le bundle '.$key.' est introuvable parmi ceux enregistrés');
+        }
         return $this->_bundles[$key];
     }
 

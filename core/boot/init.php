@@ -4,6 +4,9 @@ use Naski\Config\Config;
 use Naski\Bundle\BundleManager;
 use Naski\InstancesManager;
 
+BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/dev_bar/');
+BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/errors/');
+
 // Variable globale contenant toutes les instances à déclarer comme globales
 $IM = new InstancesManager();
 
@@ -19,7 +22,5 @@ $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/naski/'.'default.json')
     $IM->recordInstance('twig', $mainTwig);
 }
 
-$bundle = BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/errors/');
+$bundle = BundleManager::getInstance()->getBundle('errors');
 $bundle->load();
-
-BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/dev_bar/');

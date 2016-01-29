@@ -19,6 +19,5 @@ class DisplayController extends Controller {
     public function __construct(Rule $rule = null)
     {
         parent::__construct($rule);
-        $this->twig->loadBundle(BundleManager::getInstance()->getBundle('devBar'));
     }
 }
