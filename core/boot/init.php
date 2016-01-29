@@ -4,6 +4,7 @@ use Naski\Config\Config;
 use Naski\Bundle\BundleManager;
 use Naski\InstancesManager;
 
+BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/naskiPage/');
 BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/dev_bar/');
 BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/errors/');
 

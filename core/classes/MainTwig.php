@@ -4,12 +4,17 @@ namespace Naski;
 
 use Naski\Bundle\DisplayBundle;
 use Naski\Bundle\BundleManager;
+use Assetic\Asset\AssetCollection;
+use Assetic\Asset\AssetCache;
+use Assetic\Cache\FilesystemCache;
 
+// TODO ne pas use 2 fois le même bundle
 
 class MainTwig
 {
     private $_twigInstance = null;
     private $_twigParams = array('bundles' => array());
+    private $_css; // array<FileAsset,GlobAsset>
 
     public function __construct($twigOption)
     {
@@ -20,6 +25,11 @@ class MainTwig
 
         $this->loadBaseTwigParams();
         $this->useBundle('devBar');
+    }
+
+    public function getTwigInstance()
+    {
+        return $this->_twigInstance;
     }
 
     private function loadBaseTwigParams()
@@ -47,6 +57,7 @@ class MainTwig
         $this->_twigInstance->getLoader()->addPath($bundle->getTwigTemplatesDir(), $bundle->config->alias);
         $this->_twigParams['bundles'][$bundle->config->alias] = $bundle->getTwigParams();
         $this->_twigParams['bundles'][$bundle->config->alias]['instance'] = $bundle;
+        $bundle->exec();
     }
 
     public function addTwigPath($path)
@@ -59,13 +70,26 @@ class MainTwig
         $this->_twigParams = array_merge($array, $this->_twigParams);
     }
 
-    public function getTwigInstance()
+    public function addCssFile($file)
     {
-        return $this->_twigInstance;
+        $this->_css[] = $file;
+    }
+
+    private function buildCss()
+    {
+        if (count($this->_css)) {
+            $collection = new AssetCollection($this->_css);
+            $cache = new AssetCache(
+                $collection,
+                new FilesystemCache(PATH_CACHE."assets/")
+            );
+            $this->addTwigParams(array('css_content' => $cache->dump()));
+        }
     }
 
     public function render(string $templateName)
     {
+        $this->buildCss();
         $template = $this->_twigInstance->loadTemplate($templateName);
         echo $template->render($this->_twigParams);
     }

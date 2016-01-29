@@ -1,8 +1,8 @@
-{% extends 'naski.twig' %}
+{% extends '@naskiPage/naski.twig' %}
 {% set bundle = bundles.errors %}
 {% set e = bundle.instance.exception %}
 
-{% block body %}
+{% block content %}
     <h1>Une erreur est survenue :(</h1>
 
     <h2>{{e.message}}</h2>

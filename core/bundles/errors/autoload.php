@@ -2,8 +2,7 @@
 
 /**
  * Dépendances:
- * $IM->twig
- * bundle/devBar
+ * bundle/naskiPage
  */
 
 use Naski\Bundle\DisplayBundle;
@@ -25,6 +24,7 @@ class ErrorBundle extends DisplayBundle
 
         $this->exception = $e;
 
+        $IM->twig->useBundle('naskiPage');
         $IM->twig->loadBundle($this);
         $IM->twig->render('@errors/view.twig');
 
