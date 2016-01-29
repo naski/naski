@@ -2,6 +2,7 @@
 
 /**
  *  Instancie des entités nécessaires au projet
+ *  Ne doit pas faire d'affichage
  */
 
 PHP_Timer::start();

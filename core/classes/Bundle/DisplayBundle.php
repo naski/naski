@@ -4,7 +4,10 @@ namespace Naski\Bundle;
 
 /**
  * Bundle qui est capable de s'intégrer dans une page web
- * Contient des templates twig, des variable
+ * Contient des templates twig, des variable twigs
+ *
+ * Le bundle doit etre chargé dans le MainTwig pour pouvoir être utilisé
+ * 
  * // TODO et bientôt des assets...
  */
 abstract class DisplayBundle extends Bundle

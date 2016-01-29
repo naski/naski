@@ -25,11 +25,7 @@ class ErrorBundle extends DisplayBundle
 
         $this->exception = $e;
 
-        $bundle = BundleManager::getInstance()->getBundle('devBar');
-        $bundle->load();
-
         $IM->twig->loadBundle($this);
-        $IM->twig->loadBundle($bundle);
         $IM->twig->render('@errors/view.twig');
 
         die();
