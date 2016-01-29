@@ -11,19 +11,18 @@ use Naski\Bundle\BundleManager;
 
 class ErrorBundle extends DisplayBundle
 {
+    public $exception;
+
     public function load()
     {
         global $IM;
-        $IM->twig->getTwigInstance()->addExtension(new Twig_Extension_Debug());
         set_exception_handler(array($this, 'onException'));
     }
-
-    public $exception;
 
     public function onException($e)
     {
         global $IM;
-        
+
         $this->exception = $e;
 
         $bundle = BundleManager::getInstance()->getBundle('devBar');

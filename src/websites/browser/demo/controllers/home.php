@@ -1,9 +1,9 @@
 <?php
 
-use Naski\DisplayController;
+use Naski\Controller;
 use Job\User;
 
-class HomeController extends DisplayController
+class HomeController extends Controller
 {
     public function indexAction()
     {
