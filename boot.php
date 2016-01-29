@@ -7,7 +7,7 @@
 
 
  // Tests de dépendance
- require_once __DIR__.'/core/boot/dependencies.php';
+require_once __DIR__.'/core/boot/dependencies.php';
 
  // Classes des composants externes
 require_once __DIR__.'/vendor/autoload.php';
