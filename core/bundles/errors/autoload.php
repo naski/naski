@@ -1,24 +1,39 @@
 <?php
 
+/**
+ * Dépendances:
+ * $IM->twig
+ * bundle/devBar
+ */
+
 use Naski\Bundle\DisplayBundle;
+use Naski\Bundle\BundleManager;
 
 class ErrorBundle extends DisplayBundle
 {
     public function load()
     {
         global $IM;
-        $IM->twig->addExtension(new Twig_Extension_Debug());
+        $IM->twig->getTwigInstance()->addExtension(new Twig_Extension_Debug());
+        set_exception_handler(array($this, 'onException'));
     }
 
-    protected function getTwigParamsOveride(): array
-    {
-        return array();
-    }
+    public $exception;
 
-    public $exceptions = array();
-
-    public function addException($e)
+    public function onException($e)
     {
-        $this->exceptions[] = $e;
+        global $IM;
+        
+        $this->exception = $e;
+
+        $bundle = BundleManager::getInstance()->getBundle('devBar');
+        $bundle->load();
+
+        $IM->twig->loadBundle($this);
+        $IM->twig->loadBundle($bundle);
+        $IM->twig->render('@errors/view.twig');
+
+        die();
+
     }
 }

@@ -8,4 +8,4 @@ global $IM;
 
 $IM->recordInstance('site', $SITE);
 
-$IM->twig->getLoader()->addPath(ROOT_SYSTEM_WEBSITE.'views/');
+$IM->twig->addTwigPath(ROOT_SYSTEM_WEBSITE.'views/');

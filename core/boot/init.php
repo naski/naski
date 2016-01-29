@@ -4,13 +4,22 @@ use Naski\Config\Config;
 use Naski\Bundle\BundleManager;
 use Naski\InstancesManager;
 
-set_exception_handler('exception_handler');
-
 // Variable globale contenant toutes les instances à déclarer comme globales
 $IM = new InstancesManager();
 
 $IM->recordInstance('config', new Config());
 $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/naski/'.'default.json');
 
-BundleManager::getInstance()->loadBundle(ROOT_SYSTEM.'core/bundles/dev_bar/');
-BundleManager::getInstance()->loadBundle(ROOT_SYSTEM.'core/bundles/errors/');
+// Moteur de template twig
+{
+    $options = $IM->config->cache_twig ? array(
+        'cache' => ROOT_SYSTEM.'/app/cache/',
+    ) : array();
+    $mainTwig = new \Naski\MainTwig($options);
+    $IM->recordInstance('twig', $mainTwig);
+}
+
+$bundle = BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/errors/');
+$bundle->load();
+
+BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/dev_bar/');

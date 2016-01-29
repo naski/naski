@@ -1,8 +1,10 @@
+{% set bundle = bundles.devBar %}
+
 {% if IM.config.env == 'dev' %}
     <hr>
-    {{ bundle.getRequestsNumber() }} requêtes SQL<br>
+    {{ bundle.instance.getRequestsNumber() }} requêtes SQL<br>
     Environnement: {{ IM.config.env }}<br>
     Site web: {{ IM.site.name }}<br>
     Action: {{ IM.rule.controller }} / {{ IM.rule.action }}<br>
-    Executé en: {{ bundle.getTime() }}
+    Executé en: {{ bundle.instance.getTime() }}
 {% endif %}

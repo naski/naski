@@ -10,27 +10,21 @@ namespace Naski\Bundle;
 abstract class DisplayBundle extends Bundle
 {
 
-    /**
-     * A overide dans votre bundle pour ajouter des parametres twig
-     * @return [type] [description]
-     */
-    protected function getTwigParamsOveride(): array
+    private $_params = array();
+
+    protected function addTwigParams(array $a): array
     {
-        return array();
+        $this->_params = array_merge($this->_params, $a);
     }
 
     public function getTwigParams(): array
     {
-        $a = array(
-            'bundle' => $this
-        );
-        return array_merge($a, $this->getTwigParamsOveride());
+        return $this->_params;
     }
 
-    public function addHisTemplatesToTwig($twig)
+    public function getTwigTemplatesDir()
     {
-        $pathTwig = $this->directory.$this->config->twig_path;
-        $twig->getLoader()->addPath($pathTwig, $this->config->alias);
+        return $this->directory.$this->config->twig_path;
     }
 
 }

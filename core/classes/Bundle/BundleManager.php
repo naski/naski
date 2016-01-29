@@ -19,8 +19,6 @@ class BundleManager
 
     private $_bundles = array(); // array<Bundle>
 
-    private function __constuct() { }
-
     private function recordNewBundle(Bundle $bundle)
     {
         $this->_bundles[$bundle->config->alias] = $bundle;
@@ -32,11 +30,11 @@ class BundleManager
     }
 
     /**
-     * Charge un bundle dans la mémoire pour qu'il soit accessible, mais ne l'exécute pas
+     * Enregistre un bundle dans la mémoire pour qu'il soit accessible et tester son fonctionnement, mais ne l'exécute pas
      * @param  string $dirBundle Le chemin absolue vers le bundle à charger, finisant par un /
-     * @return void
+     * @return Bundle   Le bundle créé
      */
-    public function loadBundle(string $dirBundle)
+    public function recordBundle(string $dirBundle): Bundle
     {
         $config = new Config();
         $config->loadFile($dirBundle.'config.yml');
@@ -51,5 +49,7 @@ class BundleManager
         $bundle->directory = $dirBundle;
 
         $this->recordNewBundle($bundle);
+
+        return $bundle;
     }
 }
