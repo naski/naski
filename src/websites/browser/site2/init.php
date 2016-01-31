@@ -6,17 +6,16 @@ global $IM;
 
 $IM->recordInstance('site', $SITE);
 
-use Assetic\Asset\FileAsset;
-use Assetic\Asset\GlobAsset;
-use Assetic\Filter\LessFilter;
-use Assetic\AssetWriter;
-use Assetic\FilterManager;
-use Assetic\Filter\Sass\SassFilter;
-use Assetic\Filter\Yui;
-use Assetic\AssetManager;
 
 
 $IM->twig->addTwigPath(ROOT_SYSTEM_WEBSITE);
 
 $IM->twig->useBundle('naskiPage');
 $IM->twig->render('index.twig');
+
+$db = new \Naski\Pdo\MySQLDatabase($IM->config['main_mysql']);
+
+$users = \Job\User::get($db, array());
+echo $users[0]->name;
+$users[0]->name = "Go";
+$users[0]->save();
