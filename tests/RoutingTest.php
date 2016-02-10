@@ -69,4 +69,14 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $routing->process('/login');
         $this->expectOutputString("ok");
     }
+
+    public function testPostRuleBad()
+    {
+        $config = new Config();
+        $config->loadFile(__DIR__.'/routing_post.json');
+        $routing = Routing::buildFromConfig($config);
+        $_POST['username'] = 'john';
+        $routing->process('/login');
+        $this->expectOutputString("bad");
+    }
 }

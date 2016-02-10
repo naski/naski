@@ -9,48 +9,38 @@ namespace Naski\Routing;
  */
 abstract class Controller
 {
-    public $inputs = array(); // Tableau clé/valeur de $POST nettoyé
-    private $_postValid = true;
+    public $post = array(); // Tableau clé/valeur de $POST nettoyé
+    public $get = array(); // Tableau clé/valeur de $GET nettoyé
 
-    public function __construct(Rule $rule = null)
+    private $_inputsValids = true;
+    private $_rule;
+    private $_gump;
+
+    public function __construct(Rule $rule)
     {
-        if ($rule != null) {
-            $this->setInputs($rule);
-        }
+        $this->_rule = $rule;
+
+        $gump = new \GUMP();
+        $this->post = $gump->sanitize($_POST);
+        $this->get = $gump->sanitize($_GET);
+
+        $this->_inputsValids = ($this->testInputs('get') && $this->testInputs('post'));
     }
 
-    private function setInputs(Rule $rule)
+    private function testInputs($method)
     {
         $gump = new \GUMP();
 
-        $_POST = $gump->sanitize($_POST);
+        $gump->validation_rules(self::buildGumpRules($method, 'validation_rules'));
+        $gump->filter_rules(self::buildGumpRules($method, 'filter_rules'));
 
-        $gump->validation_rules(self::buildGumpRules($rule, 'validation_rules'));
-        $gump->filter_rules(self::buildGumpRules($rule, 'filter_rules'));
-
-        $validatedData = $gump->run($_POST);
-
-        if ($validatedData === false) {
-            $this->_postValid = false;
-        } else {
-            $this->_postValid = true;
-            $this->inputs = $validatedData;
-        }
+        return $gump->run($this->$method);
     }
 
-    /**
-     * Test si tout les entrées POST respectent la régle
-     * @return bool Vrai si toutes les régles sont respectées
-     */
-    public function inputValid() :bool
-    {
-        return $this->_postValid;
-    }
-
-    private static function buildGumpRules(Rule $rule, string $name) :array
+    private function buildGumpRules(string $method, string $name) :array
     {
         $rules = array();
-        foreach ($rule->params ?? array() as $param) {
+        foreach ($rule->$method ?? array() as $param) {
             if (!($param[$name] ?? '') && $name == 'validation_rules') {
                 $param[$name] = 'required';
             }
@@ -61,4 +51,14 @@ abstract class Controller
 
         return $rules;
     }
+
+    /**
+     * Test si tout les entrées POST respectent la régle
+     * @return bool Vrai si toutes les régles sont respectées
+     */
+    public function inputValid() :bool
+    {
+        return $this->_inputsValids;
+    }
+
 }

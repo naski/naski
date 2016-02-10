@@ -4,7 +4,7 @@
             "path": "/login",
             "controller": "TestController",
             "action": "loginAction",
-            "params": [
+            "post": [
                 {
                     "name": "username"
                 },
