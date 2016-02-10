@@ -1,8 +1,8 @@
 <?php
 
-using namespace Naski\Routing;
+namespace Naski\Routing;
 
 class FileNotFoundException extends \Exception
 {
-    
+
 }
