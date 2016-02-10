@@ -55,10 +55,10 @@ $routing->process($_SERVER[REQUEST_URI]);
 ```
 Voir [nikic/FastRoute](https://github.com/nikic/FastRoute) pour les posiblités de synthaxe du path.
 
-### Formulaires POST
-Il est possible de spécifier directement dans la règle la liste des parametres POST attendue, avec des régles de validation et de filtre. Ces conditions ne sont pas prisent en compte dans le routing et doivent être testées manuellement dans le contrôleur :
+### Inputs GET/POST
+Il est possible de spécifier directement dans la règle la liste des parametres POST/GET attendue, avec des régles de validation et de filtre. Ces conditions ne sont pas prisent en compte dans le routing et doivent être testées manuellement dans le contrôleur :
 - `$this->inputValid()` pour savoir si les paramètres sont valides
-- `$this->inputs['key']` pour accèder à un paramètre filtré
+- `$this->get['key']` ou `$this->post['key']` pour accèder à un paramètre filtré
 
 Prévu uniquement comme test de sécurité côté serveur, préférer la validation côté client pour l'aspect esthétique.
 
@@ -67,7 +67,7 @@ $routing >addRule(new Rule(array(
     'path' => '/form',
     'controller' => 'MyController',
     'action' => 'formAction',
-    'params' => array(
+    'post' => array(
         array(
             "name": "id",
             "validation_rules": "required",
@@ -77,6 +77,13 @@ $routing >addRule(new Rule(array(
             "name": "username",
             "validation_rules": "required|max_len,100|min_len,6",
             "filter_rules": "trim|sanitize_string"
+        )
+    ),
+    'get' => array(
+        array(
+            "name": "idProduct",
+            "validation_rules": "required",
+            "filter_rules": "trim"
         )
     )
 )));
@@ -128,7 +135,7 @@ routing.json :
             "path": "/product",
             "controller": "HomeController",
             "action": "productAction",
-            "params": [
+            "post": [
                 {
                     "name": "id",
                     "validation_rules": "required",
