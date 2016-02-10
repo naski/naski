@@ -13,7 +13,8 @@ class Rule
     public $path = 'undefined';
     public $controller = 'undefined';
     public $action = 'undefined';
-    public $params = array(); // array<array>
+    public $post = array(); // array<array>
+    public $get = array(); // array<array>
 
     public function __construct(array $a)
     {

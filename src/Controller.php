@@ -34,13 +34,13 @@ abstract class Controller
         $gump->validation_rules(self::buildGumpRules($method, 'validation_rules'));
         $gump->filter_rules(self::buildGumpRules($method, 'filter_rules'));
 
-        return $gump->run($this->$method);
+        return ($gump->run($this->$method) !== false);
     }
 
     private function buildGumpRules(string $method, string $name) :array
     {
         $rules = array();
-        foreach ($rule->$method ?? array() as $param) {
+        foreach ($this->_rule->$method ?? array() as $param) {
             if (!($param[$name] ?? '') && $name == 'validation_rules') {
                 $param[$name] = 'required';
             }
