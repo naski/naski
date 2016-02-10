@@ -38,9 +38,20 @@ abstract class Entity
 		return $list;
 	}
 
+	public static function construct(array $array)
+	{
+		$i = new static($array);
+		return $i;
+	}
+
 	public function getAsArray()
 	{
 		return $this->_rows;
+	}
+
+	public function insert()
+	{
+		$this->_db->insert($this->table(), $this->_rows);
 	}
 
 	public function save()

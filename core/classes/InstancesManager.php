@@ -17,7 +17,7 @@ class InstancesManager
 
     /**
      * Enregistre une nouvelle instance
-     * @param  string $instanceName La clé choisie pour référencer d'instance
+     * @param  string $instanceName La clé choisie pour référencer l'instance
      * @param  Object $instance     L'instance à enregistrer
      * @return void
      */

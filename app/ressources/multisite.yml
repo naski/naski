@@ -3,13 +3,13 @@ websites:
     -
         name: Site 2
         conditions:
-            - path: ^/site2(.*)
+            path: ^/site2(.*)
         src: browser/site2/
         initFile: init.php
     -
         name: Login API
         conditions:
-            - path: ^/ws/account(.*)
+            path: ^/ws/account(.*)
         src: rest/login/
         initFile: init.php
         routingFile: routing.json

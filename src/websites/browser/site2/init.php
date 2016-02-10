@@ -6,11 +6,8 @@ global $IM;
 
 $IM->recordInstance('site', $SITE);
 
-
-
 $IM->twig->addTwigPath(ROOT_SYSTEM_WEBSITE);
 
-$IM->twig->useBundle('naskiPage');
 $IM->twig->render('index.twig');
 
 $db = new \Naski\Pdo\MySQLDatabase($IM->config['main_mysql']);
