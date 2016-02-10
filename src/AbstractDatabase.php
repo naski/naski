@@ -108,22 +108,38 @@ abstract class AbstractDatabase
      *
      *  @param $tablename       Nom de la table
      *  @param $insertArray     Clés : noms des colonnes. Valeurs : valeurs du tuple
-     *  @param $cond            Condition SQL à concatener à la requête
+     *  @param $conditon        Liste des champs à respecter
      *  @param $addQuotes       Permet d'ajouter des quotes simples ' autour des valeurs
      */
-    public function update(string $tablename, array $insertArray, string $cond, bool $addQuotes = true)
+    public function update(string $tablename, array $insertArray, array $conditon, bool $addQuotes = true)
     {
         $setter = '';
-
         foreach ($insertArray as $key => $value) {
             $setter .= "$key=";
-            $setter .= $addQuotes ? ("'$value',") : "$value,";
+            $setter .= $addQuotes ? "'$value'," : "$value,";
         }
-
         $setter = substr_replace($setter, '', -1);
+
+        $cond = self::createWhereCondition($cond);
+
         $query = sprintf('UPDATE %s SET %s %s', $tablename, $setter, $cond);
 
         return $this->query($query);
+    }
+
+    private static function createWhereCondition(array $array): string
+    {
+        $cond = '';
+        if (!empty($cond)) {
+            $cond = "WHERE ";
+            foreach ($cond as $key => $value) {
+                $cond .= "$key=";
+                $cond .= $addQuotes ? ("'$value'") : "$value";
+                $cond .= " AND ";
+            }
+            $cond = substr($cond, 0, strlen(" AND "));
+        }
+        return $cond;
     }
 
     public function getRequestsNumber() :int

@@ -13,4 +13,3 @@ $GLOBALS['DB_MYSQL'] = array(
 //     'username' => 'root',
 //     'password' => 'wugaxu'
 // );
-
