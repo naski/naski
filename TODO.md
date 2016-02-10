@@ -1,6 +1,5 @@
 # Todo
 
-- Faire mieux la validation des POSTs
-- Documenter
+- Documenter le multisite
 - Ajouter du log ?
 - Ajouter le parametrage dans les tests
