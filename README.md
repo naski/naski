@@ -1,6 +1,6 @@
 # Naski Routing
 
-[![Build Status](https://travis-ci.org/Doelia/routing.svg?branch=master)](https://travis-ci.org/Doelia/routing)
+[![Build Status](https://travis-ci.org/Doelia/naski-routing.svg?branch=master)](https://travis-ci.org/Doelia/naski-routing)
 
 
 ## Fonctionnalités
