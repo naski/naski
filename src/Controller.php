@@ -24,17 +24,25 @@ abstract class Controller
         $this->post = $gump->sanitize($_POST);
         $this->get = $gump->sanitize($_GET);
 
-        $this->_inputsValids = ($this->testInputs('get') && $this->testInputs('post'));
+        $this->testAndFilterInputs('get');
+        $this->testAndFilterInputs('post');
     }
 
-    private function testInputs($method)
+    private function testAndFilterInputs($method)
     {
         $gump = new \GUMP();
 
         $gump->validation_rules(self::buildGumpRules($method, 'validation_rules'));
         $gump->filter_rules(self::buildGumpRules($method, 'filter_rules'));
 
-        return ($gump->run($this->$method) !== false);
+        $filtered = $gump->run($this->$method);
+        
+        if ($filtered === false) {
+            $this->_inputsValids = false;
+        } else {
+            $this->$method = $filtered;
+        }
+
     }
 
     private function buildGumpRules(string $method, string $name) :array
