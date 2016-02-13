@@ -41,4 +41,16 @@ class DevBarBundle extends Bundle
         return PHP_Timer::secondsToTimeString($time);
     }
 
+    public function getCssFilesincludes(): array
+    {
+        global $IM;
+        $tab = array('toto');
+        die('ok');
+        foreach ($IM->dpl->includedCssFilesStack as $f) {
+            $tab[] = $f;
+        }
+        var_dump($tab);
+        return $tab;
+    }
+
 }

@@ -17,6 +17,7 @@ class NaskiDisplayer
     private $_css; // array<FileAsset,|GlobAsset>
 
     public $usedBundlesStack = array();
+    public $includedCssFilesStack = array();
 
     public function __construct($twigOption)
     {
@@ -62,6 +63,7 @@ class NaskiDisplayer
 
     public function addCssFile($file)
     {
+        $this->includedCssFilesStack[] = $file;
         $this->_css[] = $file;
     }
 

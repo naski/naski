@@ -10,6 +10,12 @@
     Executé en: {{ bundle.instance.getTime() }}
 
     <br>
+    Instances du IM:
+    {% for b in IM.getListInstancesKey() %}
+        {{ b }},
+    {% endfor %}
+
+    <br>
     Ordre d'usage des bundles:
     {% for b in bundle.instance.getUsedBundle() %}
         -> {{ b }}
@@ -20,6 +26,13 @@
     {% for b in bundle.instance.getRecordedBundle() %}
         -> {{ b }}
     {% endfor %}
+
+    <br>
+    Fichiers CSS inclus :
+    {% for i in bundle.instances.getRecordedBundle() %}
+        {{ i }} <br>
+    {% endfor %}
+
 
 </div>
 {% endif %}

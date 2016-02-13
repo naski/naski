@@ -32,6 +32,8 @@ class InstancesManager
      */
     public $rule;
 
+    private $_instances = array();
+
     /**
      * Enregistre une nouvelle instance
      * @param  string $instanceName La clé choisie pour référencer l'instance
@@ -40,7 +42,10 @@ class InstancesManager
      */
     public function recordInstance(string $instanceName, $instance)
     {
-        $this->$instanceName = $instance;
+        if (property_exists(__CLASS__, $instanceName)) {
+            $this->$instanceName = $instance;
+        }
+        $this->_instances[$instanceName] = $instance;
     }
 
     /**
@@ -59,6 +64,11 @@ class InstancesManager
         return $list;
     }
 
+    public function getListInstancesKey(): array
+    {
+        return array_keys($this->_instances);
+    }
+
     /**
      * Place toutes les instances enregistrées dans un objet
      * @param  mixed $object L'object dans lequel placer les instances
@@ -69,5 +79,10 @@ class InstancesManager
         foreach ($this as $key => $value) {
             $object->$key = $value;
         }
+    }
+
+    public function __get($key)
+    {
+        return $this->_instances[$key];
     }
 }
