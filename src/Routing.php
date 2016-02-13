@@ -109,6 +109,12 @@ class Routing
         return false;
     }
 
+    /**
+     * Execute la régle passée en parametre
+     * @param  Rule   $rule La régle à exécuter
+     * @param  array  $vars Tableau clé valeurs des variables détéctées
+     * @return void       
+     */
     private static function processRule(Rule $rule, array $vars)
     {
         $controllerName = $rule->controller;
