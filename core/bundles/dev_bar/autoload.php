@@ -44,6 +44,7 @@ class DevBarBundle extends Bundle
     public function getCssFilesincludes(): array
     {
         global $IM;
+        $tab = array();
         foreach ($IM->dpl->includedCssFilesStack as $f) {
             $tab[] = $f->getSourceRoot().'/'.$f->getSourcePath();
         }

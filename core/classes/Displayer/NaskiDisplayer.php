@@ -8,8 +8,6 @@ use Assetic\Asset\AssetCollection;
 use Assetic\Asset\AssetCache;
 use Assetic\Cache\FilesystemCache;
 
-// TODO ne pas use 2 fois le même bundle
-
 class NaskiDisplayer
 {
     private $_twigInstance = null;
@@ -98,13 +96,15 @@ class NaskiDisplayer
     // TODO Écrire des verifs
     public function useBundle(string $alias)
     {
-        $bundle = BundleManager::getInstance()->getBundle($alias);
-        $this->_twigInstance->getLoader()->addPath($bundle->getTwigTemplatesDir(), $bundle->config->alias);
-        $this->_twigParams['bundles'][$bundle->config->alias] = $bundle->getTwigParams();
-        $this->_twigParams['bundles'][$bundle->config->alias]['instance'] = $bundle;
+        if (!in_array($alias, $this->usedBundlesStack)) {
+            $bundle = BundleManager::getInstance()->getBundle($alias);
+            $this->_twigInstance->getLoader()->addPath($bundle->getTwigTemplatesDir(), $bundle->getAlias());
+            $this->_twigParams['bundles'][$bundle->getAlias()] = $bundle->getTwigParams();
+            $this->_twigParams['bundles'][$bundle->getAlias()]['instance'] = $bundle;
 
-        $this->usedBundlesStack[] = $bundle->getAlias();
-        $bundle->exec();
+            $this->usedBundlesStack[] = $bundle->getAlias();
+            $bundle->exec();
+        }
     }
 
 
