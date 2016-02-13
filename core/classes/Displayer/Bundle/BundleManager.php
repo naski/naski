@@ -21,10 +21,12 @@ class BundleManager
     }
 
     private $_bundles = array(); // array<Bundle>
+    public $recordedBundlesStack = array();
 
     private function recordNewBundle(Bundle $bundle)
     {
-        $this->_bundles[$bundle->config->alias] = $bundle;
+        $this->_bundles[$bundle->getAlias()] = $bundle;
+        $this->recordedBundlesStack[] = $bundle->getAlias();
     }
 
     public function getBundle(string $key): Bundle
@@ -48,7 +50,7 @@ class BundleManager
         /** @noinspection PhpIncludeInspection */
         require_once $dirBundle.'autoload.php';
 
-        $nameClass = $config->class;
+        $nameClass = $config['class'];
 
         $bundle = new $nameClass($dirBundle);
 

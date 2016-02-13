@@ -16,6 +16,8 @@ class NaskiDisplayer
     private $_twigParams = array('bundles' => array());
     private $_css; // array<FileAsset,|GlobAsset>
 
+    public $usedBundlesStack = array();
+
     public function __construct($twigOption)
     {
         $loader = new \Twig_Loader_Filesystem($basepath = ROOT_SYSTEM);
@@ -90,6 +92,8 @@ class NaskiDisplayer
         $this->_twigInstance->getLoader()->addPath($bundle->getTwigTemplatesDir(), $bundle->config->alias);
         $this->_twigParams['bundles'][$bundle->config->alias] = $bundle->getTwigParams();
         $this->_twigParams['bundles'][$bundle->config->alias]['instance'] = $bundle;
+
+        $this->usedBundlesStack[] = $bundle->getAlias();
         $bundle->exec();
     }
 

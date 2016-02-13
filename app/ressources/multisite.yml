@@ -1,13 +1,6 @@
 rootPath: src/websites/
 websites:
     -
-        name: Login API
-        conditions:
-            path: ^/ws/account(.*)
-        src: rest/login/
-        initFile: init.php
-        routingFile: routing.json
-    -
         name: Backend
         conditions:
             path: ^/backend(.*)

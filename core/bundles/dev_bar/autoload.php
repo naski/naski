@@ -2,6 +2,7 @@
 
 use Assetic\Asset\FileAsset;
 use Naski\Displayer\Bundle\Bundle;
+use Naski\Displayer\Bundle\BundleManager;
 
 class DevBarBundle extends Bundle
 {
@@ -21,6 +22,17 @@ class DevBarBundle extends Bundle
     {
         global $IM;
         return \Naski\sumCalls($IM->getInstancesOfType('\\Naski\\Pdo\\AbstractDatabase'), 'getRequestsNumber');
+    }
+
+    public function getUsedBundle(): array
+    {
+        global $IM;
+        return $IM->dpl->usedBundlesStack;
+    }
+
+    public function getRecordedBundle(): array
+    {
+        return BundleManager::getInstance()->recordedBundlesStack;
     }
 
     public function getTime(): string

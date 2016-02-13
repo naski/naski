@@ -16,11 +16,11 @@ $IM->recordInstance('config', new Config());
 $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/naski/'.'default.json');
 
 $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config.json');
-$IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$IM->config->env.'.json');
+$IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$IM->config['env'].'.json');
 
 // Configuration de l'afficheur HTML
 {
-    $options = $IM->config->cache_twig ? array(
+    $options = $IM->config['cache_twig'] ? array(
         'cache' => ROOT_SYSTEM.'/app/cache/',
     ) : array();
     $IM->recordInstance('dpl', new NaskiDisplayer($options));

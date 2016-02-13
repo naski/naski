@@ -8,5 +8,18 @@
     Site web: {{ IM.site.name }} |
     Action: {{ IM.rule.controller }} / {{ IM.rule.action }} |
     Executé en: {{ bundle.instance.getTime() }}
+
+    <br>
+    Ordre d'usage des bundles:
+    {% for b in bundle.instance.getUsedBundle() %}
+        -> {{ b }}
+    {% endfor %}
+
+    <br>
+    Ordre d'enregitrement des bundles:
+    {% for b in bundle.instance.getRecordedBundle() %}
+        -> {{ b }}
+    {% endfor %}
+
 </div>
 {% endif %}

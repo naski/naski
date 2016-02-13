@@ -1,7 +1,6 @@
 <?php
 
 namespace Naski;
-use Naski\Displayer\NaskiDisplayer;
 
 /**
  * Permet de stocker et d'accéder de manière globale à des instances
@@ -24,7 +23,7 @@ class InstancesManager
     public $config;
 
     /**
-     * @var \Naski\Displayer\NaskiDisplayer\NaskiDisplayer
+     * @var \Naski\Displayer\NaskiDisplayer
      */
     public $dpl;
 
