@@ -5,16 +5,14 @@
  * bundle/naskiPage
  */
 
-use Naski\Bundle\DisplayBundle;
-use Naski\Bundle\BundleManager;
+use Naski\Displayer\Bundle\Bundle;
 
-class ErrorBundle extends DisplayBundle
+class ErrorBundle extends Bundle
 {
     public $exception;
 
     public function exec()
     {
-        global $IM;
         set_exception_handler(array($this, 'onException'));
     }
 

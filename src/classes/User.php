@@ -14,6 +14,6 @@ class User extends Entity
 
     public static function goodLogin($user, $pass)
     {
-        return ($user == 'doelia' && $pass = 'wugaxu');
+        return ($user == 'doelia' && $pass == 'wugaxu');
     }
 }

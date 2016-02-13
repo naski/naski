@@ -1,7 +1,6 @@
 <?php
 
 use Naski\Controller;
-use Job\User;
 
 class HomeController extends Controller
 {

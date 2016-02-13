@@ -1,9 +1,13 @@
 <?php
 
-use Naski\Bundle\DisplayBundle;
+/**
+ * Bundle pour créer des pages ayant la charte Naski : Pages d'erreurs, pannels admins...
+ */
+
+use Naski\Displayer\Bundle\Bundle;
 use Assetic\Asset\FileAsset;
 
-class NaskiPageBundle extends DisplayBundle
+class NaskiPageBundle extends Bundle
 {
     public function exec()
     {

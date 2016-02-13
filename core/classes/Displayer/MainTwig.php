@@ -1,9 +1,10 @@
 <?php
 
-namespace Naski;
+namespace Naski\Displayer;
 
-use Naski\Bundle\DisplayBundle;
-use Naski\Bundle\BundleManager;
+use Naski\Displayer\Bundle\Bundle;
+use Naski\Displayer\Bundle\BundleManager;
+
 use Assetic\Asset\AssetCollection;
 use Assetic\Asset\AssetCache;
 use Assetic\Cache\FilesystemCache;
@@ -52,7 +53,7 @@ class MainTwig
         $this->loadBundle($bundle);
     }
 
-    public function loadBundle(DisplayBundle $bundle)
+    public function loadBundle(Bundle $bundle)
     {
         $this->_twigInstance->getLoader()->addPath($bundle->getTwigTemplatesDir(), $bundle->config->alias);
         $this->_twigParams['bundles'][$bundle->config->alias] = $bundle->getTwigParams();

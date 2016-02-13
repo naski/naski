@@ -1,6 +1,6 @@
 <?php
 
-namespace Naski\Bundle;
+namespace Naski\Displayer\Bundle;
 
 use Naski\Config\Config;
 
@@ -42,6 +42,7 @@ class BundleManager
         $config = new Config();
         $config->loadFile($dirBundle.'config.yml');
 
+        /** @noinspection PhpIncludeInspection */
         require_once $dirBundle.'autoload.php';
 
         $nameClass = $config->class;

@@ -1,8 +1,8 @@
 <?php
 
-use Naski\Bundle\DisplayBundle;
+use Naski\Displayer\Bundle\Bundle;
 
-class DevBarBundle extends DisplayBundle
+class DevBarBundle extends Bundle
 {
 
     public function getRequestsNumber(): int

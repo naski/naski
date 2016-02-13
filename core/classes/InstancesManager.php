@@ -18,7 +18,7 @@ class InstancesManager
     /**
      * Enregistre une nouvelle instance
      * @param  string $instanceName La clé choisie pour référencer l'instance
-     * @param  Object $instance     L'instance à enregistrer
+     * @param mixed   $instance L'instance à enregistrer
      * @return void
      */
     public function recordInstance(string $instanceName, $instance)
@@ -44,7 +44,7 @@ class InstancesManager
 
     /**
      * Place toutes les instances enregistrées dans un objet
-     * @param  Object $object L'object dans lequel placer les instances
+     * @param  mixed $object L'object dans lequel placer les instances
      * @return void
      */
     public function putInstancesIn($object)

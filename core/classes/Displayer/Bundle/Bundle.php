@@ -1,11 +1,13 @@
 <?php
 
-namespace Naski\Bundle;
+namespace Naski\Displayer\Bundle;
 
 abstract class Bundle
 {
     public $directory; // Chemin absolue
     public $config;
+
+    private $_twigParams = array();
 
     /**
      * Fonction écrite par convention pour les bundles qui nécesites d'être exécutés
@@ -21,5 +23,20 @@ abstract class Bundle
      * Prêt pour override
      */
     public function onEnable() { }
+
+    protected function addTwigParams(array $a): array
+    {
+        $this->_twigParams = array_merge($this->_params, $a);
+    }
+
+    public function getTwigParams(): array
+    {
+        return $this->_twigParams;
+    }
+
+    public function getTwigTemplatesDir()
+    {
+        return $this->directory.$this->config->twig_path;
+    }
 
 }

@@ -4,6 +4,7 @@ namespace Naski;
 
 use Naski\Routing\Rule;
 
+/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 class Controller extends \Naski\Routing\Controller {
 
     public function __construct(Rule $rule = null)

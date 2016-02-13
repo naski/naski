@@ -7,6 +7,7 @@ use Naski\Pdo\AbstractDatabase;
 abstract class Entity
 {
 
+	/** @noinspection PhpAbstractStaticMethodInspection */
 	public static abstract function table();
 	private $_rows = array();
 	private $_db;
@@ -26,7 +27,8 @@ abstract class Entity
 		}
 	}
 
-	public static function get(AbstractDatabase $db, array $cond): array
+	public static function get(AbstractDatabase $db, /** @noinspection PhpUnusedParameterInspection */
+							   array $cond): array
 	{
 		$list = array();
 		$query = $db->query("SELECT * FROM ".static::table());

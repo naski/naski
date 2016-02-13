@@ -16,6 +16,3 @@ require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/core/boot/tools.php';
 require_once __DIR__.'/core/boot/paths.php';
 require_once __DIR__.'/core/boot/init.php';
-
-// Initialisation du projet
-require_once __DIR__.'/src/boot/init.php';

@@ -1,3 +1,5 @@
+# Supprime la totalité du repertoire de cache
+
 dir="$( dirname "$0" )"
 dir="$dir/../.."
 echo "Repertoire traité : $dir"
