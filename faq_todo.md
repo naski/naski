@@ -10,12 +10,12 @@
 Dossier src/classes
 
 **Comment créer un nouvel espace ?**
-Créer un nouveau dossier dans src/websites/browser et déclarer les régles d'accés dans app/ressouces/multisite.json
+Créer un nouveau dossier dans src/websites/browser et déclarer les régles d'accés dans src/ressouces/multisite.json
 
 **Comment créer un nouveau web service ?**
-Créer un nouveau dossier dans src/websites/rest et déclarer les régles d'accés dans app/ressouces/multisite.json
+Créer un nouveau dossier dans src/websites/rest et déclarer les régles d'accés dans src/ressouces/multisite.json
 
-**Où créer une nouvelle page AJAX ?**
+**Où créer une nouvelle page AJAX pour un espace spécifique ?**
 Créer une nouvelle action dans un controlleur adapté et la déclarer dans le routing.json du site associé
 
 **Où ajouter un nouveau script PHP ? (Cron, Nettoyeur, importeur...) ?**

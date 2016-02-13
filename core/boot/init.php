@@ -21,7 +21,7 @@ $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$IM->config
 // Configuration de l'afficheur HTML
 {
     $options = $IM->config['cache_twig'] ? array(
-        'cache' => ROOT_SYSTEM.'/app/cache/',
+        'cache' => PATH_CACHE,
     ) : array();
     $IM->recordInstance('dpl', new NaskiDisplayer($options));
     $IM->dpl->useBundle('devBar');
