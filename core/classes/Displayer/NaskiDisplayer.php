@@ -11,7 +11,7 @@ use Assetic\Cache\FilesystemCache;
 
 // TODO ne pas use 2 fois le même bundle
 
-class MainTwig
+class NaskiDisplayer
 {
     private $_twigInstance = null;
     private $_twigParams = array('bundles' => array());
@@ -46,26 +46,15 @@ class MainTwig
         ));
     }
 
-    // TODO Écrire des verifs
-    public function useBundle(string $alias)
-    {
-        $bundle = BundleManager::getInstance()->getBundle($alias);
-        $this->loadBundle($bundle);
-    }
-
-    public function loadBundle(Bundle $bundle)
-    {
-        $this->_twigInstance->getLoader()->addPath($bundle->getTwigTemplatesDir(), $bundle->config->alias);
-        $this->_twigParams['bundles'][$bundle->config->alias] = $bundle->getTwigParams();
-        $this->_twigParams['bundles'][$bundle->config->alias]['instance'] = $bundle;
-        $bundle->exec();
-    }
-
     public function addTwigPath($path)
     {
         $this->_twigInstance->getLoader()->addPath($path);
     }
 
+    /**
+     * Ajoute des parametres à twig qui seront accesible de manière globale, sans alias
+     * @param array $array Un tableau clé -> valeur
+     */
     public function addTwigParams($array)
     {
         $this->_twigParams = array_merge($array, $this->_twigParams);
@@ -94,4 +83,17 @@ class MainTwig
         $template = $this->_twigInstance->loadTemplate($templateName);
         echo $template->render($this->_twigParams);
     }
+
+
+    // TODO Écrire des verifs
+    public function useBundle(string $alias)
+    {
+        $bundle = BundleManager::getInstance()->getBundle($alias);
+        $this->_twigInstance->getLoader()->addPath($bundle->getTwigTemplatesDir(), $bundle->config->alias);
+        $this->_twigParams['bundles'][$bundle->config->alias] = $bundle->getTwigParams();
+        $this->_twigParams['bundles'][$bundle->config->alias]['instance'] = $bundle;
+        $bundle->exec();
+    }
+
+
 }

@@ -23,7 +23,7 @@ class ErrorBundle extends Bundle
         $this->exception = $e;
 
         $IM->twig->useBundle('naskiPage');
-        $IM->twig->loadBundle($this);
+        $IM->twig->useBundle($this->getAlias());
         $IM->twig->render('@errors/view.twig');
 
         die();

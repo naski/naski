@@ -39,4 +39,9 @@ abstract class Bundle
         return $this->directory.$this->config->twig_path;
     }
 
+    public function getAlias(): string
+    {
+        return $this->config['alias'];
+    }
+
 }

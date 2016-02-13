@@ -22,7 +22,7 @@ $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$IM->config
     $options = $IM->config->cache_twig ? array(
         'cache' => ROOT_SYSTEM.'/app/cache/',
     ) : array();
-    $mainTwig = new \Naski\Displayer\MainTwig($options);
+    $mainTwig = new \Naski\Displayer\NaskiDisplayer($options);
     $IM->recordInstance('twig', $mainTwig);
 }
 
