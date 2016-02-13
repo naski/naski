@@ -26,7 +26,7 @@ abstract class Bundle
 
     protected function addTwigParams(array $a): array
     {
-        $this->_twigParams = array_merge($this->_params, $a);
+        $this->_twigParams = array_merge($this->getTwigParams(), $a);
     }
 
     public function getTwigParams(): array

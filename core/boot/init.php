@@ -2,6 +2,7 @@
 
 use Naski\Config\Config;
 use Naski\Displayer\Bundle\BundleManager;
+use Naski\Displayer\NaskiDisplayer;
 use Naski\InstancesManager;
 
 BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/naskiPage/');
@@ -22,8 +23,8 @@ $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$IM->config
     $options = $IM->config->cache_twig ? array(
         'cache' => ROOT_SYSTEM.'/app/cache/',
     ) : array();
-    $mainTwig = new \Naski\Displayer\NaskiDisplayer($options);
-    $IM->recordInstance('twig', $mainTwig);
+    NaskiDisplayer::createInstance($options);
+    $IM->recordInstance('dpl', NaskiDisplayer::getInstance());
 }
 
 $bundle = BundleManager::getInstance()->getBundle('errors');

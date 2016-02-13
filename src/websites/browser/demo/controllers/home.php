@@ -11,10 +11,10 @@ class HomeController extends Controller
 
     private function displayLoginForm()
     {
-        $this->twig->addTwigParams(array(
+        $this->dpl->addTwigParams(array(
             'var_demo' => "It's work!"
         ));
-        $this->twig->render('login.twig.html');
+        $this->dpl->render('login.twig.html');
     }
 
     public function badAction()
