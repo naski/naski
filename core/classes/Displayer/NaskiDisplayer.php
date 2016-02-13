@@ -69,12 +69,20 @@ class NaskiDisplayer
 
     private function buildCss()
     {
+        global $IM;
         if (count($this->_css)) {
             $collection = new AssetCollection($this->_css);
-            $cache = new AssetCache(
-                $collection,
-                new FilesystemCache(PATH_CACHE."assets/")
-            );
+
+            if ($IM->config['cache_css']) {
+                $cache = new AssetCache(
+                    $collection,
+                    $IM->config['cache_css'] ? new FilesystemCache(PATH_CACHE."assets/") : null
+                );
+            } else {
+                $cache = $collection;
+            }
+
+
             $this->addTwigParams(array('css_content' => $cache->dump()));
         }
     }

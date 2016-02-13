@@ -42,9 +42,7 @@ class InstancesManager
      */
     public function recordInstance(string $instanceName, $instance)
     {
-        if (property_exists(__CLASS__, $instanceName)) {
-            $this->$instanceName = $instance;
-        }
+        $this->$instanceName = $instance;
         $this->_instances[$instanceName] = $instance;
     }
 
@@ -81,8 +79,5 @@ class InstancesManager
         }
     }
 
-    public function __get($key)
-    {
-        return $this->_instances[$key];
-    }
+
 }

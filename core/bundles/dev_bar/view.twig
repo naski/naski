@@ -29,7 +29,7 @@
 
     <br>
     Fichiers CSS inclus :
-    {% for i in bundle.instances.getRecordedBundle() %}
+    {% for i in bundle.instance.getCssFilesincludes() %}
         {{ i }} <br>
     {% endfor %}
 

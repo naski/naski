@@ -22,4 +22,5 @@ class HomeController extends Controller
         $this->dpl->useBundle('naskiPage');
         $this->dpl->render('404.twig');
     }
+
 }

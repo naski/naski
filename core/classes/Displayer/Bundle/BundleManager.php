@@ -58,6 +58,8 @@ class BundleManager
         $bundle->directory = $dirBundle;
 
         $this->recordNewBundle($bundle);
+
+        /** @noinspection PhpUndefinedMethodInspection */
         $bundle->onEnable();
 
         return $bundle;
