@@ -1,9 +1,21 @@
 <?php
 
+use Assetic\Asset\FileAsset;
 use Naski\Displayer\Bundle\Bundle;
 
 class DevBarBundle extends Bundle
 {
+
+    public function exec()
+    {
+        global $IM;
+        $IM->dpl->addCssFile(new FileAsset($this->directory.'style.css'));
+    }
+
+    public function onEnable()
+    {
+        PHP_Timer::start();
+    }
 
     public function getRequestsNumber(): int
     {

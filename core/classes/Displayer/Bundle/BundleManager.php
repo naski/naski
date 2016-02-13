@@ -4,6 +4,9 @@ namespace Naski\Displayer\Bundle;
 
 use Naski\Config\Config;
 
+/**
+ * Gére un ensemble de Bundle
+ */
 class BundleManager
 {
     private static $instance = null;
@@ -47,7 +50,7 @@ class BundleManager
 
         $nameClass = $config->class;
 
-        $bundle = new $nameClass();
+        $bundle = new $nameClass($dirBundle);
 
         $bundle->config = $config;
         $bundle->directory = $dirBundle;

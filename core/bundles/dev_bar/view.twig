@@ -2,12 +2,11 @@
 
 
 {% if IM.config.env == 'dev' %}
-<div style="position: fixed; bottom: 0; width: 100%">
-    <hr>
-    {{ bundle.instance.getRequestsNumber() }} requêtes SQL -
-    Environnement: {{ IM.config.env }} -
-    Site web: {{ IM.site.name }} -
-    Action: {{ IM.rule.controller }} / {{ IM.rule.action }} -
+<div class="devBar">
+    {{ bundle.instance.getRequestsNumber() }} requêtes SQL |
+    Environnement: {{ IM.config.env }} |
+    Site web: {{ IM.site.name }} |
+    Action: {{ IM.rule.controller }} / {{ IM.rule.action }} |
     Executé en: {{ bundle.instance.getTime() }}
 </div>
 {% endif %}

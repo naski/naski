@@ -1,0 +1,9 @@
+{
+    "rules": [
+        {
+            "path": "/clean_cache",
+            "controller": "Backend",
+            "action": "cleanLogs"
+        }
+    ]
+}

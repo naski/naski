@@ -19,6 +19,7 @@ class HomeController extends Controller
 
     public function badAction()
     {
-        echo 'Page introuvable';
+        $this->dpl->useBundle('naskiPage');
+        $this->dpl->render('404.twig');
     }
 }

@@ -13,5 +13,6 @@ class NaskiPageBundle extends Bundle
     {
         global $IM;
         $IM->dpl->addCssFile(new FileAsset(ROOT_SYSTEM.'vendor/twbs/bootstrap/dist/css/bootstrap.css'));
+        $IM->dpl->addCssFile(new FileAsset($this->directory.'style.css'));
     }
 }

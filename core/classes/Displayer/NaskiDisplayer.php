@@ -2,7 +2,6 @@
 
 namespace Naski\Displayer;
 
-use Naski\Displayer\Bundle\Bundle;
 use Naski\Displayer\Bundle\BundleManager;
 
 use Assetic\Asset\AssetCollection;
@@ -15,7 +14,7 @@ class NaskiDisplayer
 {
     private $_twigInstance = null;
     private $_twigParams = array('bundles' => array());
-    private $_css; // array<FileAsset,GlobAsset>
+    private $_css; // array<FileAsset,|GlobAsset>
 
     public function __construct($twigOption)
     {
@@ -25,7 +24,6 @@ class NaskiDisplayer
         $this->_twigInstance = new \Twig_Environment($loader, $twigOption);
 
         $this->loadBaseTwigParams();
-        $this->useBundle('devBar');
     }
 
     public function getTwigInstance()

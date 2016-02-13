@@ -25,7 +25,9 @@ class Controller extends \Naski\Routing\Controller {
         parent::__construct($rule);
 
         global $IM;
+        
         $IM->recordInstance('rule', $rule);
+
         if ($IM != null) {
             $IM->putInstancesIn($this);
         }

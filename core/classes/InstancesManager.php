@@ -24,7 +24,7 @@ class InstancesManager
     public $config;
 
     /**
-     * @var NaskiDisplayer
+     * @var \Naski\Displayer\NaskiDisplayer\NaskiDisplayer
      */
     public $dpl;
 

@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    margin-bottom: 40px;
+}
+
+.devBar {
+    font-size: 14px;
+    padding: 20px;
+    color: #313131;
+    background-color: #D5E0D5;
+    border-top: 1px solid #9CD69C;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: tahoma;
+}

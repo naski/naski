@@ -44,4 +44,5 @@ abstract class Bundle
         return $this->config['alias'];
     }
 
+
 }
