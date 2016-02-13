@@ -79,4 +79,5 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $routing->process('/login');
         $this->expectOutputString("bad");
     }
+
 }

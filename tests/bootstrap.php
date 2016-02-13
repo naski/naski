@@ -10,6 +10,12 @@ if (@!include __DIR__.'/../vendor/autoload.php') {
     exit(1);
 }
 
+$sitee = "nop";
+function onSite($site = 'yes') {
+    global $sitee;
+    $sitee = $site->name;
+}
+
 use Naski\Routing\Controller;
 
 class TestController extends Controller

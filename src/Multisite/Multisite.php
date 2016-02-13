@@ -15,6 +15,7 @@ class Multisite
 {
     private $_root = null; // Chemin absolu
     private $_websites = array(); // array<array>
+    private $_onExecSitehandler = null;
 
     /**
      * Contruit une instance de Multisite à partir d'une config
@@ -29,8 +30,21 @@ class Multisite
         foreach ($config['websites'] as $w) {
             $obj->addSite(new Site($w));
         }
+        if ($config['handler']) {
+            $obj->setOnSiteHandle($config['handler']);
+        }
 
         return $obj;
+    }
+
+    /**
+     * Définit un handler qui sera appelé quand un site sera executé
+     * La variable sera appelée call_user_func($handler)
+     * @param mixed $handler L'handler à appeler
+     */
+    public function setOnSiteHandle($handler)
+    {
+        $this->_onExecSitehandler = $handler;
     }
 
     public function __construct(string $root)
@@ -53,6 +67,9 @@ class Multisite
     {
         foreach ($this->_websites as $w) {
             if ($w->match($uri)) {
+                if ($this->_onExecSitehandler != null) {
+                    call_user_func($this->_onExecSitehandler, $w);
+                }
                 $w->exec($this->_root, $uri);
 
                 return $w;
