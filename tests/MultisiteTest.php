@@ -105,7 +105,8 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite.json');
         $multisite = MultiSite::buildFromConfig($websites, __DIR__);
-        $out = $multisite->process(HttpUri::createFromString('http://vps.doelia.fr/'));
+        $multisite->setOnSiteHandle('onSite');
+        $multisite->process(HttpUri::createFromString('http://vps.doelia.fr/'));
         global $sitee;
         $this->assertNotEquals($sitee, 'nop');
         $this->assertEquals($sitee, 'Site privé');

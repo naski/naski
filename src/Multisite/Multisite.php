@@ -30,9 +30,6 @@ class Multisite
         foreach ($config['websites'] as $w) {
             $obj->addSite(new Site($w));
         }
-        if ($config['handler']) {
-            $obj->setOnSiteHandle($config['handler']);
-        }
 
         return $obj;
     }

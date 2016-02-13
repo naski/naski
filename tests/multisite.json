@@ -1,6 +1,5 @@
 {
     "rootPath": "/",
-    "handler": "onSite",
     "websites": [
         {
             "name": "Site 2",
