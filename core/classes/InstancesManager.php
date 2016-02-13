@@ -74,7 +74,7 @@ class InstancesManager
      */
     public function putInstancesIn($object)
     {
-        foreach ($this as $key => $value) {
+        foreach ($this->_instances as $key => $value) {
             $object->$key = $value;
         }
     }
