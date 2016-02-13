@@ -21,7 +21,7 @@ class NaskiDisplayer
     public function __construct($twigOption)
     {
         $loader = new \Twig_Loader_Filesystem($basepath = ROOT_SYSTEM);
-        $loader->addPath(ROOT_SYSTEM.'app/ressources/views/');
+        $loader->addPath(ROOT_SYSTEM.'core/ressources/');
 
         $this->_twigInstance = new \Twig_Environment($loader, $twigOption);
 

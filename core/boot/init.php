@@ -13,7 +13,7 @@ BundleManager::getInstance()->recordBundle(ROOT_SYSTEM.'core/bundles/errors/');
 $IM = new InstancesManager();
 
 $IM->recordInstance('config', new Config());
-$IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/naski/'.'default.json');
+$IM->config->loadFile(ROOT_SYSTEM.'core/ressources/config_default.json');
 
 $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config.json');
 $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$IM->config['env'].'.json');
