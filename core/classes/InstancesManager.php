@@ -15,6 +15,9 @@ use Naski\Displayer\NaskiDisplayer;
  */
 class InstancesManager
 {
+
+    // Quelques instances toujours présentes, définies pour l'autocompletion
+
     /**
      * @var \Naski\Config\Config
      */

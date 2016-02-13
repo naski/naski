@@ -23,8 +23,7 @@ $IM->config->loadFile(ROOT_SYSTEM.'app/ressources/config/'.'config_'.$IM->config
     $options = $IM->config->cache_twig ? array(
         'cache' => ROOT_SYSTEM.'/app/cache/',
     ) : array();
-    NaskiDisplayer::createInstance($options);
-    $IM->recordInstance('dpl', NaskiDisplayer::getInstance());
+    $IM->recordInstance('dpl', new NaskiDisplayer($options));
 }
 
 $bundle = BundleManager::getInstance()->getBundle('errors');

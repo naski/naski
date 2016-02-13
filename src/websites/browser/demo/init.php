@@ -10,4 +10,4 @@ global $IM;
 
 $IM->recordInstance('site', $SITE);
 
-NaskiDisplayer::getInstance()->addTwigPath(ROOT_SYSTEM_WEBSITE.'views/');
+$IM->dpl->addTwigPath(ROOT_SYSTEM_WEBSITE.'views/');

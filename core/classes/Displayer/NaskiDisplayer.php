@@ -17,21 +17,7 @@ class NaskiDisplayer
     private $_twigParams = array('bundles' => array());
     private $_css; // array<FileAsset,GlobAsset>
 
-    private static $instance;
-
-    public static function createInstance($twigOptions) {
-        self::$instance = new self($twigOptions);
-    }
-
-    public static function getInstance(): self
-    {
-        if (self::$instance == null) {
-            throw new \Exception("NaskiDisplayer n'est pas initialisé avec NaskiDisplayer::createInstance()");
-        }
-        return self::$instance;
-    }
-
-    private function __construct($twigOption)
+    public function __construct($twigOption)
     {
         $loader = new \Twig_Loader_Filesystem($basepath = ROOT_SYSTEM);
         $loader->addPath(ROOT_SYSTEM.'app/ressources/views/');
