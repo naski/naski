@@ -38,7 +38,7 @@ class BundleManager
     }
 
     /**
-     * Enregistre un bundle dans la mémoire pour qu'il soit accessible et tester son fonctionnement, mais ne l'exécute pas
+     * Enregistre un bundle dans la mémoire pour qu'il soit accessible et pour tester son fonctionnement, mais ne l'exécute pas
      * @param  string $dirBundle Le chemin absolue vers le bundle à charger, finisant par un /
      * @return Bundle   Le bundle créé
      */

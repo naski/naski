@@ -17,6 +17,16 @@ class HomeController extends Controller
         $this->dpl->render('login.twig.html');
     }
 
+    public function loginAction() {
+        if ($this->inputValid()) {
+            $this->dpl->addTwigParams(array("text" => "login sur ".$this->post['username']));
+            $this->dpl->render('defaultPage.twig');
+        } else {
+            $this->dpl->addTwigParams(array("message" => "Champs invalides"));
+            $this->displayLoginForm();
+        }
+    }
+
     public function badAction()
     {
         $this->dpl->useBundle('naskiPage');

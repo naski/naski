@@ -6,4 +6,6 @@ require ROOT_SYSTEM_WEBSITE.'controllers/home.php';
 
 global $IM;
 
+$IM->dpl->useBundle('naskiPage');
+
 $IM->dpl->addTwigPath(ROOT_SYSTEM_WEBSITE.'views/');

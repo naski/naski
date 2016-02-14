@@ -6,6 +6,16 @@
             "action": "indexAction"
         },
         {
+            "path": "/login",
+            "controller": "HomeController",
+            "action": "loginAction",
+            "post": [
+                {
+                    "name": "username"
+                }
+            ]
+        },
+        {
             "path": "*",
             "controller": "HomeController",
             "action": "badAction"
