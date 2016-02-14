@@ -6,6 +6,11 @@
             "action": "indexAction"
         },
         {
+            "path": "/twig",
+            "controller": "HomeController",
+            "action": "testTwigAction"
+        },
+        {
             "path": "/login",
             "controller": "HomeController",
             "action": "loginAction",

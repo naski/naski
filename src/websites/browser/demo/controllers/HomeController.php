@@ -17,6 +17,23 @@ class HomeController extends Controller
         $this->dpl->render('login.twig.html');
     }
 
+    public function testTwigAction()
+    {
+        $collection = new \Assetic\Asset\AssetCollection(array(
+            new \Assetic\Asset\FileAsset(ROOT_SYSTEM_WEBSITE.'test.css'),
+            new \Assetic\Asset\FileAsset(ROOT_SYSTEM_WEBSITE.'test2.css')
+        ));
+        $collection->setTargetPath('hey.css');
+
+        $am = new \Assetic\AssetManager();
+        $am->set('basecss', $collection);
+
+        $writer = new \Assetic\AssetWriter(ROOT_SYSTEM.'web');
+        $writer->writeManagerAssets($am);
+        echo "Hey";
+
+    }
+
     public function loginAction() {
         if ($this->inputValid()) {
             $this->dpl->addTwigParams(array("text" => "login sur ".$this->post['username']));
