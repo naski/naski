@@ -12,7 +12,7 @@ class NaskiDisplayer
 {
     private $_twigInstance = null;
     private $_twigParams = array('bundles' => array());
-    private $_css; // array<FileAsset,|GlobAsset>
+    private $_css; // array<FileAsset|GlobAsset>
 
     public $usedBundlesStack = array();
     public $includedCssFilesStack = array();
