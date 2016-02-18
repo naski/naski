@@ -11,7 +11,7 @@ before_script:
 # - curl -sS https://getcomposer.org/installer | php
 # - php composer.phar update
 # - phpunit --version
-- wget https://phar.phpunit.de/phpunit.phar
+- curl https://phar.phpunit.de/phpunit.phar > phpunit.phar
 - chmod +x phpunit.phar
 - php phpunit.phar --version
 
