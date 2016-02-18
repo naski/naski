@@ -5,7 +5,7 @@ cache:
   - vendor/
 
 before_script:
-- bash docker_install.sh > /dev/null
+#- bash docker_install.sh > /dev/null
 #- sudo source /root/.phpbrew/bashrc
 #- phpbrew switch 7.0.2
 - docker-php-ext-install mbstring
