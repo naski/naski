@@ -5,13 +5,12 @@ cache:
   - vendor/
 
 before_script:
-- bash docker_install.sh > /dev/null
-- docker-php-ext-configure intl > /dev/null
-- docker-php-ext-install zip mbstring intl > /dev/null
-- curl -sS https://getcomposer.org/installer | php
-- cp php.ini /usr/local/etc/php/conf.d/test.ini
-- php composer.phar update
-#- phpunit --version
+# - bash docker_install.sh > /dev/null
+# - docker-php-ext-configure intl > /dev/null
+# - docker-php-ext-install zip mbstring intl > /dev/null
+# - curl -sS https://getcomposer.org/installer | php
+# - php composer.phar update
+- phpunit --version
 
 test:app:
   script:

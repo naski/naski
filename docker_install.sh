@@ -6,10 +6,11 @@
 set -xe
 
 # Install git (the php image doesn't have it) which is required by composer
-apt-get update -yqq
-apt-get install git -yqq
-apt-get install -y zlib1g-dev libicu-dev g++
+# apt-get update -yqq
+# apt-get install git -yqq
+# apt-get install -y zlib1g-dev libicu-dev g++
 
 # Install phpunit, the tool that we will use for testing
-curl -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
-chmod +x /usr/local/bin/phpunit
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+mv phpunit.phar /usr/local/bin/phpunit
