@@ -11,15 +11,12 @@ apt-get update -yqq
 apt-get install git -yqq
 
 # Install exention
-git clone https://git.php.net/repository/php-src.git
-cd php-src
-./buildconf
-./configure --enable-mbstring
+&& apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng12-dev \
+
 
 # Install phpunit, the tool that we will use for testing
 apt-get install -y phpunit
-
-
-
-rm -r xcache \
-docker-php-ext-enable xcache
