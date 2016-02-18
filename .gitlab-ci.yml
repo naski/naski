@@ -13,8 +13,9 @@ before_script:
 - docker-php-ext-configure intl > /dev/null
 - docker-php-ext-install intl > /dev/null
 - curl -sS https://getcomposer.org/installer | php
-#- cp php.ini /usr/local/etc/php/conf.d/test.ini
+- cp php.ini /usr/local/etc/php/conf.d/test.ini
 - php composer.phar update
+- phpunit --version
 
 test:app:
   script:
