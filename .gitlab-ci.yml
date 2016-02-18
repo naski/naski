@@ -8,6 +8,7 @@ before_script:
 - bash docker_install.sh > /dev/null
 #- sudo source /root/.phpbrew/bashrc
 #- phpbrew switch 7.0.2
+- docker-php-ext-install zip > /dev/null
 - docker-php-ext-install mbstring > /dev/null
 - docker-php-ext-configure intl > /dev/null
 - docker-php-ext-install intl > /dev/null
