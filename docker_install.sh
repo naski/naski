@@ -5,14 +5,19 @@
 
 set -xe
 
+
+# Install git (the php image doesn't have it) which is required by composer
+apt-get update -yqq
+apt-get install git -yqq
+
+# Install exention
 git clone https://git.php.net/repository/php-src.git
 cd php-src
 ./buildconf
 ./configure --enable-mbstring
 
 # Install phpunit, the tool that we will use for testing
-curl -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
-chmod +x /usr/local/bin/phpunit
+apt-get install -y phpunit
 
 
 
