@@ -9,8 +9,8 @@ before_script:
 - docker-php-ext-configure intl > /dev/null
 - docker-php-ext-install zip mbstring intl > /dev/null
 - curl -sS https://getcomposer.org/installer | php
+- php composer.phar update
 - php vendor/bin/phpunit --version
-
 
 test:app:
   script:
