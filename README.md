@@ -25,6 +25,8 @@
 Les régles sont testées par le router dans l'ordre où elles sont déclarées. La première qui match avec le *path* indiqué est exécutée et la méthode *action* du controleur *controler* sera appelée.
 
 ```php
+<?php
+
 use Naski\Routing\Routing;
 use Naski\Routing\Rule;
 
@@ -63,6 +65,8 @@ Il est possible de spécifier directement dans la règle la liste des parametres
 Prévu uniquement comme test de sécurité côté serveur, préférer la validation côté client pour l'aspect esthétique.
 
 ```php
+<?php
+
 $routing >addRule(new Rule(array(
     'path' => '/form',
     'controller' => 'MyController',
@@ -94,6 +98,8 @@ Voir [wixel/gump](https://github.com/Wixel/GUMP) pour les synthaxes de *validati
 ### Exemple de controleur
 
 ```php
+<?php
+
 use Naski\Routing\Controller;
 
 class TestController extends Controller
@@ -154,6 +160,8 @@ routing.json :
 ```
 boot.php :
 ```php
+<?php
+
 use Naski\Config\Config;
 use Naski\Routing\Routing;
 
