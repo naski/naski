@@ -11,6 +11,5 @@ set -xe
 # apt-get install -y zlib1g-dev libicu-dev g++
 
 # Install phpunit, the tool that we will use for testing
-wget https://phar.phpunit.de/phpunit.phar
-chmod +x phpunit.phar
-mv phpunit.phar /usr/local/bin/phpunit
+curl -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
+chmod +x /usr/local/bin/phpunit

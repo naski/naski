@@ -5,17 +5,14 @@ cache:
   - vendor/
 
 before_script:
-# - bash docker_install.sh > /dev/null
+- bash docker_install.sh > /dev/null
 # - docker-php-ext-configure intl > /dev/null
 # - docker-php-ext-install zip mbstring intl > /dev/null
 # - curl -sS https://getcomposer.org/installer | php
 # - php composer.phar update
 # - phpunit --version
-- curl https://phar.phpunit.de/phpunit.phar > phpunit.phar
-- chmod +x phpunit.phar
-- php phpunit.phar --version
 
 
 test:app:
   script:
-  - phpunit tests/ --verbose
+  - php phpunit.phar --version
