@@ -12,4 +12,5 @@ apt-get install git -yqq
 apt-get install -y zlib1g-dev libicu-dev g++
 
 # Install phpunit, the tool that we will use for testing
-#apt-get install -y phpunit
+curl -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
+chmod +x /usr/local/bin/phpunit
