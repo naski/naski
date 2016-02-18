@@ -6,7 +6,7 @@ cache:
 
 before_script:
 #- bash docker_install.sh > /dev/null
-- /root/.phpbrew/bashrc
+- source /root/.phpbrew/bashrc
 - phpbrew switch 7.0.2
 - curl -sS https://getcomposer.org/installer | php
 #- cp php.ini /usr/local/etc/php/conf.d/test.ini
