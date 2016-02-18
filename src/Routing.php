@@ -69,7 +69,7 @@ class Routing
         $this->_dispatcher = \FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
             global $that;
             foreach ($that->getRules() as $rule) {
-                $r->addRoute($rule->type, $rule->path, $rule);
+                $r->addRoute($rule->method, $rule->path, $rule);
             }
         });
     }
@@ -113,7 +113,7 @@ class Routing
      * Execute la régle passée en parametre
      * @param  Rule   $rule La régle à exécuter
      * @param  array  $vars Tableau clé valeurs des variables détéctées
-     * @return void       
+     * @return void
      */
     private static function processRule(Rule $rule, array $vars)
     {

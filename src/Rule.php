@@ -9,7 +9,7 @@ namespace Naski\Routing;
  */
 class Rule
 {
-    public $type = ['GET', 'POST'];
+    public $method = ['GET', 'POST'];
     public $path = 'undefined';
     public $controller = 'undefined';
     public $action = 'undefined';

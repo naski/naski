@@ -39,3 +39,16 @@ class TestController extends Controller
         }
     }
 }
+
+class RestController extends Controller
+{
+    public function getUser($id=0)
+    {
+        echo "get user $id";
+    }
+
+    public function updateUser($id=0)
+    {
+        echo "update user $id";
+    }
+}

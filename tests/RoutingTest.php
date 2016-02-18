@@ -80,4 +80,26 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $this->expectOutputString("bad");
     }
 
+    public function testRestGetUser()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $config = new Config();
+        $config->loadFile(__DIR__.'/routing_rest.json');
+        $routing = Routing::buildFromConfig($config);
+        $out = $routing->process('/rest/user/3');
+        $this->assertTrue($out);
+        $this->expectOutputString("get user 3");
+    }
+
+    public function testRestUpdateUser()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $config = new Config();
+        $config->loadFile(__DIR__.'/routing_rest.json');
+        $routing = Routing::buildFromConfig($config);
+        $out = $routing->process('/rest/user/3');
+        $this->assertTrue($out);
+        $this->expectOutputString("update user 3");
+    }
+
 }

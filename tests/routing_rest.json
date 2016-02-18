@@ -1,0 +1,16 @@
+{
+    "rules": [
+        {
+            "method": ["POST"],
+            "path": "/rest/user/{id}",
+            "controller": "RestController",
+            "action": "updateUser"
+        },
+        {
+            "method": ["GET"],
+            "path": "/rest/user/{id}",
+            "controller": "RestController",
+            "action": "getUser"
+        }
+    ]
+}
