@@ -15,4 +15,4 @@ before_script:
 
 test:app:
   script:
-  - php phpunit.phar --version
+  - phpunit --version
