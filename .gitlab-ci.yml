@@ -5,10 +5,10 @@ cache:
   - vendor/
 
 before_script:
-# bash docker_install.sh > /dev/null
+bash docker_install.sh > /dev/null
 #- sudo source /root/.phpbrew/bashrc
 #- phpbrew switch 7.0.2
-- docker-php-ext-install mbstring
+- docker-php-ext-install mbstring > /dev/null
 - curl -sS https://getcomposer.org/installer | php
 #- cp php.ini /usr/local/etc/php/conf.d/test.ini
 - php composer.phar update
