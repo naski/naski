@@ -10,7 +10,11 @@ before_script:
 # - docker-php-ext-install zip mbstring intl > /dev/null
 # - curl -sS https://getcomposer.org/installer | php
 # - php composer.phar update
-- phpunit --version
+# - phpunit --version
+- wget https://phar.phpunit.de/phpunit.phar
+- chmod +x phpunit.phar
+- php phpunit.phar --version
+
 
 test:app:
   script:
