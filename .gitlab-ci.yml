@@ -3,7 +3,7 @@ cache:
   - vendor/
 
 before_script:
-- phpbrew use 7.0.2
+- sudo phpbrew use 7.0.2
 - composer update
 
 test:app:
