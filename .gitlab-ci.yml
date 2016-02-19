@@ -5,7 +5,7 @@ cache:
   - vendor/
 
 before_script:
-- mysql -e "create database IF NOT EXISTS test;" -u gitlab -pgitlab
+- mysql -e "create database IF NOT EXISTS test;" -u gitlab -pgitlab -h 127.0.0.1
 - cp tests/config.php.gitlab tests/config.php
 - source /root/.phpbrew/bashrc
 - phpbrew use 7.0.2
