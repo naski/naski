@@ -3,7 +3,8 @@ cache:
   - vendor/
 
 before_script:
-- source ~/.phpbrew/bashrc
+- su
+- source /root-.phpbrew/bashrc
 - phpbrew use 7.0.2
 - composer update
 
