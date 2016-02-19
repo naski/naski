@@ -3,9 +3,10 @@ cache:
   - vendor/
 
 before_script:
-- phpbrew use 7.0.2
-- composer update
+- sudo source /root/.phpbrew/bashrc
+- sudo phpbrew use 7.0.2
+- sudo composer update
 
 test:app:
   script:
-  - phpunit tests/
+  - sudo phpunit tests/
