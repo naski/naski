@@ -1,0 +1,16 @@
+image: php:7.0
+
+cache:
+  paths:
+  - vendor/
+
+before_script:
+- bash docker_install.sh > /dev/null
+#- docker-php-ext-configure intl > /dev/null
+#- docker-php-ext-install zip mbstring intl > /dev/null
+- curl -sS https://getcomposer.org/installer | php
+- php composer.phar update
+
+test:app:
+  script:
+  - php vendor/bin/phpunit tests/
