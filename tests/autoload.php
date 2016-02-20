@@ -9,8 +9,7 @@ define('NASKI_APP_PATH', __DIR__.'/app/');
 
 // Classes des composants externes
 if (!require_once __DIR__.'/../vendor/autoload.php') {
-    echo 'Exécuter `composer install` pour télécharger le vendor/';
-    exit(1);
+    die('Exécuter `composer install` pour télécharger le vendor/');
 }
 
 // Initialisation du framework
