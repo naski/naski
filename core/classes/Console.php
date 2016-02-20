@@ -30,9 +30,9 @@ class Console
 
     public function recordFileExec($cmdname, $filename) {
 
-        $f = function ($filename){
-            return function($argv) use($filename){
-                $cmd = "$filename ".($argv[2]??'').' '.($argv[3]??'');
+        $f = function ($filename) {
+            return function($p1="", $p2="", $p3="") use($filename) {
+                $cmd = "$filename $p1 $p2 $p3";
                 echo "exec in shell : $cmd\n";
                 echo exec($cmd);
                 echo "\n";
@@ -47,7 +47,7 @@ class Console
         if (isset($argv[1])) {
             $command = $argv[1];
             if (isset($this->_commands[$command])) {
-                call_user_func_array($this->_commands[$command], $argv);
+                call_user_func_array($this->_commands[$command], array_slice($argv, 2));
             } else {
                 die("Command $command not found\n");
             }
