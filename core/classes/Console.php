@@ -47,7 +47,7 @@ class Console
         if (isset($argv[1])) {
             $command = $argv[1];
             if (isset($this->_commands[$command])) {
-                $this->_commands[$command]->call($this, $argv);
+                call_user_func_array($this->_commands[$command], $argv);
             } else {
                 die("Command $command not found\n");
             }

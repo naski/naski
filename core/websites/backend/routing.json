@@ -2,8 +2,8 @@
     "rules": [
         {
             "path": "/clean_cache",
-            "controller": "Backend",
-            "action": "cleanLogs"
+            "controller": "\\Naski\\Controllers\\Backend",
+            "action": "cleanCache"
         }
     ]
 }
