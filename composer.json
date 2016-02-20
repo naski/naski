@@ -20,7 +20,7 @@
         },
         "files": [
             "core/functions/functions.php",
-            "../core/core/boot/check_globals.php"
+            "core/boot/check_globals.php"
         ]
     },
     "require": {
