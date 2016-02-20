@@ -1,0 +1,8 @@
+websites:
+   -
+      name: Backend
+      conditions:
+          path: ^/backend(.*)
+      src: backend/
+      initFile: init.php
+      routingFile: routing.json
