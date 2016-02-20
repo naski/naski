@@ -30,6 +30,10 @@ class Config implements \ArrayAccess
 
     private function loadYAMLFile(string $path)
     {
+        if (!file_exists($path)) {
+            throw new FileNotFoundException("Le fichier YML $path est introuvale.");
+        }
+        
         try {
             $data = \Spyc::YAMLLoad($path);
             $this->loadArray($data);
