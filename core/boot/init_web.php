@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Fichier à include après le /boot.php, pour initialiser tout ce qui est nécéssaire à la génération de code HTML
+ */
+
 use Naski\Displayer\Bundle\BundleManager;
 use Naski\Displayer\NaskiDisplayer;
 
