@@ -44,15 +44,15 @@ class Site
         }
     }
 
-    public function verificateFiles(string $rootDir)
+    public function verificateFiles()
     {
-        $filename = $rootDir.$this->src.$this->initFile;
+        $filename = $this->src.$this->initFile;
         if (!file_exists($filename)) {
             throw new FileNotFoundException('Le fichier d\'initialisation '.$filename.' n\'existe pas');
         }
 
         if ($this->routingFile ?? '') {
-            $filename = $rootDir.$this->src.$this->routingFile;
+            $filename = $this->src.$this->routingFile;
             if (!file_exists($filename)) {
                 throw new FileNotFoundException('Le fichier de routing '.$filename.' n\'existe pas');
             }
@@ -65,14 +65,14 @@ class Site
      * @param  UriInterface $uri     l'URI du client
      * @return void
      */
-    public function exec(string $rootDir, UriInterface $uri)
+    public function exec(UriInterface $uri)
     {
         $SITE = $this; // Utilisable dans le fichier inclus
         $PATH = $this->getNewPath($uri->getPath());
-        require $rootDir.$this->src.$this->initFile;
+        require $this->src.$this->initFile;
 
         if ($this->routingFile ?? '') {
-            $routingFile = $rootDir.$this->src.$this->routingFile;
+            $routingFile = $this->src.$this->routingFile;
 
             $config = new Config();
             $config->loadFile($routingFile);

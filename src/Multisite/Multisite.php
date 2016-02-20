@@ -13,7 +13,6 @@ use Psr\Http\Message\UriInterface;
  */
 class Multisite
 {
-    private $_root = null; // Chemin absolu
     private $_websites = array(); // array<array>
     private $_onExecSitehandler = null;
 
@@ -24,17 +23,17 @@ class Multisite
      * @return self             L'instance Multisite
      * // TODO vérifier la formation de la config
      */
-    public static function buildFromConfig(Config $config, string $rootSystem): self
+    public static function buildFromConfig(Config $config, string $rootWebsites): self
     {
-        $obj = new self($rootSystem);
-        $obj->addSitesFromConfig($config);
+        $obj = new self();
+        $obj->addSitesFromConfig($config, $rootWebsites);
         return $obj;
     }
 
-    public function addSitesFromConfig(Config $config) {
+    public function addSitesFromConfig(Config $config, string $rootWebsites) {
         foreach ($config['websites'] as $w) {
             $site = new Site($w);
-            $site->src = $config['rootPath'].$site->src;
+            $site->src = $rootWebsites.$site->src;
             $this->addSite($site);
         }
     }
@@ -49,15 +48,10 @@ class Multisite
         $this->_onExecSitehandler = $handler;
     }
 
-    public function __construct(string $root)
-    {
-        $this->_root = $root;
-    }
-
     public function addSite(Site $site)
     {
         $this->_websites[] = $site;
-        $site->verificateFiles($this->_root);
+        $site->verificateFiles();
     }
 
     /**
@@ -72,7 +66,7 @@ class Multisite
                 if ($this->_onExecSitehandler != null) {
                     call_user_func($this->_onExecSitehandler, $w);
                 }
-                $w->exec($this->_root, $uri);
+                $w->exec($uri);
 
                 return $w;
             }

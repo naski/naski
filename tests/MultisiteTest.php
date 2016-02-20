@@ -11,10 +11,10 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
 {
     public function testDisplay()
     {
-        $multisite = new Multisite(__DIR__.'/');
+        $multisite = new Multisite();
         $multisite->addSite($site1 = new Site(array(
             'name' => 'Site 1',
-            'src' => './',
+            'src' => __DIR__.'/',
             'initFile' => 'initSite.php',
         )));
         $out = $multisite->process(HttpUri::createFromString('http://doelia.fr/'));
@@ -24,10 +24,10 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
 
     public function testMatch()
     {
-        $multisite = new Multisite(__DIR__.'/');
+        $multisite = new Multisite();
         $multisite->addSite($site2 = new Site(array(
             'name' => 'Site 2',
-            'src' => './',
+            'src' => __DIR__.'/',
             'conditions' => array(
                 'path' => '^/site2(.*)',
             ),
@@ -35,7 +35,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
         )));
         $multisite->addSite($site1 = new Site(array(
             'name' => 'Site 1',
-            'src' => './',
+            'src' => __DIR__.'/',
             'initFile' => 'initSite.php',
         )));
 
@@ -52,7 +52,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     {
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite.json');
-        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__.'/');
         $out = $multisite->process(HttpUri::createFromString('http://doelia.fr/product'));
         $this->assertEquals($out->name, 'Site 1');
         $this->assertNotEquals($out->name, 'Site 2');
@@ -62,7 +62,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     {
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite.json');
-        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__.'/');
         $out = $multisite->process(HttpUri::createFromString('https://doelia.fr/'));
         $this->assertEquals($out->name, 'Site HTTPS');
         $out = $multisite->process(HttpUri::createFromString('http://doelia.fr/'));
@@ -73,7 +73,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     {
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite.json');
-        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__.'/');
         $out = $multisite->process(HttpUri::createFromString('http://vps.doelia.fr/'));
         $this->assertEquals($out->name, 'Site privé');
         $out = $multisite->process(HttpUri::createFromString('http://doelia.fr/'));
@@ -87,8 +87,8 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     {
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite_bad.json');
-        $multisite = new MultiSite(__DIR__);
-        $multisite->addSitesFromConfig($websites);
+        $multisite = new MultiSite();
+        $multisite->addSitesFromConfig($websites, __DIR__.'/');
     }
 
     /**
@@ -98,14 +98,14 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     {
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite_badRouting.json');
-        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__.'/');
     }
 
     public function testHandler()
     {
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite.json');
-        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+        $multisite = MultiSite::buildFromConfig($websites, __DIR__.'/');
         $multisite->setOnSiteHandle('onSite');
         $multisite->process(HttpUri::createFromString('http://vps.doelia.fr/'));
         global $sitee;
