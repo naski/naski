@@ -8,6 +8,7 @@ before_script:
 - source /root/.phpbrew/bashrc
 - phpbrew use 7.0.2
 - composer update
+- chmod u+x core/scripts/*
 
 test:app:
   script:

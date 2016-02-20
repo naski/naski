@@ -11,6 +11,8 @@ class GlobalTesteur extends PHPUnit_Framework_TestCase
 
     public function testExecs()
     {
-        $this->assertContains('rm -rf', exec('php tests/console.php cleanLogs'));
+        $out = array();
+        exec('php tests/console.php cleanLogs go 2>&1', $out);
+        $this->assertContains('app/logs', $out[1]);
     }
 }
