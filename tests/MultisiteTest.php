@@ -87,7 +87,8 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     {
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite_bad.json');
-        $multisite = MultiSite::buildFromConfig($websites, __DIR__);
+        $multisite = new MultiSite(__DIR__);
+        $multisite->addSitesFromConfig($websites);
     }
 
     /**

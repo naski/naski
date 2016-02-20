@@ -26,12 +26,17 @@ class Multisite
      */
     public static function buildFromConfig(Config $config, string $rootSystem): self
     {
-        $obj = new self($rootSystem.$config['rootPath']);
-        foreach ($config['websites'] as $w) {
-            $obj->addSite(new Site($w));
-        }
-
+        $obj = new self($rootSystem);
+        $obj->addSitesFromConfig($config);
         return $obj;
+    }
+
+    public function addSitesFromConfig(Config $config) {
+        foreach ($config['websites'] as $w) {
+            $site = new Site($w);
+            $site->src = $config['rootPath'].$site->src;
+            $this->addSite($site);
+        }
     }
 
     /**
