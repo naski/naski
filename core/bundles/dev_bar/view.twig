@@ -1,0 +1,38 @@
+{% set bundle = bundles.devBar %}
+
+
+{% if IM.config.env == 'dev' %}
+<div class="devBar">
+    {{ bundle.instance.getRequestsNumber() }} requêtes SQL |
+    Environnement: {{ IM.config.env }} |
+    Site web: {{ IM.site.name }} |
+    Action: {{ IM.rule.controller }} / {{ IM.rule.action }} |
+    Executé en: {{ bundle.instance.getTime() }}
+
+    <br>
+    Instances du IM:
+    {% for b in IM.getListInstancesKey() %}
+        {{ b }},
+    {% endfor %}
+
+    <br>
+    Ordre d'usage des bundles:
+    {% for b in bundle.instance.getUsedBundle() %}
+        -> {{ b }}
+    {% endfor %}
+
+    <br>
+    Ordre d'enregitrement des bundles:
+    {% for b in bundle.instance.getRecordedBundle() %}
+        -> {{ b }}
+    {% endfor %}
+
+    <br>
+    Fichiers CSS inclus :
+    {% for i in bundle.instance.getCssFilesincludes() %}
+        {{ i }} <br>
+    {% endfor %}
+
+
+</div>
+{% endif %}

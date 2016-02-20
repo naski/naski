@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Naski Framework{% endblock %}</title>
+        <style media="screen">
+            {{ css_content }}
+        </style>
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% include '@devBar/view.twig' %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

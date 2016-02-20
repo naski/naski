@@ -1,0 +1,14 @@
+{% extends '@naskiPage/naski.twig' %}
+{% set bundle = bundles.errors %}
+{% set e = bundle.instance.exception %}
+
+{% block content %}
+    <h1>Une erreur est survenue :(</h1>
+
+    <h2>{{e.message}}</h2>
+    Déclanchée par {{e.file}}:{{e.line}}<br>
+    <h2>Calltrace</h2>
+    {% for ins in e.getTrace() %}
+        {{ins.file}}:{{ins.line}}<br>
+    {% endfor %}
+{% endblock %}
