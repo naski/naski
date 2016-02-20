@@ -19,8 +19,7 @@
             "Naski\\": "core/classes/"
         },
         "files": [
-            "core/functions/functions.php",
-            "core/boot/check_globals.php"
+            "core/functions/functions.php"
         ]
     },
     "require": {
