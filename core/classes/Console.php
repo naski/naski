@@ -32,7 +32,7 @@ class Console
 
         $f = function ($filename) {
             return function($p1="", $p2="", $p3="") use($filename) {
-                $cmd = "$filename $p1 $p2 $p3";
+                $cmd = "$filename $p1 $p2 $p3 2>&1";
                 echo "exec in shell : $cmd\n";
                 echo exec($cmd);
                 echo "\n";
