@@ -7,7 +7,9 @@
  * Utilisation : php console.php [arguments]
  */
 
-require(__DIR__.'/autoload.php');
+ini_set('display_errors', 1);
+
+require(__DIR__.'/boot.php');
 
 use Naski\Console;
 

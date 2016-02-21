@@ -1,6 +1,6 @@
 <?php
 
-require 'autoload.php';
+require 'boot.php';
 
 class GlobalTesteur extends PHPUnit_Framework_TestCase
 {
