@@ -6,11 +6,20 @@ use Naski\Displayer\Bundle\BundleManager;
 
 use Assetic\Asset\AssetCollection;
 use Assetic\Asset\AssetCache;
+use Assetic\Factory\AssetFactory;
 use Assetic\Cache\FilesystemCache;
+use Assetic\Extension\Twig\AsseticExtension;
+use Assetic\AssetWriter;
+use Assetic\Extension\Twig\TwigFormulaLoader;
+use Assetic\Extension\Twig\TwigResource;
+use Assetic\Factory\LazyAssetManager;
 
 class NaskiDisplayer
 {
     private $_twigInstance = null;
+    private $_assetFactory = null;
+
+
     private $_twigParams = array('bundles' => array());
     private $_css; // array<FileAsset|GlobAsset>
 
@@ -23,6 +32,9 @@ class NaskiDisplayer
         $loader->addPath(NASKI_CORE_PATH.'ressources/');
 
         $this->_twigInstance = new \Twig_Environment($loader, $twigOption);
+
+        $this->_assetFactory = new AssetFactory(ROOT_SYSTEM);
+        $this->_twigInstance->addExtension(new AsseticExtension($this->_assetFactory));
 
         $this->loadBaseTwigParams();
     }
@@ -79,14 +91,23 @@ class NaskiDisplayer
                 $cache = $collection;
             }
 
-
-            $this->addTwigParams(array('css_content' => $cache->dump()));
+           // $this->addTwigParams(array('css_content' => $cache->dump()));
         }
     }
 
     public function render(string $templateName)
     {
-        $this->buildCss();
+       // $this->buildCss();
+
+        $resource = new TwigResource($this->_twigInstance->getLoader(), $templateName);
+
+        $am = new LazyAssetManager($this->_assetFactory);
+        $am->setLoader('twig', new TwigFormulaLoader($this->_twigInstance));
+        $am->addResource($resource, 'twig');
+
+        $writer = new AssetWriter(ROOT_SYSTEM.'web/');
+        $writer->writeManagerAssets($am);
+
         $template = $this->_twigInstance->loadTemplate($templateName);
         echo $template->render($this->_twigParams);
     }

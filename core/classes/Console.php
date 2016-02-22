@@ -59,7 +59,7 @@ class Console
      *
      * @param $argv La liste des arguments entrés par l'utilisateur
      */
-    public function process($argv)
+    public function process(array $argv)
     {
         if (isset($argv[1])) {
             $command = $argv[1];
