@@ -23,11 +23,23 @@ class Console
         return self::$instance;
     }
 
+    /**
+     * Enregistre une nouvelle commande à la console, associée à une fonction
+     *
+     * @param $cmd Le nom de la commande à enregistrer. Exemple: cleanCache
+     * @param $handler  L'handler qui sera exécuté avec call_user_func_array
+     */
     public function recordCommand($cmd, $handler)
     {
         $this->_commands[$cmd] = $handler;
     }
 
+    /**
+     * Enregistre une nouvelle commande à la console, qui exécutera un fichier
+     *
+     * @param $cmdname Le nom de la commande à enregistrer
+     * @param $filename Le chemin complet vers le fichier qui sera exécuté
+     */
     public function recordFileExec($cmdname, $filename) {
 
         $f = function ($filename) {
@@ -42,6 +54,11 @@ class Console
         $this->recordCommand($cmdname, $f($filename));
     }
 
+    /**
+     * Exécute la commande qu'il faut en fonction des urguments
+     *
+     * @param $argv La liste des arguments entrés par l'utilisateur
+     */
     public function process($argv)
     {
         if (isset($argv[1])) {
@@ -59,6 +76,9 @@ class Console
         echo "\n";
     }
 
+    /**
+     * Affiche à l'écran la liste des commandes enregistrées
+     */
     private function showAvailableCommands()
     {
         echo "Commandes disponiables:\n";
