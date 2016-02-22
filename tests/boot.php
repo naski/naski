@@ -1,5 +1,10 @@
 <?php
 
+/**
+ *  Fichier à inclure avant chaque utilisation du framework.
+ *  Ne produit aucun affichage si tout se passe bien.
+ */
+
 define('ROOT_SYSTEM', __DIR__.'/');
 define('NASKI_CORE_PATH', __DIR__.'/../core/');
 define('NASKI_APP_PATH', __DIR__.'/app/');
@@ -11,6 +16,7 @@ define('CONFIG_FILE', NASKI_CORE_PATH.'ressources/config_examples/dev.yml');
 // Classes des composants externes
 if (!require_once __DIR__.'/../vendor/autoload.php') {
     trigger_error('Exécuter `composer install` pour télécharger le vendor/', E_USER_ERROR);
+    exit();
 }
 
 // Initialisation du framework
