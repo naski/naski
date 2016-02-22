@@ -28,6 +28,15 @@ abstract class Controller
         $this->testAndFilterInputs('post');
     }
 
+    /**
+     * Sera appelé juste avant l'appel de l'action, prêt à l'override
+     * @return void
+     */
+    public function init()
+    {
+
+    }
+
     private function testAndFilterInputs($method)
     {
         $gump = new \GUMP();
@@ -36,7 +45,7 @@ abstract class Controller
         $gump->filter_rules(self::buildGumpRules($method, 'filter_rules'));
 
         $filtered = $gump->run($this->$method);
-        
+
         if ($filtered === false) {
             $this->_inputsValids = false;
         } else {
