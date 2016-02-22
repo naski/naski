@@ -49,15 +49,22 @@ class Console
             if (isset($this->_commands[$command])) {
                 call_user_func_array($this->_commands[$command], array_slice($argv, 2));
             } else {
-                die("Command $command not found\n");
+                echo "Commande $command introuvable. ";
+                $this->showAvailableCommands();
             }
         } else {
-            echo "Aucune commande entrée. Commandes disponibles :\n";
-            var_dump(array_keys($this->_commands));
-            exit();
+            echo "Aucune commande entrée. ";
+            $this->showAvailableCommands();
         }
+        echo "\n";
+    }
 
-        die();
+    private function showAvailableCommands()
+    {
+        echo "Commandes disponiables:\n";
+        foreach ($this->_commands as $c => $v) {
+            echo "- $c\n";
+        }
     }
 
 }

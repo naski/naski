@@ -22,3 +22,4 @@ BundleManager::getInstance()->recordBundle(NASKI_CORE_PATH.'bundles/errors/');
 
 $bundle = BundleManager::getInstance()->getBundle('errors');
 $bundle->exec();
+

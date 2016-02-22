@@ -26,5 +26,5 @@ if ($IM->config['show_php_errors'] ?? false) {
 
 // Ajout de quelques commandes à la console
 \Naski\Console::getInstance()->recordCommand("cleanCache", array(new \Naski\Controllers\Backend(), 'cleanCache'));
-\Naski\Console::getInstance()->recordFileExec("cleanLogs", NASKI_CORE_PATH.'scripts/clean_logs.sh');
+\Naski\Console::getInstance()->recordCommand("cleanLogs", array(new \Naski\Controllers\Backend(), 'cleanLogs'));
 \Naski\Console::getInstance()->recordFileExec("setPerms", NASKI_CORE_PATH.'scripts/set_perms.sh');
