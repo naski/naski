@@ -34,7 +34,8 @@
         "naski/config": "dev-master",
         "naski/routing": "dev-master",
         "webmozart/json": "^1.2",
-        "league/uri": "^4.0"
+        "league/uri": "^4.0",
+        "components/jquery": "^2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.2.8"
