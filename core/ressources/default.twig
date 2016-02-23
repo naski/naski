@@ -6,6 +6,9 @@
             {{ css_content }}
         </style>
         {% block stylesheets %}
+            {% for file in css_files %}
+                <link href="{{ file }}" rel="stylesheet" type="text/css" />
+            {% endfor %}
         {% endblock %}
 
     </head>

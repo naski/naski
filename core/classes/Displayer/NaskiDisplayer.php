@@ -19,7 +19,6 @@ class NaskiDisplayer
     private $_twigInstance = null;
     private $_assetFactory = null;
 
-
     private $_twigParams = array('bundles' => array());
     private $_css; // array<FileAsset|GlobAsset>
 
@@ -32,9 +31,6 @@ class NaskiDisplayer
         $loader->addPath(NASKI_CORE_PATH.'ressources/');
 
         $this->_twigInstance = new \Twig_Environment($loader, $twigOption);
-
-        $this->_assetFactory = new AssetFactory(ROOT_SYSTEM);
-        $this->_twigInstance->addExtension(new AsseticExtension($this->_assetFactory));
 
         $this->loadBaseTwigParams();
     }
@@ -70,43 +66,39 @@ class NaskiDisplayer
         $this->_twigParams = array_merge($array, $this->_twigParams);
     }
 
-    public function addCssFile($file)
+    public function addCssFile($output, $input)
     {
-        $this->includedCssFilesStack[] = $file;
-        $this->_css[] = $file;
+        $this->includedCssFilesStack[] = $input;
+        $this->_css[$output][] = $input;
     }
 
     private function buildCss()
     {
         global $IM;
+
+        $twig_files = array();
+
         if (count($this->_css)) {
-            $collection = new AssetCollection($this->_css);
+            foreach ($this->_css as $output => $input) {
+                $collection = new AssetCollection($input);
+                $collection->setTargetPath($output);
 
-            if ($IM->config['cache_css']) {
-                $cache = new AssetCache(
-                    $collection,
-                    $IM->config['cache_css'] ? new FilesystemCache(NASKI_APP_PATH."cache/assets/") : null
-                );
-            } else {
-                $cache = $collection;
+                $am = new \Assetic\AssetManager();
+                $am->set('css', $collection);
+
+                $writer = new \Assetic\AssetWriter(ROOT_SYSTEM.'web/generated_assets/css/');
+                $writer->writeManagerAssets($am);
+
+                $twig_files[] = '/generated_assets/css/'.$output;
             }
-
-           // $this->addTwigParams(array('css_content' => $cache->dump()));
         }
+
+        $this->addTwigParams(array('css_files' => $twig_files));
     }
 
     public function render(string $templateName)
     {
-       // $this->buildCss();
-
-        $resource = new TwigResource($this->_twigInstance->getLoader(), $templateName);
-
-        $am = new LazyAssetManager($this->_assetFactory);
-        $am->setLoader('twig', new TwigFormulaLoader($this->_twigInstance));
-        $am->addResource($resource, 'twig');
-
-        $writer = new AssetWriter(ROOT_SYSTEM.'web/');
-        $writer->writeManagerAssets($am);
+        $this->buildCss();
 
         $template = $this->_twigInstance->loadTemplate($templateName);
         echo $template->render($this->_twigParams);
