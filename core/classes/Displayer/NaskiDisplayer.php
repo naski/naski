@@ -13,6 +13,7 @@ use Assetic\AssetWriter;
 use Assetic\Extension\Twig\TwigFormulaLoader;
 use Assetic\Extension\Twig\TwigResource;
 use Assetic\Factory\LazyAssetManager;
+use Assetic\Filter\CleanCssFilter;
 
 class NaskiDisplayer
 {
@@ -76,10 +77,11 @@ class NaskiDisplayer
     {
         global $IM;
 
-        $twig_files = array();
+        $twig_files = array(); // Liens affichés dans l'HTML
 
         if (count($this->_css)) {
             foreach ($this->_css as $output => $input) {
+
                 $collection = new AssetCollection($input);
                 $collection->setTargetPath($output);
 
