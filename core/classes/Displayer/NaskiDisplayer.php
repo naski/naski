@@ -22,6 +22,7 @@ class NaskiDisplayer
 
     private $_twigParams = array('bundles' => array());
     private $_css; // array<FileAsset|GlobAsset>
+    private $_js; // array<FileAsset|GlobAsset>
 
     public $usedBundlesStack = array();
     public $includedCssFilesStack = array();
@@ -73,6 +74,11 @@ class NaskiDisplayer
         $this->_css[$output][] = $input;
     }
 
+    public function addJsFile($output, $input)
+    {
+        $this->_js[$output][] = $input;
+    }
+
     private function buildCss()
     {
         global $IM;
@@ -98,9 +104,35 @@ class NaskiDisplayer
         $this->addTwigParams(array('css_files' => $twig_files));
     }
 
+    private function buildJs()
+    {
+        global $IM;
+
+        $twig_files = array(); // Liens affichés dans l'HTML
+
+        if (count($this->_js)) {
+            foreach ($this->_js as $output => $input) {
+
+                $collection = new AssetCollection($input);
+                $collection->setTargetPath($output);
+
+                $am = new \Assetic\AssetManager();
+                $am->set('js', $collection);
+
+                $writer = new \Assetic\AssetWriter(ROOT_SYSTEM.'web/generated_assets/js/');
+                $writer->writeManagerAssets($am);
+
+                $twig_files[] = '/generated_assets/js/'.$output;
+            }
+        }
+
+        $this->addTwigParams(array('js_files' => $twig_files));
+    }
+
     public function render(string $templateName)
     {
         $this->buildCss();
+        $this->buildJs();
 
         $template = $this->_twigInstance->loadTemplate($templateName);
         echo $template->render($this->_twigParams);

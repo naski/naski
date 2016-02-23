@@ -15,6 +15,10 @@
     <body>
         {% block body %}{% endblock %}
         {% include '@devBar/view.twig' %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            {% for file in js_files %}
+                <script type="text/javascript" src="{{ file }}"></script>
+            {% endfor %}
+        {% endblock %}
     </body>
 </html>
