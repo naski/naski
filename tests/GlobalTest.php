@@ -23,12 +23,17 @@ class GlobalTesteur extends PHPUnit_Framework_TestCase
 
     public function testExtract()
     {
+        $in = array(
+            'toto' => 'tata',
+            'titi' => 'nono',
+            'grep' => 'nana'
+        );
+        $in[0] = 'tutu';
+        $in[1] = 'gaga';
+        $in[] = 'too';
+
         $this->assertEquals(
-            \Naski\array_extract(array(
-                'toto' => 'tata',
-                'titi' => 'nono',
-                'grep' => 'nana'
-            ), array(
+            \Naski\array_extract($in, array(
                 'toto', 'grep'
             )),
             array(

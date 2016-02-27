@@ -26,7 +26,7 @@ function array_extract(array $array, array $listKeys)
 {
     $out = array();
     foreach ($array as $key => $value) {
-        if (in_array($key, $listKeys)) {
+        if (in_array($key, $listKeys, true)) {
             $out[$key] = $value;
         }
     }
