@@ -17,4 +17,21 @@ class GlobalTesteur extends PHPUnit_Framework_TestCase
 
         $this->assertContains('rm -rf', exec('php tests/console.php cleanCache 2>&1'));
     }
+
+    public function testExtract()
+    {
+        $this->assertEquals(
+            \Naski\array_extract(array(
+                'toto' => 'tata',
+                'titi' => 'nono',
+                'grep' => 'nana'
+            ), array(
+                'toto', 'grep'
+            )),
+            array(
+                'toto' => 'tata',
+                'grep' => 'nana'
+            )
+        );
+    }
 }

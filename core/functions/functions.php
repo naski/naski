@@ -21,3 +21,14 @@ function sumCalls(array $arr, $property)
 
     return $sum;
 }
+
+function array_extract(array $array, array $listKeys)
+{
+    $out = array();
+    foreach ($array as $key => $value) {
+        if (in_array($key, $listKeys)) {
+            $out[$key] = $value;
+        }
+    }
+    return $out;
+}
