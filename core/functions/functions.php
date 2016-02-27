@@ -22,7 +22,7 @@ function sumCalls(array $arr, $property)
     return $sum;
 }
 
-function array_extract(array $array, array $listKeys)
+function array_keep(array $array, array $listKeys)
 {
     $out = array();
     foreach ($array as $key => $value) {

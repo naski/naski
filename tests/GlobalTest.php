@@ -21,7 +21,7 @@ class GlobalTesteur extends PHPUnit_Framework_TestCase
 
     }
 
-    public function testExtract()
+    public function testArrayKeep()
     {
         $in = array(
             'toto' => 'tata',
@@ -33,7 +33,7 @@ class GlobalTesteur extends PHPUnit_Framework_TestCase
         $in[] = 'too';
 
         $this->assertEquals(
-            \Naski\array_extract($in, array(
+            \Naski\array_keep($in, array(
                 'toto', 'grep'
             )),
             array(
