@@ -10,7 +10,7 @@ class DevBarBundle extends Bundle
     public function exec()
     {
         global $IM;
-        $IM->dpl->addCssFile(new FileAsset($this->directory.'style.css'));
+        $IM->dpl->addCssFile('devBar.css', new FileAsset($this->directory.'style.css'));
     }
 
     public function onEnable()

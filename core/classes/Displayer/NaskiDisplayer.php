@@ -6,13 +6,23 @@ use Naski\Displayer\Bundle\BundleManager;
 
 use Assetic\Asset\AssetCollection;
 use Assetic\Asset\AssetCache;
+use Assetic\Factory\AssetFactory;
 use Assetic\Cache\FilesystemCache;
+use Assetic\Extension\Twig\AsseticExtension;
+use Assetic\AssetWriter;
+use Assetic\Extension\Twig\TwigFormulaLoader;
+use Assetic\Extension\Twig\TwigResource;
+use Assetic\Factory\LazyAssetManager;
+use Assetic\Filter\CleanCssFilter;
 
 class NaskiDisplayer
 {
     private $_twigInstance = null;
+    private $_assetFactory = null;
+
     private $_twigParams = array('bundles' => array());
     private $_css; // array<FileAsset|GlobAsset>
+    private $_js; // array<FileAsset|GlobAsset>
 
     public $usedBundlesStack = array();
     public $includedCssFilesStack = array();
@@ -58,35 +68,72 @@ class NaskiDisplayer
         $this->_twigParams = array_merge($array, $this->_twigParams);
     }
 
-    public function addCssFile($file)
+    public function addCssFile($output, $input)
     {
-        $this->includedCssFilesStack[] = $file;
-        $this->_css[] = $file;
+        $this->includedCssFilesStack[] = $input;
+        $this->_css[$output][] = $input;
+    }
+
+    public function addJsFile($output, $input)
+    {
+        $this->_js[$output][] = $input;
     }
 
     private function buildCss()
     {
         global $IM;
+
+        $twig_files = array(); // Liens affichés dans l'HTML
+
         if (count($this->_css)) {
-            $collection = new AssetCollection($this->_css);
+            foreach ($this->_css as $output => $input) {
 
-            if ($IM->config['cache_css']) {
-                $cache = new AssetCache(
-                    $collection,
-                    $IM->config['cache_css'] ? new FilesystemCache(NASKI_APP_PATH."cache/assets/") : null
-                );
-            } else {
-                $cache = $collection;
+                $collection = new AssetCollection($input);
+                $collection->setTargetPath($output);
+
+                $am = new \Assetic\AssetManager();
+                $am->set('css', $collection);
+
+                $writer = new \Assetic\AssetWriter(ROOT_SYSTEM.'web/generated_assets/css/');
+                $writer->writeManagerAssets($am);
+
+                $twig_files[] = '/generated_assets/css/'.$output;
             }
-
-
-            $this->addTwigParams(array('css_content' => $cache->dump()));
         }
+
+        $this->addTwigParams(array('css_files' => $twig_files));
+    }
+
+    private function buildJs()
+    {
+        global $IM;
+
+        $twig_files = array(); // Liens affichés dans l'HTML
+
+        if (count($this->_js)) {
+            foreach ($this->_js as $output => $input) {
+
+                $collection = new AssetCollection($input);
+                $collection->setTargetPath($output);
+
+                $am = new \Assetic\AssetManager();
+                $am->set('js', $collection);
+
+                $writer = new \Assetic\AssetWriter(ROOT_SYSTEM.'web/generated_assets/js/');
+                $writer->writeManagerAssets($am);
+
+                $twig_files[] = '/generated_assets/js/'.$output;
+            }
+        }
+
+        $this->addTwigParams(array('js_files' => $twig_files));
     }
 
     public function render(string $templateName)
     {
         $this->buildCss();
+        $this->buildJs();
+
         $template = $this->_twigInstance->loadTemplate($templateName);
         echo $template->render($this->_twigParams);
     }

@@ -23,11 +23,23 @@ class Console
         return self::$instance;
     }
 
+    /**
+     * Enregistre une nouvelle commande à la console, associée à une fonction
+     *
+     * @param $cmd Le nom de la commande à enregistrer. Exemple: cleanCache
+     * @param $handler  L'handler qui sera exécuté avec call_user_func_array
+     */
     public function recordCommand($cmd, $handler)
     {
         $this->_commands[$cmd] = $handler;
     }
 
+    /**
+     * Enregistre une nouvelle commande à la console, qui exécutera un fichier
+     *
+     * @param $cmdname Le nom de la commande à enregistrer
+     * @param $filename Le chemin complet vers le fichier qui sera exécuté
+     */
     public function recordFileExec($cmdname, $filename) {
 
         $f = function ($filename) {
@@ -42,22 +54,37 @@ class Console
         $this->recordCommand($cmdname, $f($filename));
     }
 
-    public function process($argv)
+    /**
+     * Exécute la commande qu'il faut en fonction des urguments
+     *
+     * @param $argv La liste des arguments entrés par l'utilisateur
+     */
+    public function process(array $argv)
     {
         if (isset($argv[1])) {
             $command = $argv[1];
             if (isset($this->_commands[$command])) {
                 call_user_func_array($this->_commands[$command], array_slice($argv, 2));
             } else {
-                die("Command $command not found\n");
+                echo "Commande $command introuvable. ";
+                $this->showAvailableCommands();
             }
         } else {
-            echo "Aucune commande entrée. Commandes disponibles :\n";
-            var_dump(array_keys($this->_commands));
-            exit();
+            echo "Aucune commande entrée. ";
+            $this->showAvailableCommands();
         }
+        echo "\n";
+    }
 
-        die();
+    /**
+     * Affiche à l'écran la liste des commandes enregistrées
+     */
+    private function showAvailableCommands()
+    {
+        echo "Commandes disponiables:\n";
+        foreach ($this->_commands as $c => $v) {
+            echo "- $c\n";
+        }
     }
 
 }
