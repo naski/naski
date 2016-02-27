@@ -15,6 +15,7 @@ class Rule
     public $action = 'undefined';
     public $post = array(); // array<array>
     public $get = array(); // array<array>
+    public $json;
 
     public function __construct(array $a)
     {

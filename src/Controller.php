@@ -20,12 +20,18 @@ abstract class Controller
     {
         $this->_rule = $rule;
 
-        $gump = new \GUMP();
-        $this->post = $gump->sanitize($_POST);
-        $this->get = $gump->sanitize($_GET);
 
-        $this->testAndFilterInputs('get');
+    }
+
+    private function buildInputs()
+    {
+        $this->post = $_POST;
         $this->testAndFilterInputs('post');
+
+        $this->get = $_GET;
+        $this->testAndFilterInputs('get');
+
+        $this->json = json_decode(file_get_contents('php://input'), true);
     }
 
     private function testAndFilterInputs($method)
@@ -36,7 +42,7 @@ abstract class Controller
         $gump->filter_rules(self::buildGumpRules($method, 'filter_rules'));
 
         $filtered = $gump->run($this->$method);
-        
+
         if ($filtered === false) {
             $this->_inputsValids = false;
         } else {
