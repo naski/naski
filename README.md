@@ -29,15 +29,17 @@ while ($l = $q->fetch()) {
 ```php
 <?php
 
+// Insert dans une table
 $db->insert('users', array(
     'name' => 'John',
     'date' => 'NOW()'
 ));
 
+// Update avec condition
 $db->update('users', array(
     'name' => 'Doe'
-), $where = array(
-    'name' => 'Doe'
+), array(
+    'name' => 'John'
 ));
 
 ```
