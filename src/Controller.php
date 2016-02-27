@@ -19,8 +19,7 @@ abstract class Controller
     public function __construct(Rule $rule)
     {
         $this->_rule = $rule;
-
-
+        $this->buildInputs();
     }
 
     private function buildInputs()
