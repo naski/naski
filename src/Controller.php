@@ -11,6 +11,8 @@ abstract class Controller
 {
     public $post = array(); // Tableau clé/valeur de $POST nettoyé
     public $get = array(); // Tableau clé/valeur de $GET nettoyé
+    public $json;
+    public $raw;
 
     private $_inputsValids = true;
     private $_rule;
@@ -30,7 +32,8 @@ abstract class Controller
         $this->get = $_GET;
         $this->testAndFilterInputs('get');
 
-        $this->json = json_decode(file_get_contents('php://input'), true);
+        $this->raw = file_get_contents('php://input');
+        $this->json = json_decode($this->raw, true);
     }
 
     /**
