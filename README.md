@@ -41,11 +41,10 @@ $db->update('users', array(
 ), array(
     'name' => 'John'
 ));
+```
 
 ## TODO
 - Faire un GET d'un ensemble de ligne
 - Pouvoir récupérer l'ID du dernier Insert
 - Pouvoir GET une ligne
 - Logger les requêtes trop longues
-
-```
