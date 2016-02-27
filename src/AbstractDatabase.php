@@ -148,4 +148,9 @@ abstract class AbstractDatabase
     {
         return $this->_nRequests;
     }
+
+    public function getLastQuery(): string
+    {
+        return $this->_lastQuery;
+    }
 }
