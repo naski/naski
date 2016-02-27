@@ -119,6 +119,7 @@ class Routing
     {
         $controllerName = $rule->controller;
         $ctrl = new $controllerName($rule);
+        $ctrl->init();
         call_user_func_array(array($ctrl, $rule->action), $vars);
     }
 

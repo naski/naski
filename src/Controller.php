@@ -34,6 +34,15 @@ abstract class Controller
         $this->json = json_decode(file_get_contents('php://input'), true);
     }
 
+    /**
+     * Sera appelé juste avant l'appel de l'action, prêt à l'override
+     * @return void
+     */
+    public function init()
+    {
+
+    }
+
     private function testAndFilterInputs($method)
     {
         $gump = new \GUMP();

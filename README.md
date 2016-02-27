@@ -170,7 +170,8 @@ $config = new Config();
 $config->loadJSONFile('routing.json');
 
 $routing = Routing::buildFromConfig($config);
-$routing->process($_SERVER[REQUEST_URI]);
+$url = strtok($_SERVER["REQUEST_URI"], '?');
+$routing->process($url);
 ```
 
 ## Multi-sites
