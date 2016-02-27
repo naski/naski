@@ -50,12 +50,27 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
                 'row1' => 'v11.1',
                 'row2' => 'v12.1',
             ),
-            "WHERE row1='v11'"
+            array('row1' => 'v11')
         );
         $q = $db->query('SELECT * FROM tests');
         $l = $q->fetch();
         $this->assertEquals($l['row1'], 'v11.1');
 
+        return $db;
+    }
+
+    /**
+     * @depends testInsert
+     */
+    public function testQuoted(AbstractDatabase $db) :AbstractDatabase
+    {
+        $message = "c'est une histoire";
+        $db->insert('tests',
+            array(
+                'row1' => 'v3',
+                'row2' => $message,
+            )
+        );
         return $db;
     }
 

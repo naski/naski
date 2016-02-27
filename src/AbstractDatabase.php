@@ -64,7 +64,7 @@ abstract class AbstractDatabase
             $this->connect();
         }
 
-        ++$this->_nRequests;
+        $this->_nRequests++;
         $this->_lastQuery = $query;
         try {
             $this->_result = $this->sendQuery($query);
@@ -84,15 +84,15 @@ abstract class AbstractDatabase
      *
      *  @param $tablename   Nom de la table
      *  @param $insertArray Clés : noms des colonnes. Valeurs : valeurs du tuple
-     *  @param $addQuotes   Permet d'ajouter des quotes simples ' autour des valeurs
      */
-    public function insert(string $tablename, array $insertArray, bool $addQuotes = true)
+    public function insert(string $tablename, array $insertArray)
     {
         $quotedValues = '';
         $keys = '';
 
         foreach ($insertArray as $key => $value) {
-            $quotedValues .= $addQuotes ? ("'$value',") : "$value,";
+            $value = addslashes($value);
+            $quotedValues .= ($value != 'NOW()') ? ("'$value',") : "$value,";
             $keys .= ''.$key.',';
         }
 
@@ -109,18 +109,18 @@ abstract class AbstractDatabase
      *  @param $tablename       Nom de la table
      *  @param $insertArray     Clés : noms des colonnes. Valeurs : valeurs du tuple
      *  @param $conditon        Liste des champs à respecter
-     *  @param $addQuotes       Permet d'ajouter des quotes simples ' autour des valeurs
      */
-    public function update(string $tablename, array $insertArray, array $conditon, bool $addQuotes = true)
+    public function update(string $tablename, array $insertArray, array $conditon)
     {
         $setter = '';
         foreach ($insertArray as $key => $value) {
             $setter .= "$key=";
-            $setter .= $addQuotes ? "'$value'," : "$value,";
+            $value = addslashes($value);
+            $setter .= ($value != 'NOW()') ? "'$value'," : "$value,";
         }
         $setter = substr_replace($setter, '', -1);
 
-        $cond = self::createWhereCondition($cond);
+        $cond = self::createWhereCondition($conditon);
 
         $query = sprintf('UPDATE %s SET %s %s', $tablename, $setter, $cond);
 
@@ -129,12 +129,14 @@ abstract class AbstractDatabase
 
     private static function createWhereCondition(array $array): string
     {
+        $addQuotes = false;
         $cond = '';
         if (!empty($cond)) {
             $cond = "WHERE ";
             foreach ($cond as $key => $value) {
+                $value = addslashes($value);
                 $cond .= "$key=";
-                $cond .= $addQuotes ? ("'$value'") : "$value";
+                $cond .= ($value != 'NOW()') ? "'$value'," : "$value,";
                 $cond .= " AND ";
             }
             $cond = substr($cond, 0, strlen(" AND "));

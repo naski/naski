@@ -38,8 +38,8 @@ class MySQLDatabaseTest extends AbstractTester
      */
     public function testCreateTable(AbstractDatabase $db) :AbstractDatabase
     {
+        $db->query('DROP TABLE IF EXISTS tests;');
         $db->query('
-        DROP TABLE IF EXISTS tests;
         CREATE TABLE `tests` (
           `ID` int(11) NOT NULL AUTO_INCREMENT,
           `row1` varchar(255) DEFAULT NULL,
