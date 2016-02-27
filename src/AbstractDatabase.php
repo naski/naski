@@ -131,15 +131,15 @@ abstract class AbstractDatabase
     {
         $addQuotes = false;
         $cond = '';
-        if (!empty($cond)) {
+        if (!empty($array)) {
             $cond = "WHERE ";
-            foreach ($cond as $key => $value) {
+            foreach ($array as $key => $value) {
                 $value = addslashes($value);
                 $cond .= "$key=";
-                $cond .= ($value != 'NOW()') ? "'$value'," : "$value,";
+                $cond .= ($value != 'NOW()') ? "'$value'" : "$value";
                 $cond .= " AND ";
             }
-            $cond = substr($cond, 0, strlen(" AND "));
+            $cond = substr($cond, 0, -strlen(" AND "));
         }
         return $cond;
     }
