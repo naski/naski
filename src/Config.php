@@ -31,7 +31,7 @@ class Config implements \ArrayAccess
     private function loadYAMLFile(string $path)
     {
         if (!file_exists($path)) {
-            throw new FileNotFoundException("Le fichier YML $path est introuvale.");
+            throw new FileNotFoundException("Le fichier YML $path est introuvable.");
         }
         
         try {
