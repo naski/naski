@@ -46,7 +46,13 @@ class Console
             return function($p1="", $p2="", $p3="") use($filename) {
                 $cmd = "$filename $p1 $p2 $p3 2>&1";
                 echo "exec in shell : $cmd\n";
-                echo exec($cmd);
+
+                $out = array();
+                exec($cmd, $out);
+
+                foreach ($out as $l) {
+                    echo "$l\n";
+                }
                 echo "\n";
             };
         };
