@@ -29,6 +29,8 @@ abstract class AbstractDatabase
     }
 
     abstract protected function connectAbstract();
+    abstract protected function sendQuery(string $query);
+    abstract protected function lastInsertId(): int;
 
     /**
      *  throws ConnexionFailureException.
@@ -86,7 +88,7 @@ abstract class AbstractDatabase
      *  @param $insertArray Clés : noms des colonnes. Valeurs : valeurs du tuple
      *  @param $addQuotes   Permet d'ajouter des quotes simples ' autour des valeurs
      */
-    public function insert(string $tablename, array $insertArray, bool $addQuotes = true)
+    public function insert(string $tablename, array $insertArray, bool $addQuotes = true): integer
     {
         $quotedValues = '';
         $keys = '';
@@ -100,7 +102,8 @@ abstract class AbstractDatabase
         $keys = substr_replace($keys, '', -1);
         $query = sprintf('INSERT INTO %s (%s) VALUES (%s)', $tablename, $keys, $quotedValues);
 
-        return $this->query($query);
+        $this->query($query);
+        return $this->lastInsertId();
     }
 
     /**

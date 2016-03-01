@@ -40,4 +40,9 @@ abstract class PdoDatabase extends AbstractDatabase
             $options
         );
     }
+
+    public function lastInsertId(): int
+    {
+        return $this->_pdo->lastInsertId();
+    }
 }

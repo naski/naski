@@ -18,12 +18,14 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
      */
     public function testInsert(AbstractDatabase $db) :AbstractDatabase
     {
-        $db->insert('tests',
+        $id = $db->insert('tests',
             array(
                 'row1' => 'v11',
                 'row2' => 'v12',
             )
         );
+
+        $this->assertEquals($id, 1);
 
         return $db;
     }
