@@ -21,6 +21,11 @@ abstract class PdoDatabase extends AbstractDatabase
         }
     }
 
+    public function getPdoInstance()
+    {
+        return $this->_pdo;
+    }
+
     /**
      *  @override
      */

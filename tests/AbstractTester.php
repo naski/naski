@@ -27,6 +27,14 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($id, 1);
 
+        $id = $db->insert('tests',
+            array(
+                'row1' => 'gogo',
+                'row2' => 'gogo',
+            )
+        );
+        $this->assertEquals($id, 2);
+
         return $db;
     }
 
@@ -47,17 +55,43 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
      */
     public function testUpdate(AbstractDatabase $db) :AbstractDatabase
     {
+        $db->insert('tests',
+            array(
+                'row1' => 'toto',
+                'row2' => 'tata',
+            )
+        );
+
         $db->update('tests',
             array(
-                'row1' => 'v11.1',
-                'row2' => 'v12.1',
+                'row2' => 'new',
             ),
-            "WHERE row1='v11'"
+            array('row1' => 'v11')
         );
-        $q = $db->query('SELECT * FROM tests');
-        $l = $q->fetch();
-        $this->assertEquals($l['row1'], 'v11.1');
 
+        $q = $db->query("SELECT * FROM tests WHERE row1='v11'");
+        $l = $q->fetch();
+        $this->assertEquals($l['row2'], 'new');
+
+        $q = $db->query("SELECT * FROM tests WHERE row1='toto'");
+        $l = $q->fetch();
+        $this->assertEquals($l['row2'], 'tata');
+
+        return $db;
+    }
+
+    /**
+     * @depends testInsert
+     */
+    public function testQuoted(AbstractDatabase $db) :AbstractDatabase
+    {
+        $message = "c'est une histoire";
+        $db->insert('tests',
+            array(
+                'row1' => 'v3',
+                'row2' => $message,
+            )
+        );
         return $db;
     }
 
