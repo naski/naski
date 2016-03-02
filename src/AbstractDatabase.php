@@ -53,7 +53,9 @@ abstract class AbstractDatabase
      */
     public function forceConnect()
     {
-        $this->connect();
+        if (!$this->_isConnected) {
+            $this->connect();
+        }
     }
 
     /**
