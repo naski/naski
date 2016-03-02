@@ -17,7 +17,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
             'src' => __DIR__.'/',
             'initFile' => 'initSite.php',
         )));
-        $out = $multisite->process(HttpUri::createFromString('http://doelia.fr/'));
+        $multisite->process(HttpUri::createFromString('http://doelia.fr/'));
 
         $this->expectOutputString('Site 1');
     }
@@ -98,7 +98,7 @@ class MultisiteTest extends PHPUnit_Framework_TestCase
     {
         $websites = new Config();
         $websites->loadFile(__DIR__.'/multisite_badRouting.json');
-        $multisite = MultiSite::buildFromConfig($websites, __DIR__.'/');
+        MultiSite::buildFromConfig($websites, __DIR__.'/');
     }
 
     public function testHandler()

@@ -105,8 +105,6 @@ class Routing
                 return false;
                 break;
         }
-
-        return false;
     }
 
     /**
