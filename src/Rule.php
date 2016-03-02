@@ -15,7 +15,7 @@ class Rule
     public $action = 'undefined';
     public $post = array(); // array<array>
     public $get = array(); // array<array>
-    public $json;
+    public $needJson = false; // S'il faut du JSON en POST RAW
 
     public function __construct(array $a)
     {

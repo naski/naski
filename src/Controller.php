@@ -16,7 +16,6 @@ abstract class Controller
 
     private $_inputsValids = true;
     private $_rule;
-    private $_gump;
 
     public function __construct(Rule $rule)
     {
@@ -34,6 +33,10 @@ abstract class Controller
 
         $this->raw = file_get_contents('php://input');
         $this->json = json_decode($this->raw, true);
+        if ($this->_rule->needJson && !$this->json) {
+            $this->_inputsValids = false;
+        }
+
     }
 
     /**

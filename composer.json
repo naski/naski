@@ -23,7 +23,8 @@
     },
     "require-dev": {
         "league/uri": "^4.0",
-        "phpunit/phpunit": "^5.2.8"
+        "phpunit/phpunit": "^5.2.8",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "license": "MIT"
 }

@@ -51,4 +51,13 @@ class RestController extends Controller
     {
         echo "update user $id";
     }
+
+    public function getJson()
+    {
+        if (!$this->inputValid()) {
+            echo "NOJSON";
+        } else {
+            echo "OK JSON";
+        }
+    }
 }

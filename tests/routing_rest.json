@@ -7,6 +7,13 @@
             "action": "updateUser"
         },
         {
+            "method": ["POST"],
+            "path": "/rest/json",
+            "controller": "RestController",
+            "action": "getJSON",
+            "needJson": true
+        },
+        {
             "method": ["GET"],
             "path": "/rest/user/{id}",
             "controller": "RestController",

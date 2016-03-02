@@ -102,4 +102,14 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $this->expectOutputString("update user 3");
     }
 
+    public function testJsonNeed()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $config = new Config();
+        $config->loadFile(__DIR__.'/routing_rest.json');
+        $routing = Routing::buildFromConfig($config);
+         $routing->process('/rest/json');
+        $this->expectOutputString("NOJSON");
+    }
+    
 }
