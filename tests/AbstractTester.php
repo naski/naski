@@ -2,6 +2,8 @@
 
 use Naski\Pdo\AbstractDatabase;
 
+use Monolog\Logger;
+
 abstract class AbstractTester extends PHPUnit_Framework_TestCase
 {
     protected $_bd;
@@ -101,5 +103,16 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     public function testCounter(AbstractDatabase $db)
     {
         $this->assertGreaterThan(0, $db->getRequestsNumber());
+    }
+
+    /**
+     * @depends testInsert
+     */
+    public function testLogRequest(AbstractDatabase $db)
+    {
+        $logger = new Logger('test_logs');
+        $db->startLogRequest($logger);
+        $db->query("SELECT * FROM tests");
+        $db->stopLogRequest();
     }
 }

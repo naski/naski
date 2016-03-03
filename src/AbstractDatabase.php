@@ -6,7 +6,8 @@ use Monolog\Logger;
 
 abstract class AbstractDatabase
 {
-    protected $_logger = null;
+    protected $_logger = null; // Logger pour les erreurs
+    protected $_loggerRequest = null; // Logger pour toutes les requêtes exécutées
     protected $_connexionDatas = array();
 
     protected $_isConnected = false;
@@ -14,6 +15,7 @@ abstract class AbstractDatabase
     protected $_nRequests = 0; // Nombre de requêtes exécutes depuis le début de l'instance
     protected $_lastQuery = ''; // Dernière requête SQL exécutée
     protected $_result = null; // Rsultat de la dernière requête SQL exécutée
+
 
     /**
      *  @param $array keys: host, dbname, username, password
@@ -70,6 +72,11 @@ abstract class AbstractDatabase
 
         $this->_nRequests++;
         $this->_lastQuery = $query;
+
+        if ($this->_loggerRequest != null) {
+            $this->_loggerRequest->info($query);
+        }
+
         try {
             $this->_result = $this->sendQuery($query);
 
@@ -157,5 +164,15 @@ abstract class AbstractDatabase
     public function getLastQuery(): string
     {
         return $this->_lastQuery;
+    }
+
+    public function startLogRequest(Logger $logger)
+    {
+        $this->_loggerRequest = $logger;
+    }
+
+    public function stopLogRequest()
+    {
+        $this->_loggerRequest = null;
     }
 }
