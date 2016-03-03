@@ -89,6 +89,23 @@ abstract class AbstractDatabase
         }
     }
 
+    private function cleanValue($value): string
+    {
+        switch ($value) {
+            case null:
+                $value = 'NULL';
+                break;
+            case 'NOW()':
+                break;
+            default:
+                $value = $this->cleanQuotes($value);
+                $value = "'$value'";
+        }
+        return $value;
+    }
+
+    abstract protected function cleanQuotes(string $value): string;
+
     /**
      *  Insert un tableau clé/valeur dans la base de donnée
      *  Une ligne à la fois.
@@ -96,23 +113,22 @@ abstract class AbstractDatabase
      *  @param $tablename   Nom de la table
      *  @param $insertArray Clés : noms des colonnes. Valeurs : valeurs du tuple
      */
-    public function insert(string $tablename, array $insertArray, bool $addQuotes = true): int
+    public function insert(string $tablename, array $insertArray)
     {
-        $quotedValues = '';
+        $values = '';
         $keys = '';
 
         foreach ($insertArray as $key => $value) {
-            $value = addslashes($value);
-            $quotedValues .= ($value != 'NOW()') ? ("'$value',") : "$value,";
+            $value = $this->cleanValue($value);
+            $values .= "$value,";
             $keys .= ''.$key.',';
         }
 
-        $quotedValues = substr_replace($quotedValues, '', -1);
+        $values = substr_replace($values, '', -1);
         $keys = substr_replace($keys, '', -1);
-        $query = sprintf('INSERT INTO %s (%s) VALUES (%s)', $tablename, $keys, $quotedValues);
+        $query = sprintf('INSERT INTO %s (%s) VALUES (%s)', $tablename, $keys, $values);
 
-        $this->query($query);
-        return $this->lastInsertId();
+        return $this->query($query);
     }
 
     /**
@@ -127,8 +143,8 @@ abstract class AbstractDatabase
         $setter = '';
         foreach ($insertArray as $key => $value) {
             $setter .= "$key=";
-            $value = addslashes($value);
-            $setter .= ($value != 'NOW()') ? "'$value'," : "$value,";
+            $value = $this->cleanValue($value);
+            $setter .= "$value,";
         }
         $setter = substr_replace($setter, '', -1);
 

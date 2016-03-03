@@ -8,4 +8,9 @@ class PostgreSQLDatabase extends PdoDatabase
     {
         return 'pgsql';
     }
+
+    protected function cleanQuotes(string $value): string
+    {
+        return str_replace("'", "''", $value);
+    }
 }

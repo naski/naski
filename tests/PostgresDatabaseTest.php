@@ -2,6 +2,7 @@
 
 require 'bootstrap.php';
 
+use Monolog\Logger;
 use Naski\Pdo\PostgreSQLDatabase;
 use Naski\Pdo\AbstractDatabase;
 
@@ -15,6 +16,8 @@ class PostgresDatabaseTest extends AbstractTester
 
         $db = new PostgreSQLDatabase($GLOBALS['DB_POSTGRES']);
         $db->forceConnect();
+
+        $db->startLogRequest(new Logger('postgres'));
 
         return $db;
     }

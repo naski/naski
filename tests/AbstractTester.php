@@ -3,6 +3,7 @@
 use Naski\Pdo\AbstractDatabase;
 
 use Monolog\Logger;
+use Psr\Log\AbstractLogger;
 
 abstract class AbstractTester extends PHPUnit_Framework_TestCase
 {
@@ -20,22 +21,22 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
      */
     public function testInsert(AbstractDatabase $db) :AbstractDatabase
     {
-        $id = $db->insert('tests',
+        $db->insert('tests',
             array(
                 'row1' => 'v11',
                 'row2' => 'v12',
             )
         );
 
-        $this->assertEquals($id, 1);
-
-        $id = $db->insert('tests',
+        $db->insert('tests',
             array(
                 'row1' => 'gogo',
                 'row2' => 'gogo',
             )
         );
-        $this->assertEquals($id, 2);
+
+        $q = $db->query("SELECT COUNT(*) FROM tests");
+        $this->assertEquals($q->fetch()[0], 2);
 
         return $db;
     }
@@ -108,6 +109,21 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     /**
      * @depends testInsert
      */
+    public function testNullInsert(AbstractDatabase $db)
+    {
+
+        $db->insert('tests', array(
+            'row1' => 'l1',
+            'row2' => null
+        ));
+
+        $q = $db->query("SELECT * FROM tests WHERE row2 IS NULL");
+        $this->assertEquals($q->rowCount(), 1);
+    }
+
+    /**
+     * @depends testInsert
+     */
     public function testLogRequest(AbstractDatabase $db)
     {
         $logger = new Logger('test_logs');
@@ -115,4 +131,6 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
         $db->query("SELECT * FROM tests");
         $db->stopLogRequest();
     }
+
+
 }

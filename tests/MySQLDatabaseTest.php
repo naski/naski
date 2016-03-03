@@ -2,6 +2,7 @@
 
 require 'bootstrap.php';
 
+use Monolog\Logger;
 use Naski\Pdo\MySQLDatabase;
 use Naski\Pdo\AbstractDatabase;
 
@@ -15,6 +16,8 @@ class MySQLDatabaseTest extends AbstractTester
 
         $db = new MySQLDatabase($GLOBALS['DB_MYSQL']);
         $db->forceConnect();
+
+        $db->startLogRequest(new Logger('mysql'));
 
         return $db;
     }
