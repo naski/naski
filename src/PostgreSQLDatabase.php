@@ -13,4 +13,10 @@ class PostgreSQLDatabase extends PdoDatabase
     {
         return str_replace("'", "''", $value);
     }
+
+    public function lastInsertId(): int
+    {
+        $l = $this->query("SELECT lastval();")->fetch();
+        return $l[0];
+    }
 }

@@ -28,12 +28,16 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
             )
         );
 
+        $this->assertEquals($db->lastInsertId(), 1);
+
         $db->insert('tests',
             array(
                 'row1' => 'gogo',
                 'row2' => 'gogo',
             )
         );
+
+        $this->assertEquals($db->lastInsertId(), 2);
 
         $q = $db->query("SELECT COUNT(*) FROM tests");
         $this->assertEquals($q->fetch()[0], 2);
