@@ -14,7 +14,7 @@ abstract class AbstractDatabase
 
     protected $_nRequests = 0; // Nombre de requêtes exécutes depuis le début de l'instance
     protected $_lastQuery = ''; // Dernière requête SQL exécutée
-    protected $_result = null; // Rsultat de la dernière requête SQL exécutée
+    protected $_result = null; // Résultat de la dernière requête SQL exécutée
 
 
     /**
