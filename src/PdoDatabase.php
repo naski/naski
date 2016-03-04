@@ -11,7 +11,7 @@ abstract class PdoDatabase extends AbstractDatabase
     /**
      *   Envoi la requete au serveur et retourne le résultat.
      */
-    protected function sendQu ery(string $query)
+    protected function sendQuery(string $query)
     {
         try {
             return $this->_pdo->query($query);
