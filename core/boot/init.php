@@ -12,6 +12,7 @@ foreach ($globals_needles as $v) {
 use Naski\Config\Config;
 use Naski\InstancesManager;
 
+
 // Variable globale contenant toutes les instances à déclarer comme globales
 $IM = new InstancesManager();
 
