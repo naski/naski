@@ -14,6 +14,7 @@ use Naski\InstancesManager;
 
 
 // Variable globale contenant toutes les instances à déclarer comme globales
+global $IM;
 $IM = new InstancesManager();
 
 $IM->recordInstance('config', new Config());
