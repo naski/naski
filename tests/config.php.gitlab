@@ -6,3 +6,10 @@ $GLOBALS['DB_MYSQL'] = array(
     'username' => 'gitlab',
     'password' => 'gitlab'
 );
+
+$GLOBALS['DB_POSTGRES'] = array(
+    'host' => '127.0.0.1',
+    'dbname' => 'gitlab',
+    'username' => 'postgres',
+    'password' => 'postgres'
+);
