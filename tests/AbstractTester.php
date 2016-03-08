@@ -136,5 +136,15 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
         $db->stopLogRequest();
     }
 
+    /**
+     * @depends testInsert
+     */
+    public function testTransaction(AbstractDatabase $db)
+    {
+        $db->getPdoInstance()->beginTransaction();
+        $db->query("SELECT * FROM tests");
+        $db->getPdoInstance()->commit();
+    }
+
 
 }
