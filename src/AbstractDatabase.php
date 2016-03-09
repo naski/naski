@@ -28,8 +28,6 @@ abstract class AbstractDatabase
         $this->_logger = $logger;
 
         $this->_connexionDatas = $connexionDatas;
-
-        $this->connect();
     }
 
     abstract protected function connectAbstract();

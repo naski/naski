@@ -23,6 +23,10 @@ abstract class PdoDatabase extends AbstractDatabase
 
     public function getPdoInstance()
     {
+        if (!$this->_isConnected) {
+            $this->connect();
+        }
+        
         return $this->_pdo;
     }
 
