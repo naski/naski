@@ -37,7 +37,7 @@ abstract class AbstractDatabase
     /**
      *  throws ConnexionFailureException.
      */
-    private function connect()
+    protected function connect()
     {
         try {
             $this->connectAbstract();
