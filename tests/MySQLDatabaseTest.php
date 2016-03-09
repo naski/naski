@@ -48,6 +48,7 @@ class MySQLDatabaseTest extends AbstractTester
           `row1` varchar(255) DEFAULT NULL,
           `row2` varchar(255) DEFAULT NULL,
           `row3` int(11) DEFAULT NULL,
+          `row4` bool,
           PRIMARY KEY (`ID`)
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
         ');

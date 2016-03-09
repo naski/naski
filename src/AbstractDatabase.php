@@ -91,6 +91,14 @@ abstract class AbstractDatabase
 
     private function cleanValue($value): string
     {
+        if ($value === true) {
+            return 'TRUE';
+        }
+
+        if ($value === false) {
+            return 'FALSE';
+        }
+
         switch ($value) {
             case null:
                 $value = 'NULL';

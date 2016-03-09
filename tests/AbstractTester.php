@@ -128,6 +128,24 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     /**
      * @depends testInsert
      */
+    public function testBooleanInsert(AbstractDatabase $db)
+    {
+
+        $db->insert('tests', array(
+            'row1' => 'l2',
+            'row4' => true
+        ));
+
+        $q = $db->query("SELECT * FROM tests WHERE row4=TRUE");
+        $this->assertEquals($q->rowCount(), 1);
+
+        $q = $db->query("SELECT * FROM tests WHERE row4=FALSE");
+        $this->assertEquals($q->rowCount(), 0);
+    }
+
+    /**
+     * @depends testInsert
+     */
     public function testLogRequest(AbstractDatabase $db)
     {
         $logger = new Logger('test_logs');

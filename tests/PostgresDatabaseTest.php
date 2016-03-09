@@ -32,7 +32,8 @@ class PostgresDatabaseTest extends AbstractTester
             	"ID" SERIAL PRIMARY KEY,
             	"row1" varchar(255) COLLATE "default",
             	"row2" varchar(255) COLLATE "default",
-            	"row3" int4
+            	"row3" int4,
+                "row4" bool
             );');
 
         return $db;
