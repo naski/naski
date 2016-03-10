@@ -1,13 +1,7 @@
 {
-    "name": "naski/core",
-    "description": "Naski Core, PHP Framework",
+    "name": "naski/naski",
+    "description": "Naski, PHP Framework",
     "license": "MIT",
-
-    "repositories": [
-        { "type": "vcs", "url": "http://gitlab.poisson-soluble.com/naski/routing.git" },
-        { "type": "vcs", "url": "http://gitlab.poisson-soluble.com/naski/config.git" },
-        { "type": "vcs", "url": "http://gitlab.poisson-soluble.com/naski/pdo.git" }
-    ],
     "authors": [
         {
             "name": "Stéphane Wouters",
@@ -16,10 +10,10 @@
     ],
     "autoload": {
         "psr-4": {
-            "Naski\\": "core/classes/"
+            "Naski\\": "src/classes/"
         },
         "files": [
-            "core/functions/functions.php"
+            "src/functions/functions.php"
         ]
     },
     "require": {
@@ -30,13 +24,14 @@
         "twbs/bootstrap": "^3.3",
         "kriswallsmith/assetic": "^1.3",
         "twig/twig": "^1.23",
-        "naski/pdo": "dev-master",
-        "naski/config": "dev-master",
-        "naski/routing": "dev-master",
         "webmozart/json": "^1.2",
         "league/uri": "^4.0",
         "components/jquery": "^2.2",
-        "guzzlehttp/guzzle": "^6.1"
+        "guzzlehttp/guzzle": "^6.1",
+        "mustangostang/spyc": "^0.5.1",
+        "wixel/gump": "1.3",
+        "nikic/fast-route": "^0.7.0",
+        "psr/http-message": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.2.8"
