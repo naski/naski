@@ -4,6 +4,9 @@ namespace Naski\Pdo;
 
 abstract class PdoDatabase extends AbstractDatabase
 {
+    /**
+     * @var \PDO
+     */
     protected $_pdo = null; // Objet PDO abstrait (Mysql...)
 
     abstract public function getPrefixe(): string;

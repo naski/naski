@@ -11,6 +11,8 @@ BundleManager::getInstance()->recordBundle(NASKI_CORE_PATH.'bundles/naskiPage/')
 BundleManager::getInstance()->recordBundle(NASKI_CORE_PATH.'bundles/dev_bar/');
 BundleManager::getInstance()->recordBundle(NASKI_CORE_PATH.'bundles/errors/');
 
+global $IM;
+
 // Configuration de l'afficheur HTML
 {
     $options = $IM->config['cache_twig'] ? array(
