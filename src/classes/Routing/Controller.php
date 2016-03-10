@@ -43,10 +43,7 @@ abstract class Controller
      * Sera appelé juste avant l'appel de l'action, prêt à l'override
      * @return void
      */
-    public function init()
-    {
-
-    }
+    public function init() { }
 
     private function testAndFilterInputs($method)
     {

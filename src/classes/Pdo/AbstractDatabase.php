@@ -104,16 +104,17 @@ abstract class AbstractDatabase
             return 'FALSE';
         }
 
-        switch ($value) {
-            case null:
-                $value = 'NULL';
-                break;
-            case 'NOW()':
-                break;
-            default:
-                $value = $this->cleanQuotes($value);
-                $value = "'$value'";
+        if ($value === null) {
+            return "NULL";
         }
+
+        if ($value == 'NOW()') {
+            return $value;
+        }
+
+        $value = $this->cleanQuotes($value);
+        $value = "'$value'";
+        
         return $value;
     }
 
