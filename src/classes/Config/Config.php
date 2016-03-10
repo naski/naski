@@ -2,6 +2,8 @@
 
 namespace Naski\Config;
 
+use Spyc;
+
 class Config implements \ArrayAccess
 {
 
@@ -36,7 +38,7 @@ class Config implements \ArrayAccess
         }
         
         try {
-            $data = \Spyc::YAMLLoad($path);
+            $data = Spyc::YAMLLoad($path);
             $this->loadArray($data);
         } catch (\Exception $e) {
             throw new FileNotFoundException($e);

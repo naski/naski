@@ -18,9 +18,9 @@ class Multisite
 
     /**
      * Contruit une instance de Multisite à partir d'une config
-     * @param  Config $config     La config à charger
-     * @param  string $rootSystem Le chemin racine du projet finisant par un /, qui sera suffixé par le rootPath de la config
-     * @return self             L'instance Multisite
+     * @param Config $config La config à charger
+     * @param string $rootWebsites
+     * @return Multisite L'instance Multisite
      * // TODO vérifier la formation de la config
      */
     public static function buildFromConfig(Config $config, string $rootWebsites): self

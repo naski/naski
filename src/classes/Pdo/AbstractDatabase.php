@@ -18,7 +18,9 @@ abstract class AbstractDatabase
 
 
     /**
-     *  @param array $keys: host, dbname, username, password
+     * @param array $connexionDatas
+     * @param Logger $logger
+     * @internal param array $keys : host, dbname, username, password
      */
     public function __construct(array $connexionDatas, Logger $logger = null)
     {
@@ -62,7 +64,10 @@ abstract class AbstractDatabase
 
     /**
      *  Traite la $query en l'envoyant au serveur ($this->sendQuery()), puis stocke le résultat
-     *  throws ConnexionFailureException, BadQueryException.
+     * @param string $query
+     * @return mixed
+     * @throws BadQueryException
+     * @throws ConnexionFailureException
      */
     public function query(string $query)
     {

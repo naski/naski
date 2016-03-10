@@ -10,6 +10,9 @@ abstract class PdoDatabase extends AbstractDatabase
 
     /**
      *   Envoi la requete au serveur et retourne le résultat.
+     * @param string $query
+     * @return
+     * @throws BadQueryException
      */
     protected function sendQuery(string $query)
     {
