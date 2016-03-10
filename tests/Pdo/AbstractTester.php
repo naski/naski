@@ -3,7 +3,6 @@
 use Naski\Pdo\AbstractDatabase;
 
 use Monolog\Logger;
-use Psr\Log\AbstractLogger;
 
 abstract class AbstractTester extends PHPUnit_Framework_TestCase
 {

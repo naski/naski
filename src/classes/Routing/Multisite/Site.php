@@ -61,9 +61,10 @@ class Site
 
     /**
      * Execute le site et déclanche son initilasiation
-     * @param  string       $rootDir Le chemin absolue de l'emplacement des sites
-     * @param  UriInterface $uri     l'URI du client
-     * @return void
+     * @param  UriInterface $uri l'URI du client
+     * @throws \Exception
+     * @throws \Naski\Config\UnknownExtensionException
+     * @internal param string $rootDir Le chemin absolue de l'emplacement des sites
      */
     public function exec(UriInterface $uri)
     {

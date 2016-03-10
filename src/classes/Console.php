@@ -26,10 +26,10 @@ class Console
     /**
      * Enregistre une nouvelle commande à la console, associée à une fonction
      *
-     * @param $cmd Le nom de la commande à enregistrer. Exemple: cleanCache
-     * @param $handler  L'handler qui sera exécuté avec call_user_func_array
+     * @param string $cmd Le nom de la commande à enregistrer. Exemple: cleanCache
+     * @param mixed $handler  L'handler qui sera exécuté avec call_user_func_array
      */
-    public function recordCommand($cmd, $handler)
+    public function recordCommand(string $cmd, $handler)
     {
         $this->_commands[$cmd] = $handler;
     }
@@ -37,10 +37,10 @@ class Console
     /**
      * Enregistre une nouvelle commande à la console, qui exécutera un fichier
      *
-     * @param $cmdname Le nom de la commande à enregistrer
-     * @param $filename Le chemin complet vers le fichier qui sera exécuté
+     * @param string $cmdname Le nom de la commande à enregistrer
+     * @param string $filename Le chemin complet vers le fichier qui sera exécuté
      */
-    public function recordFileExec($cmdname, $filename) {
+    public function recordFileExec(string $cmdname, string $filename) {
 
         $f = function ($filename) {
             return function($p1="", $p2="", $p3="") use($filename) {
@@ -63,7 +63,7 @@ class Console
     /**
      * Exécute la commande qu'il faut en fonction des urguments
      *
-     * @param $argv La liste des arguments entrés par l'utilisateur
+     * @param array $argv La liste des arguments entrés par l'utilisateur
      */
     public function process(array $argv)
     {

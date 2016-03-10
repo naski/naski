@@ -72,6 +72,6 @@ class Multisite
             }
         }
 
-        return;
+        return null;
     }
 }

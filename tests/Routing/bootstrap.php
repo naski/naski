@@ -6,7 +6,7 @@ $_SERVER['REQUEST_METHOD'] = 'GET';
 
 
 $sitee = "nop";
-function onSite($site = 'yes') {
+function onSite($site) {
     global $sitee;
     $sitee = $site->name;
 }

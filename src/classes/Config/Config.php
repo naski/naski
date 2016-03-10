@@ -11,17 +11,18 @@ class Config implements \ArrayAccess
      * Charge un fichier dans la config. L'extention est dynamiquement chargée.
      * Extentions prisent en charge : .json, .yml
      * @param  string $path Le chemin absolue du fuchier
-     * @return void
+     * @throws FileNotFoundException
+     * @throws UnknownExtensionException
      */
     public function loadFile(string $path)
     {
         $tab = explode('.', $path);
         switch (end($tab) ?? '') {
             case 'yml':
-                return $this->loadYAMLFile($path);
+                $this->loadYAMLFile($path);
                 break;
             case 'json':
-                return $this->loadJSONFile($path);
+                $this->loadJSONFile($path);
                 break;
             default:
                 throw new UnknownExtensionException('Extention du fichier '.$path.' non gérée');

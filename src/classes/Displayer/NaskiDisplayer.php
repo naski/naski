@@ -2,23 +2,16 @@
 
 namespace Naski\Displayer;
 
+use Assetic\AssetManager;
 use Naski\Displayer\Bundle\BundleManager;
 
 use Assetic\Asset\AssetCollection;
-use Assetic\Asset\AssetCache;
-use Assetic\Factory\AssetFactory;
-use Assetic\Cache\FilesystemCache;
-use Assetic\Extension\Twig\AsseticExtension;
 use Assetic\AssetWriter;
-use Assetic\Extension\Twig\TwigFormulaLoader;
-use Assetic\Extension\Twig\TwigResource;
-use Assetic\Factory\LazyAssetManager;
-use Assetic\Filter\CleanCssFilter;
+
 
 class NaskiDisplayer
 {
     private $_twigInstance = null;
-    private $_assetFactory = null;
 
     private $_twigParams = array('bundles' => array());
     private $_css; // array<FileAsset|GlobAsset>
@@ -81,8 +74,6 @@ class NaskiDisplayer
 
     private function buildCss()
     {
-        global $IM;
-
         $twig_files = array(); // Liens affichés dans l'HTML
 
         if (count($this->_css)) {
@@ -91,10 +82,10 @@ class NaskiDisplayer
                 $collection = new AssetCollection($input);
                 $collection->setTargetPath($output);
 
-                $am = new \Assetic\AssetManager();
+                $am = new AssetManager();
                 $am->set('css', $collection);
 
-                $writer = new \Assetic\AssetWriter(ROOT_SYSTEM.'web/generated_assets/css/');
+                $writer = new AssetWriter(ROOT_SYSTEM.'web/generated_assets/css/');
                 $writer->writeManagerAssets($am);
 
                 $twig_files[] = '/generated_assets/css/'.$output;
@@ -106,8 +97,6 @@ class NaskiDisplayer
 
     private function buildJs()
     {
-        global $IM;
-
         $twig_files = array(); // Liens affichés dans l'HTML
 
         if (count($this->_js)) {
@@ -116,10 +105,10 @@ class NaskiDisplayer
                 $collection = new AssetCollection($input);
                 $collection->setTargetPath($output);
 
-                $am = new \Assetic\AssetManager();
+                $am = new AssetManager();
                 $am->set('js', $collection);
 
-                $writer = new \Assetic\AssetWriter(ROOT_SYSTEM.'web/generated_assets/js/');
+                $writer = new AssetWriter(ROOT_SYSTEM.'web/generated_assets/js/');
                 $writer->writeManagerAssets($am);
 
                 $twig_files[] = '/generated_assets/js/'.$output;

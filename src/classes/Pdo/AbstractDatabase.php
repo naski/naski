@@ -18,7 +18,7 @@ abstract class AbstractDatabase
 
 
     /**
-     *  @param $array keys: host, dbname, username, password
+     *  @param array $keys: host, dbname, username, password
      */
     public function __construct(array $connexionDatas, Logger $logger = null)
     {
@@ -32,7 +32,7 @@ abstract class AbstractDatabase
 
     abstract protected function connectAbstract();
     abstract protected function sendQuery(string $query);
-    abstract protected function lastInsertId(): int;
+    abstract public function lastInsertId(): int;
 
     /**
      *  throws ConnexionFailureException.
@@ -118,8 +118,9 @@ abstract class AbstractDatabase
      *  Insert un tableau clé/valeur dans la base de donnée
      *  Une ligne à la fois.
      *
-     *  @param $tablename   Nom de la table
-     *  @param $insertArray Clés : noms des colonnes. Valeurs : valeurs du tuple
+     *  @param string $tablename   Nom de la table
+     *  @param array $insertArray  Clés : noms des colonnes. Valeurs : valeurs du tuple
+     *  @return string
      */
     public function insert(string $tablename, array $insertArray)
     {
@@ -142,9 +143,10 @@ abstract class AbstractDatabase
     /**
      *  Met à jour les tuples d'une table, selon une condition.
      *
-     *  @param $tablename       Nom de la table
-     *  @param $insertArray     Clés : noms des colonnes. Valeurs : valeurs du tuple
-     *  @param $conditon        Liste des champs à respecter
+     *  @param string $tablename       Nom de la table
+     *  @param array $insertArray     Clés : noms des colonnes. Valeurs : valeurs du tuple
+     *  @param array $conditon        Liste des champs à respecter
+     *  @return mixed Le résultat de la query
      */
     public function update(string $tablename, array $insertArray, array $conditon)
     {
@@ -165,7 +167,6 @@ abstract class AbstractDatabase
 
     private static function createWhereCondition(array $array): string
     {
-        $addQuotes = false;
         $cond = '';
         if (!empty($array)) {
             $cond = "WHERE ";
