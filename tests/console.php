@@ -9,7 +9,7 @@
 
 ini_set('display_errors', 1);
 
-require(__DIR__.'/boot.php');
+require_once(__DIR__.'/boot.php');
 
 use Naski\Console;
 

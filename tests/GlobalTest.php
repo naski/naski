@@ -1,6 +1,6 @@
 <?php
 
-require 'boot.php';
+require_once 'boot.php';
 
 class GlobalTesteur extends PHPUnit_Framework_TestCase
 {
