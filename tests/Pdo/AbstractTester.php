@@ -163,5 +163,17 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
         $db->getPdoInstance()->commit();
     }
 
+    /**
+     * @depends testInsert
+     */
+    public function testOneResult(AbstractDatabase $db)
+    {
+        $n = $db->getFirstColumn("SELECT count(*) from tests");
+        $this->assertGreaterThan(0, $n);
+
+        $n = $db->getFirstColumn("SELECT * from tests where row1='srautie'");
+        $this->assertNull($n);
+    }
+
 
 }

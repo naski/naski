@@ -206,4 +206,16 @@ abstract class AbstractDatabase
     {
         $this->_loggerRequest = null;
     }
+
+    /**
+     * @param $query
+     * @return string La première colonne de la première ligne de la colonne
+     * @throws BadQueryException
+     */
+    public function getFirstColumn($query)
+    {
+        $q = $this->query($query);
+        $l = $q->fetch();
+        return $l[0] ?? null;
+    }
 }
