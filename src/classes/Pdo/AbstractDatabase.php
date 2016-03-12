@@ -114,7 +114,7 @@ abstract class AbstractDatabase
 
         $value = $this->cleanQuotes($value);
         $value = "'$value'";
-        
+
         return $value;
     }
 
@@ -164,22 +164,21 @@ abstract class AbstractDatabase
         }
         $setter = substr_replace($setter, '', -1);
 
-        $cond = self::createWhereCondition($conditon);
+        $cond = $this->createWhereCondition($conditon);
 
         $query = sprintf('UPDATE %s SET %s %s', $tablename, $setter, $cond);
 
         return $this->query($query);
     }
 
-    private static function createWhereCondition(array $array): string
+    private function createWhereCondition(array $array): string
     {
         $cond = '';
         if (!empty($array)) {
             $cond = "WHERE ";
             foreach ($array as $key => $value) {
-                $value = addslashes($value);
-                $cond .= "$key=";
-                $cond .= ($value != 'NOW()') ? "'$value'" : "$value";
+                $value = $this->cleanValue($value);
+                $cond .= "$key=$value";
                 $cond .= " AND ";
             }
             $cond = substr($cond, 0, -strlen(" AND "));
