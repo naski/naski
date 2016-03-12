@@ -3,10 +3,18 @@
 namespace Naski\Pdo;
 
 use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 abstract class AbstractDatabase
 {
+    /**
+     * @var LoggerInterface
+     */
     protected $_logger = null; // Logger pour les erreurs
+
+    /**
+     * @var LoggerInterface
+     */
     protected $_loggerRequest = null; // Logger pour toutes les requêtes exécutées
     protected $_connexionDatas = array();
 

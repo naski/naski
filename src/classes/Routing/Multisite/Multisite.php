@@ -13,7 +13,10 @@ use Psr\Http\Message\UriInterface;
  */
 class Multisite
 {
-    private $_websites = array(); // array<array>
+    /**
+     * @var Site[]
+     */
+    private $_websites = array();
     private $_onExecSitehandler = null;
 
     /**

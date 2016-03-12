@@ -2,6 +2,8 @@
 
 namespace Naski\Routing;
 
+use FastRoute\Dispatcher;
+use FastRoute\RouteCollector;
 use Naski\Config\Config;
 use FastRoute;
 
@@ -12,6 +14,10 @@ use FastRoute;
  */
 class Routing
 {
+
+    /**
+     * @var Dispatcher
+     */
     private $_dispatcher;
     private $_rulesArray = array(); // array<Rule>
     private $_defaultRule = null;
@@ -66,7 +72,7 @@ class Routing
     {
         global $that;
         $that = $this;
-        $this->_dispatcher = \FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+        $this->_dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
             global $that;
             foreach ($that->getRules() as $rule) {
                 $r->addRoute($rule->method, $rule->path, $rule);
@@ -116,6 +122,10 @@ class Routing
     private static function processRule(Rule $rule, array $vars)
     {
         $controllerName = $rule->controller;
+
+        /**
+         * @var $ctrl \Naski\Controller
+         */
         $ctrl = new $controllerName($rule);
         $ctrl->init();
         call_user_func_array(array($ctrl, $rule->action), $vars);

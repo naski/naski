@@ -64,12 +64,13 @@ class Site
      * @param  UriInterface $uri l'URI du client
      * @throws \Exception
      * @throws \Naski\Config\UnknownExtensionException
-     * @internal param string $rootDir Le chemin absolue de l'emplacement des sites
      */
     public function exec(UriInterface $uri)
     {
         $SITE = $this; // Utilisable dans le fichier inclus
         $PATH = $this->getNewPath($uri->getPath());
+
+        /** @noinspection PhpIncludeInspection */
         require $this->src.$this->initFile;
 
         if ($this->routingFile ?? '') {
