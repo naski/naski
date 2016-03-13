@@ -72,12 +72,17 @@ class Routing
     {
         global $that;
         $that = $this;
-        $this->_dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
-            global $that;
-            foreach ($that->getRules() as $rule) {
-                $r->addRoute($rule->method, $rule->path, $rule);
-            }
-        });
+
+        $f = function ($that) {
+            return function (RouteCollector $r) use ($that) {
+                foreach ($that->getRules() as $rule) {
+                    $r->addRoute($rule->method, $rule->path, $rule);
+                }
+            };
+        };
+
+
+        $this->_dispatcher = FastRoute\simpleDispatcher($f($this));
     }
 
     /**

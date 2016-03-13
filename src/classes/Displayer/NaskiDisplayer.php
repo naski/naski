@@ -2,6 +2,7 @@
 
 namespace Naski\Displayer;
 
+use Assetic\Asset\AssetInterface;
 use Assetic\AssetManager;
 use Naski\Displayer\Bundle\BundleManager;
 
@@ -14,10 +15,15 @@ class NaskiDisplayer
     private $_twigInstance = null;
 
     private $_twigParams = array('bundles' => array());
-    private $_css; // array<FileAsset|GlobAsset>
-    private $_js; // array<FileAsset|GlobAsset>
+
+    private $_css;
+    private $_js;
 
     public $usedBundlesStack = array();
+
+    /**
+     * @var AssetInterface[]
+     */
     public $includedCssFilesStack = array();
 
     public function __construct($twigOption)
@@ -61,7 +67,7 @@ class NaskiDisplayer
         $this->_twigParams = array_merge($array, $this->_twigParams);
     }
 
-    public function addCssFile($output, $input)
+    public function addCssFile($output, AssetInterface $input)
     {
         $this->includedCssFilesStack[] = $input;
         $this->_css[$output][] = $input;

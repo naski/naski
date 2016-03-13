@@ -2,7 +2,8 @@
 
 namespace Naski\Config;
 
-use Spyc;
+use /** @noinspection PhpUndefinedClassInspection */
+    Spyc;
 
 class Config implements \ArrayAccess
 {
@@ -38,6 +39,7 @@ class Config implements \ArrayAccess
         }
         
         try {
+            /** @noinspection PhpUndefinedClassInspection */
             $data = Spyc::YAMLLoad($path);
             $this->loadArray($data);
         } catch (\Exception $e) {
