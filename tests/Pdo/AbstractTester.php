@@ -3,6 +3,7 @@
 use Naski\Pdo\AbstractDatabase;
 
 use Monolog\Logger;
+use Naski\Pdo\PdoDatabase;
 
 abstract class AbstractTester extends PHPUnit_Framework_TestCase
 {
@@ -156,7 +157,7 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     /**
      * @depends testInsert
      */
-    public function testTransaction(AbstractDatabase $db)
+    public function testTransaction(PdoDatabase $db)
     {
         $db->getPdoInstance()->beginTransaction();
         $db->query("SELECT * FROM tests");
@@ -166,7 +167,7 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     /**
      * @depends testInsert
      */
-    public function testOneResult(AbstractDatabase $db)
+    public function testOneResult(PdoDatabase $db)
     {
         $n = $db->getFirstColumn("SELECT count(*) from tests");
         $this->assertGreaterThan(0, $n);

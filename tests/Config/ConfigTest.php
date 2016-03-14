@@ -30,10 +30,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     {
         $config = new Config();
         $config->loadFile(__DIR__.'/config.json');
-        $cpt = 0;
-        foreach ($config['array1'] as $value) {
-            $cpt++;
-        }
+        $cpt = count($config['array1']);
         $this->assertEquals($cpt, 7);
     }
 
