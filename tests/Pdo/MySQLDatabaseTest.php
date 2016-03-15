@@ -37,6 +37,18 @@ class MySQLDatabaseTest extends AbstractTester
     }
 
     /**
+     * @expectedException Naski\Pdo\ConnexionFailureException
+     */
+    public function testPostConnexion()
+    {
+        $data = $GLOBALS['DB_MYSQL'];
+        $data['port'] = 3305; // Mauvais port, volotaire
+        $db = new MySQLDatabase($data);
+
+        $db->forceConnect();
+    }
+
+    /**
      * @depends testConnect
      */
     public function testCreateTable(AbstractDatabase $db) :AbstractDatabase

@@ -48,8 +48,13 @@ abstract class PdoDatabase extends AbstractDatabase
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
         );
 
+        $dsn = $this->getPrefixe().':host='.$array['host'].';dbname='.$array['dbname'].'';
+        if (isset($array['port'])) {
+            $dsn .= ";port=".$array['port'];
+        }
+
         $this->_pdo = new \PDO(
-            $this->getPrefixe().':host='.$array['host'].';dbname='.$array['dbname'].'',
+            $dsn,
             $array['username'],
             $array['password'],
             $options
