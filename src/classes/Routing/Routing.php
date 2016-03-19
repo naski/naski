@@ -85,13 +85,7 @@ class Routing
         $this->_dispatcher = FastRoute\simpleDispatcher($f($this));
     }
 
-    /**
-     * Exécute la première règle qui match avec le path donné
-     * @param  string $path      Le chemin à tester
-     * @param  bool $processIt Permet d'éxécuter ou non la règle
-     * @return bool            Si une régle à été trouvée
-     */
-    public function process(string $path, $processIt = true): bool
+    protected function processWithMethod(string $path, string $httpMethod, $processIt = true): bool
     {
         $this->createDispatcher();
         $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -119,12 +113,23 @@ class Routing
     }
 
     /**
+     * Exécute la première règle qui match avec le path donné
+     * @param  string $path      Le chemin à tester
+     * @param  bool $processIt Permet d'éxécuter ou non la règle
+     * @return bool            Si une régle à été trouvée
+     */
+    public function process(string $path, $processIt = true): bool
+    {
+        return $this->processWithMethod($path, $_SERVER['REQUEST_METHOD'], $processIt);
+    }
+
+    /**
      * Execute la régle passée en parametre
      * @param  Rule   $rule La régle à exécuter
      * @param  array  $vars Tableau clé valeurs des variables détéctées
      * @return void
      */
-    private static function processRule(Rule $rule, array $vars)
+    protected static function processRule(Rule $rule, array $vars)
     {
         $controllerName = $rule->controller;
 

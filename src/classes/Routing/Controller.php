@@ -23,6 +23,19 @@ abstract class Controller
         $this->buildInputs();
     }
 
+    private static $fackedRaw = null;
+
+    public static function setCustomRaw(string $raw) {
+        self::$fackedRaw = $raw;
+    }
+
+    private static function getRaw() {
+        if (self::$fackedRaw == null) {
+            return file_get_contents('php://input');
+        }
+        return self::$fackedRaw;
+    }
+
     private function buildInputs()
     {
         $this->post = $_POST;
@@ -31,7 +44,7 @@ abstract class Controller
         $this->get = $_GET;
         $this->testAndFilterInputs('get');
 
-        $this->raw = file_get_contents('php://input');
+        $this->raw = self::getRaw();
         $this->json = json_decode($this->raw, true);
         if ($this->_rule->needJson && !$this->json) {
             $this->_inputsValids = false;
