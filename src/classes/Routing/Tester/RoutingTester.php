@@ -7,19 +7,21 @@ use Naski\Routing\Routing;
 use FastRoute\Dispatcher;
 use FastRoute;
 
-class RoutingTester extends Routing
+class RoutingTester
 {
+
+    private $routing;
 
     public function __construct(Routing $r)
     {
-        foreach ($r as $key => $v) {
-            $this->$key = $v;
-        }
+        $this->routing = $r;
     }
 
     private function simulateRequest($path, $method) {
+        $_SERVER['REQUEST_METHOD'] = $method;
+
         ob_start();
-        $this->processWithMethod($path, $method, true);
+        $this->routing->process($path, $method, true);
         $content = ob_get_contents();
         ob_end_flush();
         return $content;
