@@ -1,0 +1,12 @@
+cache:
+  paths:
+  - vendor/
+
+before_script:
+- source /root/.phpbrew/bashrc
+- phpbrew use 7.0.2
+- composer update
+
+test:app:
+  script:
+  - phpunit tests/

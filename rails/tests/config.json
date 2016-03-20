@@ -1,0 +1,10 @@
+{
+    "var1": true,
+    "array1": [
+        "monday", "thesdasy", "wednesday", "thursday", "friday", "saturday", "sunday"
+    ],
+    "sub": {
+        "var11": "ok",
+        "var12": "hey"
+    }
+}
