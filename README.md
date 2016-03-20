@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 # Framework Naski
 
 ## Présentation
-=======
-# Présentation
->>>>>>> demo/master
 
 Ce framework met à disposition des fonctionnalités et outils imbriquables, sans l'obligation de les utiliser.
 
@@ -25,22 +21,6 @@ Fonctionnaltés à venir :
 - Système de cache Memcache
 - API de maintenance multi-serveur (git pull, composer update, cleaner...)
 
-<<<<<<< HEAD
 ## Get started
 Un minimum de pré-requis est nécessaire pour créer un nouveau projet avec Naski Core.  
 Voir projet de démonstration. (En construction)
-=======
-# Installation
-
-Installer les dépendances :
-```
-composer update
-```
-
-Configurer les droits du repertoire (linux uniquement) :
-```
-./core/scripts/set_perms.sh
-```
-
-Faire pointer un alias domaine racine sur /web/
->>>>>>> demo/master

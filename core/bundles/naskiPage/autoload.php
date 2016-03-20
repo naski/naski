@@ -12,12 +12,7 @@ class NaskiPageBundle extends Bundle
     public function exec()
     {
         global $IM;
-<<<<<<< HEAD
         $IM->dpl->addCssFile('bootstrap.css', new FileAsset(ROOT_SYSTEM.'vendor/twbs/bootstrap/dist/css/bootstrap.css'));
         $IM->dpl->addCssFile('naski.css', new FileAsset($this->directory.'style.css'));
-=======
-        $IM->dpl->addCssFile(new FileAsset(ROOT_SYSTEM.'vendor/twbs/bootstrap/dist/css/bootstrap.css'));
-        $IM->dpl->addCssFile(new FileAsset($this->directory.'style.css'));
->>>>>>> demo/master
     }
 }
