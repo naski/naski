@@ -1,0 +1,14 @@
+{
+    "rules": [
+        {
+            "path": "/product",
+            "controller": "TestController",
+            "action": "testAction"
+        },
+        {
+            "path": "*",
+            "controller": "TestController",
+            "action": "notFoundAction"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "rules": [
+        {
+            "path": "/login",
+            "controller": "TestController",
+            "action": "loginAction",
+            "post": [
+                {
+                    "name": "username"
+                },
+                {
+                    "name": "password",
+                    "validation_rules": "required"
+                }
+            ]
+        }
+    ]
+}

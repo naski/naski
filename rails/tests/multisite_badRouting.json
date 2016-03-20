@@ -1,0 +1,10 @@
+{
+    "websites": [
+        {
+            "name": "Site 2",
+            "src": "./",
+            "initFile": "intiFile.php",
+            "routingFile": "bad.php"
+        }
+    ]
+}
