@@ -6,19 +6,27 @@
             {{ css_content }}
         </style>
         {% block stylesheets %}
+<<<<<<< HEAD
             {% for file in css_files %}
                 <link href="{{ file }}" rel="stylesheet" type="text/css" />
             {% endfor %}
         {% endblock %}
 
+=======
+        {% endblock %}
+>>>>>>> demo/master
     </head>
     <body>
         {% block body %}{% endblock %}
         {% include '@devBar/view.twig' %}
+<<<<<<< HEAD
         {% block javascripts %}
             {% for file in js_files %}
                 <script type="text/javascript" src="{{ file }}"></script>
             {% endfor %}
         {% endblock %}
+=======
+        {% block javascripts %}{% endblock %}
+>>>>>>> demo/master
     </body>
 </html>

@@ -1,5 +1,12 @@
 vendor/
+<<<<<<< HEAD
 
+=======
+app/cache
+app/logs
+
+# Provisoirement
+>>>>>>> demo/master
 composer.lock
 
 # OS or Editor folders

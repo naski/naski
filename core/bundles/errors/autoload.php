@@ -20,10 +20,13 @@ class ErrorBundle extends Bundle
     {
         global $IM;
 
+<<<<<<< HEAD
         if (!$IM->config['show_php_errors']) {
             die();
         }
 
+=======
+>>>>>>> demo/master
         $this->exception = $e;
 
         $IM->dpl->useBundle('naskiPage');
