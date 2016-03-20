@@ -1,8 +1,0 @@
-language: php
-php:
-  - '7.0'
-script: phpunit tests/ --verbose
-before_install:
-  - phpunit --version
-install:
-  - composer update
