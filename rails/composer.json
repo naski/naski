@@ -1,0 +1,24 @@
+{
+    "version": "dev-master",
+    "name": "naski/pdo",
+    "description": "PHP Interface for SQL SQBD",
+    "authors": [
+        {
+            "name": "Stéphane Wouters",
+            "email": "doelia@doelia.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Naski\\Pdo\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "monolog/monolog": "^1.17"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.2.8"
+    },
+    "license": "MIT"
+}
