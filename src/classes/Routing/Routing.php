@@ -39,9 +39,7 @@ class Routing
 
     public function __construct()
     {
-        if (!isset($_SERVER['REQUEST_METHOD'])) {
-            throw new \Exception('Impossible de router une requête non HTTP');
-        }
+       
     }
 
     /**
