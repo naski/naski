@@ -34,6 +34,18 @@ class Console
         $this->_commands[$cmd] = $handler;
     }
 
+    public static function execCmdInShell($cmd) {
+        echo "exec in shell : $cmd\n";
+
+        $out = array();
+        exec($cmd, $out);
+
+        foreach ($out as $l) {
+            echo "$l\n";
+        }
+        echo "\n";
+    }
+
     /**
      * Enregistre une nouvelle commande à la console, qui exécutera un fichier
      *
@@ -45,15 +57,7 @@ class Console
         $f = function ($filename) {
             return function($p1="", $p2="", $p3="") use($filename) {
                 $cmd = "$filename $p1 $p2 $p3 2>&1";
-                echo "exec in shell : $cmd\n";
-
-                $out = array();
-                exec($cmd, $out);
-
-                foreach ($out as $l) {
-                    echo "$l\n";
-                }
-                echo "\n";
+                self::execCmdInShell($cmd);
             };
         };
 
