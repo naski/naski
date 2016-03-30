@@ -1,6 +1,7 @@
 <?php
 
 namespace Naski;
+use Psr\Log\LoggerInterface;
 
 /**
  * Permet de stocker et d'accéder de manière globale à des instances
@@ -31,6 +32,11 @@ class InstancesManager
      * @var \Naski\Routing\Rule
      */
     public $rule;
+
+    /**
+     * @var LoggerInterface
+     */
+    public $logger;
 
     private $_instances = array();
 
