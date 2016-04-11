@@ -18,7 +18,14 @@ global $IM;
 $IM = new InstancesManager();
 
 $IM->recordInstance('config', new Config());
-$IM->config->loadFile(CONFIG_FILE);
+$IM->config->loadFile(NASKI_CORE_PATH.'ressources/config_default.yml');
+{
+    $userNaskiConfig = \Naski\getFileInParents(ROOT_SYSTEM, 'naski_config.yml');
+    if ($userNaskiConfig != null) {
+        $IM->config->loadFile($userNaskiConfig);
+    }
+
+}
 
 if ($IM->config['show_php_errors'] ?? false) {
     ini_set("display_errors", 1);

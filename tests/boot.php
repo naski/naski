@@ -21,3 +21,8 @@ if (!require_once __DIR__.'/../vendor/autoload.php') {
 
 // Initialisation du framework
 require_once NASKI_CORE_PATH.'boot/init.php';
+
+if (!require_once __DIR__.'/../vendor/autoload.php') {
+    trigger_error('Exécuter `composer install` pour télécharger le vendor/', E_USER_ERROR);
+    exit();
+}
