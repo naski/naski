@@ -13,4 +13,9 @@ class MySQLDatabase extends PdoDatabase
     {
         return addslashes($value);
     }
+
+    public function upsert(string $tablename, array $insertArray, array $condition)
+    {
+        throw new \Exception("Pas encore implémenté");
+    }
 }

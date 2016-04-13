@@ -19,4 +19,30 @@ class PostgreSQLDatabase extends PdoDatabase
         $l = $this->query("SELECT lastval();")->fetch();
         return $l[0];
     }
+
+    public function upsert(string $tablename, array $insertArray, array $condition)
+    {
+        $this->update($tablename, $insertArray, $condition);
+
+        $values = '';
+        $keys = '';
+
+        foreach ($insertArray as $key => $value) {
+            $value = $this->cleanValue($value);
+            $values .= "$value,";
+            $keys .= ''.$key.',';
+        }
+
+        $values = substr_replace($values, '', -1);
+        $keys = substr_replace($keys, '', -1);
+
+        $newCondition = [];
+        foreach ($condition as $key => $value) {
+            $newCondition["t.$key"] = $value;
+        }
+        $cond = $this->createWhereCondition($newCondition);
+        $query = sprintf("INSERT INTO $tablename ($keys) SELECT $values WHERE NOT EXISTS (SELECT 1 FROM $tablename t $cond)");
+        $this->query($query);
+    }
+    
 }

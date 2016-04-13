@@ -38,4 +38,19 @@ class PostgresDatabaseTest extends AbstractTester
 
         return $db;
     }
+
+    /**
+     * @depends testInsert
+     */
+    public function testUpsert(AbstractDatabase $db) :AbstractDatabase
+    {
+        $db->upsert('tests',
+            array(
+                'row2' => 'new_upsert',
+            ),
+            array('row1' => 'v11')
+        );
+
+        return $db;
+    }
 }
