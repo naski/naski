@@ -35,9 +35,14 @@ abstract class AbstractDatabase
         if ($logger == null) {
             $logger = new Logger('unused_logger');
         }
-        $this->_logger = $logger;
+        $this->setLogger($logger);
 
         $this->_connexionDatas = $connexionDatas;
+    }
+
+    public function setLogger(Logger $logger)
+    {
+        $this->_logger = $logger;
     }
 
     abstract protected function connectAbstract();
@@ -177,6 +182,13 @@ abstract class AbstractDatabase
         $query = sprintf('UPDATE %s SET %s %s', $tablename, $setter, $cond);
 
         return $this->query($query);
+    }
+
+    public function delete(string $tablename, array $condition)
+    {
+        $cond = $this->createWhereCondition($condition);
+        $query = "DELETE FROM $tablename $cond";
+        $this->query($query);
     }
 
     abstract public function upsert(string $tablename, array $insertArray, array $condition);

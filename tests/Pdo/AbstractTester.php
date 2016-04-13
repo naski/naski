@@ -87,7 +87,22 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
         return $db;
     }
 
-    
+    /**
+     * @depends testUpdate
+     */
+    public function testDelete(AbstractDatabase $db) :AbstractDatabase
+    {
+        $db->delete('tests',
+            array('row1' => 'v11')
+        );
+
+        $q = $db->query("SELECT * FROM tests WHERE row1='v11'");
+        $this->assertEquals($q->rowCount(), 0);
+
+        return $db;
+    }
+
+
 
     /**
      * @depends testInsert
