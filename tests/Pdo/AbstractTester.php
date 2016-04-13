@@ -90,6 +90,21 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
     /**
      * @depends testInsert
      */
+    public function testUpsert(AbstractDatabase $db) :AbstractDatabase
+    {
+        $db->upsert('tests',
+            array(
+                'row2' => 'new_upsert',
+            ),
+            array('row1' => 'v11')
+        );
+
+        return $db;
+    }
+
+    /**
+     * @depends testInsert
+     */
     public function testQuoted(AbstractDatabase $db) :AbstractDatabase
     {
         $message = "c'est une histoire";

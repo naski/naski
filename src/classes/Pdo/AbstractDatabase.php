@@ -179,6 +179,26 @@ abstract class AbstractDatabase
         return $this->query($query);
     }
 
+    public function upsert(string $tablename, array $insertArray, array $condition)
+    {
+        $this->update($tablename, $insertArray, $condition);
+
+        $values = '';
+        $keys = '';
+
+        foreach ($insertArray as $key => $value) {
+            $value = $this->cleanValue($value);
+            $values .= "$value,";
+            $keys .= ''.$key.',';
+        }
+
+        $values = substr_replace($values, '', -1);
+        $keys = substr_replace($keys, '', -1);
+        $cond = $this->createWhereCondition($condition);
+        $query = sprintf("INSERT INTO $tablename ($keys) SELECT $values WHERE NOT EXISTS (SELECT 1 FROM $tablename $cond)");
+
+    }
+
     private function createWhereCondition(array $array): string
     {
         $cond = '';
