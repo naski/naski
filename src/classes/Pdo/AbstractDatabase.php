@@ -208,6 +208,30 @@ abstract class AbstractDatabase
         return $cond;
     }
 
+    /**
+     * Construit une chaine SQL dlf : (VALUES (201486), (1825186), (998608), ... )
+     * Utilisable avec un IN
+     * @param array $list
+     * @return string
+     * @throws \Exception
+     */
+    public static function buildListValues(array $list): string
+    {
+        if (count($list) == 0) {
+            throw new \Exception("Impossible de builder une liste vide");
+        }
+
+        $s = "(VALUES ";
+        foreach ($list as $v) {
+            $s .= "('$v'),";
+        }
+        $s = rtrim($s, ",");
+
+        $s .= ') ';
+
+        return $s;
+    }
+
     public function getRequestsNumber() :int
     {
         return $this->_nRequests;

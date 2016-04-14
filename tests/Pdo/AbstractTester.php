@@ -193,5 +193,11 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
         $this->assertNull($n);
     }
 
+    public function testBuildList()
+    {
+        $s = AbstractDatabase::buildListValues(array('98989', '34270'));
+        $this->assertEquals("(VALUES ('98989'),('34270')) ", $s);
+    }
+
 
 }
