@@ -21,7 +21,7 @@ class RoutingTester
         $_SERVER['REQUEST_METHOD'] = $method;
 
         ob_start();
-        $this->routing->process($path, $method, true);
+        $this->routing->process($path, true);
         $content = ob_get_contents();
         ob_end_flush();
         return $content;

@@ -4,7 +4,6 @@ require_once 'bootstrap.php';
 
 use Naski\Routing\Routing;
 use Naski\Routing\Rule;
-use Naski\Config\Config;
 
 class TesterTest extends PHPUnit_Framework_TestCase
 {
