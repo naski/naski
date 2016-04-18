@@ -91,7 +91,7 @@ class Console
      */
     private function showAvailableCommands()
     {
-        echo "Commandes disponiables:\n";
+        echo "Commandes disponibles:\n";
         foreach ($this->_commands as $c => $v) {
             echo "- $c\n";
         }
