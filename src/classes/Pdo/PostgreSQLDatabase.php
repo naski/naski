@@ -44,5 +44,13 @@ class PostgreSQLDatabase extends PdoDatabase
         $query = sprintf("INSERT INTO $tablename ($keys) SELECT $values WHERE NOT EXISTS (SELECT 1 FROM $tablename t $cond)");
         $this->query($query);
     }
-    
+
+    public function execFile($filename)
+    {
+        $datas = $this->getConnexionDatas();
+        putenv("PGPASSWORD=".$datas['password']);
+        $cmd = "psql -h ".$datas['host']." -U ".$datas['username']." -d ".$datas['dbname']." -f ".$filename;
+		exec($cmd);
+    }
+
 }

@@ -53,4 +53,18 @@ class PostgresDatabaseTest extends AbstractTester
 
         return $db;
     }
+
+    /**
+     * @depends testConnect
+     */
+    public function testImportFile(AbstractDatabase $db) :AbstractDatabase
+    {
+        echo "testImportFile\n";
+        $db->execFile(ROOT_SYSTEM.'config/testImport.sql');
+
+        $n = $db->getFirstColumn("SELECT count(*) from imported_file");
+        $this->assertGreaterThan(0, $n);
+
+        return $db;
+    }
 }

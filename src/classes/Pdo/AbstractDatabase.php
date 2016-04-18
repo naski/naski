@@ -263,4 +263,9 @@ abstract class AbstractDatabase
         $l = $q->fetch();
         return $l[0] ?? null;
     }
+
+    public function getConnexionDatas()
+    {
+        return $this->_connexionDatas;
+    }
 }
