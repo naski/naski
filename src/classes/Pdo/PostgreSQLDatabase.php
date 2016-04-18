@@ -49,10 +49,10 @@ class PostgreSQLDatabase extends PdoDatabase
     {
         $datas = $this->getConnexionDatas();
         putenv("PGPASSWORD=".$datas['password']);
-        if ($echoCmd) {
-            echo $cmd;
-        }
         $cmd = "psql -h ".$datas['host']." -U ".$datas['username']." -d ".$datas['dbname']." -f ".$filename;
+        if ($echoCmd) {
+            echo "$cmd\n";
+        }
 		exec($cmd);
         return $cmd;
     }
