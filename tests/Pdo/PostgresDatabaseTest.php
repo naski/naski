@@ -60,7 +60,7 @@ class PostgresDatabaseTest extends AbstractTester
     public function testImportFile(AbstractDatabase $db) :AbstractDatabase
     {
         echo "testImportFile\n";
-        $db->execFile(ROOT_SYSTEM.'config/testImport.sql');
+        $db->execFile(ROOT_SYSTEM.'Config/testImport.sql');
 
         $n = $db->getFirstColumn("SELECT count(*) from imported_file");
         $this->assertGreaterThan(0, $n);
