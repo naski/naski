@@ -51,6 +51,7 @@ class PostgreSQLDatabase extends PdoDatabase
         putenv("PGPASSWORD=".$datas['password']);
         $cmd = "psql -h ".$datas['host']." -U ".$datas['username']." -d ".$datas['dbname']." -f ".$filename;
 		exec($cmd);
+        return $cmd;
     }
 
 }
