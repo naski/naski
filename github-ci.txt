@@ -1,4 +1,3 @@
 cp tests/gitlab/config.php.gitlab tests/Pdo/config.php
 composer update
 php vendor/bin/phpunit tests/
-# test
