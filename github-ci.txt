@@ -1,3 +1,4 @@
-cp tests/gitlab/config.php.gitlab tests/Pdo/config.php
+cp tests/github-ci/config.php tests/Pdo/config.php
+chmod u+x core/scripts/*
 composer update
 php vendor/bin/phpunit tests/
