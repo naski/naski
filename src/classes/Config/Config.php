@@ -37,7 +37,7 @@ class Config implements \ArrayAccess
         if (!file_exists($path)) {
             throw new FileNotFoundException("Le fichier YML $path est introuvale.");
         }
-        
+
         try {
             /** @noinspection PhpUndefinedClassInspection */
             $data = Spyc::YAMLLoad($path);
@@ -65,7 +65,7 @@ class Config implements \ArrayAccess
         $this->loadArray($array);
     }
 
-    private function loadArray(array $array)
+    public function loadArray(array $array)
     {
         $this->_subs = array_merge($this->_subs, $array);
     }
