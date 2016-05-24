@@ -61,4 +61,13 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $config = new Config();
         $config->loadFile(__DIR__.'/bad.json');
     }
+
+    public function testEditConfig()
+    {
+        $config = new Config();
+        $config->loadFile(__DIR__.'/config.json');
+        $this->assertEquals($config['sub']['var11'], 'ok');
+        $config->getArrayReference()['sub']['var11'] = 'changed';
+        $this->assertEquals($config['sub']['var11'], 'changed');
+    }
 }

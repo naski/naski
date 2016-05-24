@@ -65,7 +65,7 @@ class Config implements \ArrayAccess
         $this->loadArray($array);
     }
 
-    public function loadArray(array $array)
+    private function loadArray(array $array)
     {
         $this->_subs = array_merge($this->_subs, $array);
     }
@@ -76,6 +76,10 @@ class Config implements \ArrayAccess
      */
     public function toArray(): array
     {
+        return $this->_subs;
+    }
+
+    public function &getArrayReference() {
         return $this->_subs;
     }
 
