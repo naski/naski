@@ -17,10 +17,16 @@ abstract class Controller
     private $_inputsValids = true;
     private $_rule;
 
-    public function __construct(Rule $rule)
+    /**
+     *
+     * @param Rule $rule La régle exécutée en cas d'un routing. Peut être nulle
+     */
+    public function __construct($rule)
     {
-        $this->_rule = $rule;
-        $this->buildInputs();
+        if ($rule != null) {
+            $this->_rule = $rule;
+            $this->buildInputs();
+        }
     }
 
     private static $fackedRaw = null;
