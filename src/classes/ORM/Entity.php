@@ -12,7 +12,7 @@ abstract class Entity
     protected function hydrate(array $datas)
     {
         foreach ($datas as $key => $value) {
-            if (!is_numeric($key)) {
+            if (!is_numeric($key) && property_exists($this, $key)) {
                 $this->$key = $value;
             }
         }

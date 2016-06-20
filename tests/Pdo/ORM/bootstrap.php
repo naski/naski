@@ -14,7 +14,7 @@ class UserManager extends \Naski\ORM\EntityManager
     }
 
     public function getUser() {
-        $this->loadEntity("SELECT * FROM tests", "User");
+        return $this->loadEntity("SELECT * FROM tests", "User");
     }
 
 
@@ -22,5 +22,5 @@ class UserManager extends \Naski\ORM\EntityManager
 
 class User extends \Naski\ORM\Entity
 {
-
+    public $row1;
 }
