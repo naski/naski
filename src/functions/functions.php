@@ -45,3 +45,12 @@ function getFileInParents($path, $filename) {
             return getFileInParents(dirname($path) ?? '', $filename);
         }
 }
+
+
+function json_to_array($json)
+{
+    $a = json_decode($json);
+    return array_filter($a, function($v) {
+        return $v;
+    });
+}
