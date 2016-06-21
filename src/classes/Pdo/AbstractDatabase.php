@@ -193,7 +193,7 @@ abstract class AbstractDatabase
 
     abstract public function upsert(string $tablename, array $insertArray, array $condition);
 
-    protected function createWhereCondition(array $array): string
+    public function createWhereCondition(array $array): string
     {
         $cond = '';
         if (!empty($array)) {
