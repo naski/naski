@@ -96,8 +96,8 @@ abstract class AbstractDatabase
         }
 
         try {
+            $this->_result = null;
             $this->_result = $this->sendQuery($query);
-
             return $this->_result;
         } catch (BadQueryException $e) {
             $message = $e->getMessage();

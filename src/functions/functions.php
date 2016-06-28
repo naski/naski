@@ -33,17 +33,18 @@ function array_keep(array $array, array $listKeys)
     return $out;
 }
 
-function getFileInParents($path, $filename) {
+function getFileInParents($path, $filename)
+{
     if (!$path || $path == '/') {
             return null;
-        }
+    }
 
-        $f = "$path/$filename";
-        if (file_exists($f)) {
-            return $f;
-        } else {
-            return getFileInParents(dirname($path) ?? '', $filename);
-        }
+    $f = "$path/$filename";
+    if (file_exists($f)) {
+        return $f;
+    } else {
+        return getFileInParents(dirname($path) ?? '', $filename);
+    }
 }
 
 
