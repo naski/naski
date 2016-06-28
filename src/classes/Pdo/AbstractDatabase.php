@@ -22,7 +22,6 @@ abstract class AbstractDatabase
 
     protected $_nRequests = 0; // Nombre de requêtes exécutes depuis le début de l'instance
     protected $_lastQuery = ''; // Dernière requête SQL exécutée
-    protected $_result = null; // Résultat de la dernière requête SQL exécutée
 
 
     /**
@@ -96,9 +95,7 @@ abstract class AbstractDatabase
         }
 
         try {
-            $this->_result = null;
-            $this->_result = $this->sendQuery($query);
-            return $this->_result;
+            return $this->sendQuery($query);
         } catch (BadQueryException $e) {
             $message = $e->getMessage();
             $message .= "\nQuery : ".$query;
