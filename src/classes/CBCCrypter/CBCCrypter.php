@@ -17,7 +17,7 @@ class CBCCrypter {
 		$iv = $this->_iv;
 
 		if (!$data) {
-			throw new BadParameterExecption("Error during aes128_cbc_decrypt", 1);
+			throw new \Exception("Error during aes128_cbc_decrypt", 1);
 		}
 
 		if (16 !== strlen($key)) $key = hash('MD5', $key, true);
@@ -58,10 +58,10 @@ class CBCCrypter {
 		$data = base64_decode($data);
 		$data = $this->aes128_cbc_decrypt($data);
 		if (!$data) {
-			throw new BadParameterExecption("Error during mcrypt_decrypt", 1);
+			throw new \Exception("Error during mcrypt_decrypt", 1);
 		}
 		if (!preg_match('//u', $data)) {
-			throw new BadParameterExecption("Data decrypted inst a valid ASCII string", 1);
+			throw new \Exception("Data decrypted inst a valid ASCII string", 1);
 		}
 		return $data;
 	}
