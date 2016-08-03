@@ -47,6 +47,7 @@ class RoutingTest extends PHPUnit_Framework_TestCase
                 'action' => 'testAction',
             )),
             new Rule(array(
+                'method' => '*',
                 'path' => '*',
                 'controller' => 'TestController',
                 'action' => 'notFoundAction',
@@ -100,6 +101,28 @@ class RoutingTest extends PHPUnit_Framework_TestCase
         $out = $routing->process('/rest/user/3');
         $this->assertTrue($out);
         $this->expectOutputString("update user 3");
+    }
+
+    public function testOptions()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'OPTIONS';
+        $config = new Config();
+        $config->loadFile(__DIR__.'/routing_rest.json');
+        $routing = Routing::buildFromConfig($config);
+        $out = $routing->process('/caca');
+        $this->assertTrue($out);
+        $this->expectOutputString("options");
+    }
+
+    public function test404()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'DELETE';
+        $config = new Config();
+        $config->loadFile(__DIR__.'/routing_rest.json');
+        $routing = Routing::buildFromConfig($config);
+        $out = $routing->process('/caca');
+        $this->assertTrue($out);
+        $this->expectOutputString("all");
     }
 
     public function testJsonNeed()

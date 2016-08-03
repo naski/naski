@@ -18,6 +18,18 @@
             "path": "/rest/user/{id}",
             "controller": "RestController",
             "action": "getUser"
+        },
+        {
+            "method": "OPTIONS",
+            "path": "*",
+            "controller": "RestController",
+            "action": "options"
+        },
+        {
+            "method": "*",
+            "path": "*",
+            "controller": "RestController",
+            "action": "all"
         }
     ]
 }

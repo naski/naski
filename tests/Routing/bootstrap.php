@@ -47,6 +47,14 @@ class RestController extends Controller
         echo "update user $id";
     }
 
+    public function options() {
+        echo "options";
+    }
+
+    public function all() {
+        echo "all";
+    }
+
     public function getJson()
     {
         if (!$this->inputValid()) {

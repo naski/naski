@@ -20,7 +20,7 @@ class Routing
      */
     private $_dispatcher;
     private $_rulesArray = array(); // array<Rule>
-    private $_defaultRule = null;
+    private $_defaultRule = [];
 
     /**
      * Instancie un routing à partir d'une Config
@@ -39,7 +39,7 @@ class Routing
 
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -60,7 +60,7 @@ class Routing
     public function addRule(Rule $rule)
     {
         if ($rule->path == '*') {
-            $this->_defaultRule = $rule;
+            $this->_defaultRule[] = $rule;
         } else {
             $this->_rulesArray[] = $rule;
         }
@@ -105,10 +105,11 @@ class Routing
                 return true;
                 break;
             default:
-                if ($this->_defaultRule != null) {
-                    self::processRule($this->_defaultRule, array());
-
-                    return true;
+                foreach ($this->_defaultRule as $r) {
+                    if ($httpMethod == $r->method || $r->method == "*") {
+                        self::processRule($r, array());
+                        return true;
+                    }
                 }
 
                 return false;
