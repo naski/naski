@@ -190,7 +190,7 @@ abstract class AbstractDatabase
 
     abstract public function upsert(string $tablename, array $insertArray, array $condition);
 
-    public function createWhereCondition(array $array): string
+    public function createWhereCondition(array $array, string $operator="AND"): string
     {
         $cond = '';
         if (!empty($array)) {
@@ -198,9 +198,9 @@ abstract class AbstractDatabase
             foreach ($array as $key => $value) {
                 $value = $this->cleanValue($value);
                 $cond .= "$key=$value";
-                $cond .= " AND ";
+                $cond .= " $operator ";
             }
-            $cond = substr($cond, 0, -strlen(" AND "));
+            $cond = substr($cond, 0, -strlen(" $operator "));
         }
         return $cond;
     }
