@@ -199,9 +199,9 @@ abstract class AbstractDatabase
         if (in_array($key, array_keys($tests))) {
             $comparator  = $tests[$key];
             if ($comparator == '?') {
-                return exist($key,$value);
+                return "exist($key,$value)";
             } else {
-                return "$key ".$tests[$key]." $value";
+                return "$key ".$comparator." $value";
             }
         }
         else {
