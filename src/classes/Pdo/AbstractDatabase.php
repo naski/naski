@@ -194,13 +194,18 @@ abstract class AbstractDatabase
 
     abstract public function upsert(string $tablename, array $insertArray, array $condition);
 
-    private function getComparator($tests, $key)
+    private function buildComparator($tests, $key, $value)
     {
         if (in_array($key, array_keys($tests))) {
-            return " ".$tests[$key]." ";
+            $comparator  = $tests[$key];
+            if ($comparator == '?') {
+                return exist($key,$value);
+            } else {
+                return "$key ".$tests[$key]." $value";
+            }
         }
         else {
-            return " = ";
+            return "$key=$value";
         }
     }
 
@@ -218,12 +223,12 @@ abstract class AbstractDatabase
                 $cond .= " $op1 (".$this->neutralCondition($op2);
                 foreach ($value as $v) {
                     $v = $this->cleanValue($v);
-                    $cond .= " $op2 $key ".$this->getComparator($tests, $key)." $v ";
+                    $cond .= " $op2 ".$this->buildComparator($tests, $key, $v)." ";
                 }
                 $cond .= " ) ";
             } else {
                 $value = $this->cleanValue($value);
-                $cond .= " $op1 $key ".$this->getComparator($tests, $key)." $value";
+                $cond .= " $op1 ".$this->buildComparator($tests, $key, $value)." ";
             }
         }
         return $cond;
