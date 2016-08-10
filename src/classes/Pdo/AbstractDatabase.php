@@ -204,20 +204,26 @@ abstract class AbstractDatabase
         }
     }
 
+    private function neutralCondition($op) {
+        if ($op == 'AND') return " 1=1 ";
+        if ($op == 'OR') return " 1=0 ";
+        throw new \Exception('Opérateur inconnu : '.$op);
+    }
+
     public function createWhereCondition(array $array, $op1='AND', $op2='OR', $tests=[]): string
     {
-        $cond = " WHERE 1=1 ";
+        $cond = " WHERE ".$this->neutralCondition($op1);
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                $cond .= " AND (1=0 ";
+                $cond .= " $op1 (".$this->neutralCondition($op2);
                 foreach ($value as $v) {
                     $v = $this->cleanValue($v);
-                    $cond .= " OR $key".$this->getComparator($tests, $key)."$v ";
+                    $cond .= " $op2 $key".$this->getComparator($tests, $key)."$v ";
                 }
                 $cond .= " ) ";
             } else {
                 $value = $this->cleanValue($value);
-                $cond .= " AND $key".$this->getComparator($tests, $key)."$value";
+                $cond .= " $op1 $key".$this->getComparator($tests, $key)."$value";
             }
         }
         return $cond;
