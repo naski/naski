@@ -194,21 +194,30 @@ abstract class AbstractDatabase
 
     abstract public function upsert(string $tablename, array $insertArray, array $condition);
 
-    public function createWhereCondition(array $array): string
+    private function getComparator($tests, $key)
     {
-        $cond = '';
-        $cond = "WHERE 1=1 ";
+        if (in_array($key, $tests)) {
+            return $tests[$key];
+        }
+        else {
+            return "=";
+        }
+    }
+
+    public function createWhereCondition(array $array, $op1='AND', $op2='OR', $tests=[]): string
+    {
+        $cond = " WHERE 1=1 ";
         foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $cond .= " AND (1=0 ";
                 foreach ($value as $v) {
                     $v = $this->cleanValue($v);
-                    $cond .= " OR $key=$v ";
+                    $cond .= " OR $key".$this->getComparator($tests, $key)."$v ";
                 }
                 $cond .= " ) ";
             } else {
                 $value = $this->cleanValue($value);
-                $cond .= " AND $key=$value";
+                $cond .= " AND $key".$this->getComparator($tests, $key)."$value";
             }
         }
         return $cond;
