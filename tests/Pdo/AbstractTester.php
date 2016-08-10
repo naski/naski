@@ -73,7 +73,7 @@ abstract class AbstractTester extends PHPUnit_Framework_TestCase
             array(
                 'row2' => 'new',
             ),
-            array('row1' => 'v11')
+            array('row1' => ['v11', 'imposiable'])
         );
 
         $q = $db->query("SELECT * FROM tests WHERE row1='v11'");

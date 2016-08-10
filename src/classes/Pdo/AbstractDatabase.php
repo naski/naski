@@ -106,6 +106,10 @@ abstract class AbstractDatabase
 
     protected function cleanValue($value): string
     {
+        if (is_array($value)) {
+            return "";
+        }
+
         if ($value === true) {
             return 'TRUE';
         }
@@ -190,17 +194,22 @@ abstract class AbstractDatabase
 
     abstract public function upsert(string $tablename, array $insertArray, array $condition);
 
-    public function createWhereCondition(array $array, string $operator="AND"): string
+    public function createWhereCondition(array $array): string
     {
         $cond = '';
-        if (!empty($array)) {
-            $cond = "WHERE ";
-            foreach ($array as $key => $value) {
+        $cond = "WHERE 1=1 ";
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $cond .= " AND (1=0 ";
+                foreach ($value as $v) {
+                    $v = $this->cleanValue($v);
+                    $cond .= " OR $key=$v ";
+                }
+                $cond .= " ) ";
+            } else {
                 $value = $this->cleanValue($value);
-                $cond .= "$key=$value";
-                $cond .= " $operator ";
+                $cond .= " AND $key=$value";
             }
-            $cond = substr($cond, 0, -strlen(" $operator "));
         }
         return $cond;
     }
