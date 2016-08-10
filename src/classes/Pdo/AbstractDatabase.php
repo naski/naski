@@ -199,7 +199,7 @@ abstract class AbstractDatabase
         if (in_array($key, array_keys($tests))) {
             $comparator  = $tests[$key];
             if ($comparator == '?') {
-                return "exist($key,$value)";
+                return "jsonb_exists($key,$value)";
             } else {
                 return "$key ".$comparator." $value";
             }
