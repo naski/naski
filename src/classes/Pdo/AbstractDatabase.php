@@ -197,10 +197,10 @@ abstract class AbstractDatabase
     private function getComparator($tests, $key)
     {
         if (in_array($key, array_keys($tests))) {
-            return $tests[$key];
+            return " ".$tests[$key]." ";
         }
         else {
-            return "=";
+            return " = ";
         }
     }
 
@@ -218,12 +218,12 @@ abstract class AbstractDatabase
                 $cond .= " $op1 (".$this->neutralCondition($op2);
                 foreach ($value as $v) {
                     $v = $this->cleanValue($v);
-                    $cond .= " $op2 $key".$this->getComparator($tests, $key)."$v ";
+                    $cond .= " $op2 $key ".$this->getComparator($tests, $key)." $v ";
                 }
                 $cond .= " ) ";
             } else {
                 $value = $this->cleanValue($value);
-                $cond .= " $op1 $key".$this->getComparator($tests, $key)."$value";
+                $cond .= " $op1 $key ".$this->getComparator($tests, $key)." $value";
             }
         }
         return $cond;
