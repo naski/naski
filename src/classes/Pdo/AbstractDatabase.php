@@ -196,7 +196,7 @@ abstract class AbstractDatabase
 
     private function getComparator($tests, $key)
     {
-        if (in_array($key, $tests)) {
+        if (in_array($key, array_keys($tests))) {
             return $tests[$key];
         }
         else {
