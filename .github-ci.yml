@@ -1,5 +1,4 @@
 script:
 - cp tests/github-ci/Pdo/config.php tests/Pdo/config.php
-- chmod u+x core/scripts/*
 - composer update
 - php vendor/bin/phpunit tests/
