@@ -86,7 +86,7 @@ class Table {
     public function moveTempAsOriginal()
     {
         if (substr($this->tablename, -4) != '_tmp') {
-            throw new Exception("Cette table ({$this->tablename}) ne porte pas le suffixe '_tmp'");
+            throw new \Exception("Cette table ({$this->tablename}) ne porte pas le suffixe '_tmp'");
         }
 
         $name_original = substr($this->tablename, 0, -4);
