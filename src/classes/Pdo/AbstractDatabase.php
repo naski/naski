@@ -194,18 +194,23 @@ abstract class AbstractDatabase
 
     abstract public function upsert(string $tablename, array $insertArray, array $condition);
 
-    private function buildComparator($tests, $key, $value)
+    private function buildComparator($tests, $key, $value, $replaces)
     {
+        $key_sql = $key;
+        if (in_array($key, array_keys($replaces))) {
+            $key_sql = $replaces[$key];
+        }
+
         if (in_array($key, array_keys($tests))) {
             $comparator  = $tests[$key];
             if ($comparator == '?') {
-                return "jsonb_exists($key,$value)";
+                return "jsonb_exists($key_sql,$value)";
             } else {
-                return "$key ".$comparator." $value";
+                return "$key_sql ".$comparator." $value";
             }
         }
         else {
-            return "$key=$value";
+            return "$key_sql=$value";
         }
     }
 
@@ -215,7 +220,7 @@ abstract class AbstractDatabase
         throw new \Exception('Opérateur inconnu : '.$op);
     }
 
-    public function createWhereCondition(array $array, $op1='AND', $op2='OR', $tests=[]): string
+    public function createWhereCondition(array $array, $op1='AND', $op2='OR', $tests=[], $replaces=[]): string
     {
         $cond = " WHERE ".$this->neutralCondition($op1);
         foreach ($array as $key => $value) {
@@ -223,12 +228,12 @@ abstract class AbstractDatabase
                 $cond .= " $op1 (".$this->neutralCondition($op2);
                 foreach ($value as $v) {
                     $v = $this->cleanValue($v);
-                    $cond .= " $op2 ".$this->buildComparator($tests, $key, $v)." ";
+                    $cond .= " $op2 ".$this->buildComparator($tests, $key, $v, $replaces)." ";
                 }
                 $cond .= " ) ";
             } else {
                 $value = $this->cleanValue($value);
-                $cond .= " $op1 ".$this->buildComparator($tests, $key, $value)." ";
+                $cond .= " $op1 ".$this->buildComparator($tests, $key, $value, $replaces)." ";
             }
         }
         return $cond;
