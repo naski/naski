@@ -41,7 +41,6 @@ class Table {
     public function select(array $filters): array
     {
         $cond = $this->db->createWhereCondition($filters);
-        var_dump($cond);
         $q = $this->db->query("select * from {$this->tablename} $cond");
         $list = $q->fetchAll(\PDO::FETCH_ASSOC);
         return $list;
