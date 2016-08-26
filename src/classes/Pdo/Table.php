@@ -46,6 +46,14 @@ class Table {
         return $list;
     }
 
+    public function count(array $filters): int
+    {
+        $cond = $this->db->createWhereCondition($filters);
+        $q = $this->db->query("select count(*) from {$this->tablename} $cond");
+        $count = $q->fetchColumn();
+        return $count;
+    }
+
     public function cloneTable(string $newname, bool $keepOriginal, bool $keepContent)
     {
         $new = new self($this->db, $newname);
