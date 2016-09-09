@@ -103,7 +103,8 @@ class Table {
         return $new;
     }
 
-    public function check() {
+    public function check()
+	{
         try {
             $this->db->getFirstColumn("SELECT COUNT(*) FROM ".$this->tablename);
         } catch (\Exception $e) {
@@ -112,6 +113,10 @@ class Table {
 
     }
 
+	public function getTablename()
+	{
+		return $this->tablename;
+	}
 
 
 }
