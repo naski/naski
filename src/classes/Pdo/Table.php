@@ -69,7 +69,7 @@ class Table {
                 including indexes
             );");
             if ($keepContent) {
-                $this->db->query("INSERT INTO {$newname} (SELECT * FROM {$this->tablename} where 1=2)");
+                $this->db->query("INSERT INTO {$newname} (SELECT * FROM {$this->tablename})");
             }
         }
         return $new;
