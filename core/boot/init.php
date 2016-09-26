@@ -12,7 +12,7 @@ foreach ($globals_needles as $v) {
 use Naski\Config\Config;
 use Naski\InstancesManager;
 
-define('BIG_INT', 987654321);
+define('INF_INT', 987654321);
 
 
 // Variable globale contenant toutes les instances à déclarer comme globales
