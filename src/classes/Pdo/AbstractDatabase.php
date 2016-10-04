@@ -214,6 +214,21 @@ abstract class AbstractDatabase
         }
     }
 
+    /**
+     * $array tableau des rows à chercher
+     */
+    public function buildLikeCondition(array $list_rows, string $pattern): string
+    {
+        $cond = " (1!=1 ";
+
+        foreach ($list_rows as $row) {
+            $cond .= "OR $row ILIKE $pattern";
+        }
+        $cond .= " ) ";
+
+        return $cond;
+    }
+
     private function neutralCondition($op) {
         if ($op == 'AND') return " 1=1 ";
         if ($op == 'OR') return " 1=0 ";
