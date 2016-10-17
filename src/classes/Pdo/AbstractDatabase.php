@@ -237,7 +237,12 @@ abstract class AbstractDatabase
 
     public function createWhereCondition(array $array, $op1='AND', $op2='OR', $tests=[], $replaces=[]): string
     {
-        $cond = " WHERE ".$this->neutralCondition($op1);
+        return " WHERE ".$this->createCondition($array, $op1, $op2, $tests, $replaces);
+    }
+
+    public function createCondition(array $array, $op1='AND', $op2='OR', $tests=[], $replaces=[]): string
+    {
+        $cond = $this->neutralCondition($op1);
         foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $cond .= " $op1 (".$this->neutralCondition($op2);
@@ -253,7 +258,6 @@ abstract class AbstractDatabase
         }
         return $cond;
     }
-
     /**
      * Construit une chaine SQL dlf : (VALUES (201486), (1825186), (998608), ... )
      * Utilisable avec un IN
