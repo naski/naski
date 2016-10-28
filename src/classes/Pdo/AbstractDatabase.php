@@ -160,6 +160,39 @@ abstract class AbstractDatabase
         return $this->query($query);
     }
 
+	public function multiInsert(string $tablename, array $insertArray_list, $nMaxByInsert=1000)
+    {
+		$list_query_result = [];
+		$chunked = array_chunk($insertArray_list, $nMaxByInsert);
+
+		foreach ($chunked as $insertArray_list)
+		{
+			$values = '';
+	        $keys = '';
+
+	        foreach ($insertArray_list as $insertArray) {
+				$keys = '';
+				$values .= '(';
+		        foreach ($insertArray as $key => $value) {
+		            $value = $this->cleanValue($value);
+		            $values .= "$value,";
+		            $keys .= ''.$key.',';
+		        }
+		        $values = substr_replace($values, '', -1);
+				$values .= '),';
+			}
+
+	        $values = substr_replace($values, '', -1);
+	        $keys = substr_replace($keys, '', -1);
+	        $query = sprintf('INSERT INTO %s (%s) VALUES %s', $tablename, $keys, $values);
+
+	        $list_query_result[] = $this->query($query);
+
+		}
+
+		return $list_query_result;
+    }
+
     /**
      *  Met à jour les tuples d'une table, selon une condition.
      *
