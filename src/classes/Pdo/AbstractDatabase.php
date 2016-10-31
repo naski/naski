@@ -23,6 +23,8 @@ abstract class AbstractDatabase
     protected $_nRequests = 0; // Nombre de requêtes exécutes depuis le début de l'instance
     protected $_lastQuery = ''; // Dernière requête SQL exécutée
 
+    protected $errors_query_logging = true; // Active/Désactive le logging des query en erreurs
+
 
     /**
      * @param array $connexionDatas
@@ -42,6 +44,18 @@ abstract class AbstractDatabase
     public function setLogger(Logger $logger)
     {
         $this->_logger = $logger;
+    }
+
+    // Appeler quand on veut faire des requetes dont on sait qu'elles risques d'échouer
+    // (Contraine unique par exemple...)
+    public function enableErrorsQueryLogging()
+    {
+        $this->errors_query_logging = true;
+    }
+
+    public function disableErrorsQueryLogging()
+    {
+        $this->errors_query_logging = false;
     }
 
     abstract protected function connectAbstract();
@@ -99,7 +113,9 @@ abstract class AbstractDatabase
         } catch (BadQueryException $e) {
             $message = $e->getMessage();
             $message .= "\nQuery : ".$query;
-            $this->_logger->error($message);
+            if ($this->errors_query_logging) {
+                $this->_logger->error($message);
+            }
             throw new BadQueryException($message);
         }
     }
