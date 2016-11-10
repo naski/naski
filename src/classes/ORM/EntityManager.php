@@ -17,7 +17,7 @@ abstract class EntityManager
      * @param $type
      * @return Entity
      */
-    protected function loadEntity(string $query, $type)
+    public function loadEntity(string $query, $type)
     {
         $entitys = $this->loadEntitys($query, $type);
         return $entitys[0] ?? null;
@@ -29,7 +29,7 @@ abstract class EntityManager
      * @return array
      * @throws \Naski\Pdo\BadQueryException
      */
-    protected function loadEntitys($query, $type)
+    public function loadEntitys($query, $type)
     {
         $tab = array();
         $q = $this->getDb()->query($query);
