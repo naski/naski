@@ -293,7 +293,7 @@ abstract class AbstractDatabase
     {
         $cond = $this->neutralCondition($op1);
         foreach ($array as $key => $value) {
-            if (is_array($value)) {
+            if (is_array($value) && count($value) > 0) {
                 $cond .= " $op1 (".$this->neutralCondition($op2);
                 foreach ($value as $v) {
                     $v = $this->cleanValue($v);
