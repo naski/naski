@@ -259,7 +259,11 @@ abstract class AbstractDatabase
             }
         }
         else {
-            return "$key_sql=$value";
+            if ($value == 'NULL') {
+                return "$key_sql IS NULL";
+            } else {
+                return "$key_sql=$value";
+            }
         }
     }
 
