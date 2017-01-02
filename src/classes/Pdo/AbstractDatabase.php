@@ -25,6 +25,8 @@ abstract class AbstractDatabase
 
     protected $errors_query_logging = true; // Active/Désactive le logging des query en erreurs
 
+    protected $time_passed_in_query = 0; // En secondes
+
 
     /**
      * @param array $connexionDatas
@@ -109,7 +111,10 @@ abstract class AbstractDatabase
         }
 
         try {
-            return $this->sendQuery($query);
+            $start = microtime(true);
+            $result = $this->sendQuery($query);
+            $this->time_passed_in_query += (microtime(true) - $start);
+            return $result;
         } catch (BadQueryException $e) {
             $message = $e->getMessage();
             $message .= "\nQuery : ".$query;
@@ -118,6 +123,14 @@ abstract class AbstractDatabase
             }
             throw new BadQueryException($message);
         }
+    }
+
+    /**
+     * @return float
+     */
+    public function getTimePassedInQuery(): float
+    {
+        return $this->time_passed_in_query;
     }
 
     protected function cleanValue($value): string
@@ -259,7 +272,11 @@ abstract class AbstractDatabase
             }
         }
         else {
-            return "$key_sql=$value";
+            if ($value == 'NULL') {
+                return "$key_sql IS NULL";
+            } else {
+                return "$key_sql=$value";
+            }
         }
     }
 
