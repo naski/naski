@@ -55,3 +55,11 @@ function json_to_array($json)
         return $v;
     });
 }
+
+function rename_key(array &$array, string $old_key, string $new_key)
+{
+    if (isset($array[$old_key])) {
+        $array[$new_key] = $array[$old_key];
+        unset($array[$old_key]);
+    }
+}

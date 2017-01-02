@@ -9,6 +9,21 @@ class GlobalTesteur extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testRenameKey()
+    {
+        $in = array(
+            'toto' => '1',
+            'titi' => '2',
+            'grep' => '3'
+        );
+
+        \Naski\rename_key($in, 'toto', 'n.toto');
+
+        $this->assertEquals($in['n.toto'], '1');
+        $this->assertEquals($in['titi'], '2');
+        $this->assertEquals($in['toto'] ?? 'Nop.', 'Nop.');
+    }
+
     public function testArrayKeep()
     {
         $in = array(
