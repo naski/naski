@@ -32,6 +32,12 @@ class Config implements \ArrayAccess
         }
     }
 
+    public static function fromFile(string $path) {
+        $config = new self();
+        $config->loadFile($path);
+        return $config;
+    }
+
     private function loadYAMLFile(string $path)
     {
         if (!file_exists($path)) {
