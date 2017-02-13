@@ -15,4 +15,6 @@ class CBCCrypterTest extends PHPUnit_Framework_TestCase
 		$decrypted = $crypter->decrypt($crypted);
 		$this->assertEquals($decrypted, $input);
 	}
+
+
 }

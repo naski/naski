@@ -23,8 +23,7 @@ class CBCCrypter {
 		if (16 !== strlen($key)) $key = hash('MD5', $key, true);
 		if (16 !== strlen($iv)) $iv = hash('MD5', $iv, true);
         $data = openssl_decrypt($data, 'AES-128-CBC', $key, OPENSSL_RAW_DATA, $iv);
-		$padding = ord($data[strlen($data) - 1]);
-	    return substr($data, 0, -$padding);
+	    return $data;
 	}
 
 	private function aes128_cbc_encrypt($data) {
@@ -33,8 +32,6 @@ class CBCCrypter {
 
 		if (16 !== strlen($key)) $key = hash('MD5', $key, true);
 		if (16 !== strlen($iv)) $iv = hash('MD5', $iv, true);
-		$padding = 16 - (strlen($data) % 16);
-		$data .= str_repeat(chr($padding), $padding);
         return openssl_encrypt($data, 'AES-128-CBC', $key, OPENSSL_RAW_DATA, $iv);
 	}
 
