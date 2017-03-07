@@ -247,10 +247,14 @@ abstract class AbstractDatabase
         return $this->query($query);
     }
 
-    public function delete(string $tablename, array $condition)
+    public function delete(string $tablename, array $condition, bool $cascade=false)
     {
+        $query = "DELETE FROM $tablename";
+        if ($cascade) {
+            $query .= " CASCADE";
+        }
         $cond = $this->createWhereCondition($condition);
-        $query = "DELETE FROM $tablename $cond";
+        $query .= " $cond";
         $this->query($query);
     }
 

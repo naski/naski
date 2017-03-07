@@ -13,3 +13,6 @@ $GLOBALS['DB_POSTGRES'] = array(
     'username' => 'postgres',
     'password' => 'wugaxu'
 );
+
+//define('SKIP_POSTGRES', true);
+define('SKIP_MYSQL', true);

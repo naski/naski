@@ -10,7 +10,7 @@ class MySQLDatabaseTest extends AbstractTester
 {
     public function testConnect() :AbstractDatabase
     {
-        if (!isset($GLOBALS['DB_MYSQL'])) {
+        if (defined('SKIP_MYSQL')) {
             $this->markTestSkipped('MySQL désactivé.');
         }
 

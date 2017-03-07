@@ -10,7 +10,7 @@ class PostgresDatabaseTest extends AbstractTester
 {
     public function testConnect() :AbstractDatabase
     {
-        if (!isset($GLOBALS['DB_POSTGRES'])) {
+        if (defined('SKIP_POSTGRES')) {
             $this->markTestSkipped('Postgres désactivé.');
         }
 
