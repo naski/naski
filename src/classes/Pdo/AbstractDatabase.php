@@ -133,7 +133,7 @@ abstract class AbstractDatabase
         return $this->time_passed_in_query;
     }
 
-    protected function cleanValue($value): string
+    public function cleanValue($value): string
     {
         if (is_array($value)) {
             return "";
