@@ -161,7 +161,7 @@ abstract class AbstractDatabase
         return $value;
     }
 
-    abstract protected function cleanQuotes(string $value): string;
+    abstract public function cleanQuotes(string $value): string;
 
     /**
      *  Insert un tableau clé/valeur dans la base de donnée

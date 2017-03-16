@@ -9,7 +9,7 @@ class MySQLDatabase extends PdoDatabase
         return 'mysql';
     }
 
-    protected function cleanQuotes(string $value): string
+    public function cleanQuotes(string $value): string
     {
         return addslashes($value);
     }
