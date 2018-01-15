@@ -1,4 +1,0 @@
-name: Page dev de Naski
-alias: naskiPage
-class: NaskiPageBundle
-twig_path: ./

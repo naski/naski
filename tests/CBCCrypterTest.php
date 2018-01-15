@@ -1,10 +1,12 @@
 <?php
 
+
 use Naski\CBCCrypter\CBCCrypter;
+use PHPUnit\Framework\TestCase;
 
-require_once 'boot.php';
+//require_once 'boot.php';
 
-class CBCCrypterTest extends PHPUnit_Framework_TestCase
+class CBCCrypterTest extends TestCase
 {
     public function testIt()
 	{

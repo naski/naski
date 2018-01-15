@@ -3,9 +3,13 @@
 namespace Naski\Routing;
 
 use FastRoute\Dispatcher;
-use FastRoute\RouteCollector;
 use Naski\Config\Config;
-use FastRoute;
+use Symfony\Component\Routing\Loader\YamlFileLoader;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Router;
 
 /**
  * Permet de définir un ensemble de régle puis d'exécuter la bonne régle depuis un path
@@ -22,18 +26,30 @@ class Routing
     private $_rulesArray = array(); // array<Rule>
     private $_defaultRule = [];
 
+
+    /**
+     * @var Router
+     */
+    private $router;
+
+    /**
+     * @var RouteCollection
+     */
+    private $routes;
+
     /**
      * Instancie un routing à partir d'une Config
      * @param  Config $config La config à charger, voir des exemples pour le schéma
      * @return self         Le Routing instancié
      */
-    public static function buildFromConfig(Config $config) :self
+    public static function buildFromConfig(string $yaml_filename) :self
     {
         $obj = new self();
-        foreach ($config['rules'] as $r) {
-            $obj->addRule(new Rule($r));
-        }
-
+        $obj->router = new Router(
+            new YamlFileLoader(ROOT_SYSTEM),
+            $yaml_filename
+        );
+        $obj->routes = new RouteCollection();
         return $obj;
     }
 
@@ -59,28 +75,15 @@ class Routing
      */
     public function addRule(Rule $rule)
     {
-        if ($rule->path == '*') {
-            $this->_defaultRule[] = $rule;
-        } else {
-            $this->_rulesArray[] = $rule;
-        }
-    }
+        $name = str_replace('/', '_', $rule->path);
 
-    private function createDispatcher()
-    {
-        global $that;
-        $that = $this;
-
-        $f = function ($that) {
-            return function (RouteCollector $r) use ($that) {
-                foreach ($that->getRules() as $rule) {
-                    $r->addRoute($rule->method, $rule->path, $rule);
-                }
-            };
-        };
-
-
-        $this->_dispatcher = FastRoute\simpleDispatcher($f($this));
+        $this->routes->add($name, new Route(
+            $rule->path,
+            [
+                '_controller' => $rule->controller . '::' . $rule->action,
+                '_methods' => [$rule->method],
+            ]
+        ));
     }
 
     /**
@@ -91,48 +94,28 @@ class Routing
      */
     public function process(string $path, $processIt = true): bool
     {
-        $this->createDispatcher();
         $httpMethod = $_SERVER['REQUEST_METHOD'];
-        $routeInfo = $this->_dispatcher->dispatch($httpMethod, $path);
-        switch ($routeInfo[0]) {
-            case FastRoute\Dispatcher::FOUND:
-                $handler = $routeInfo[1];
-                $vars = $routeInfo[2];
-                if ($processIt) {
-                    self::processRule($handler, $vars);
-                }
 
-                return true;
-                break;
-            default:
-                foreach ($this->_defaultRule as $r) {
-                    if ($httpMethod == $r->method || $r->method == "*") {
-                        self::processRule($r, array());
-                        return true;
-                    }
-                }
+        $matcher = new UrlMatcher($this->routes, new RequestContext('/', $httpMethod));
 
-                return false;
-                break;
-        }
+        $parameters = $matcher->match('/foo/bar');
+        $action = $parameters['_controller'];
+
+        self::processRule($action, []);
     }
 
-    /**
-     * Execute la régle passée en parametre
-     * @param  Rule   $rule La régle à exécuter
-     * @param  array  $vars Tableau clé valeurs des variables détéctées
-     * @return void
-     */
-    private static function processRule(Rule $rule, array $vars)
+    private static function processRule($action, array $vars)
     {
-        $controllerName = $rule->controller;
+        $action = explode('::', $action);
+        $controller = $action[0];
+        $method = $action[1];
 
         /**
          * @var $ctrl \Naski\Controller
          */
-        $ctrl = new $controllerName($rule);
+        $ctrl = new $controller();
         $ctrl->init();
-        call_user_func_array(array($ctrl, $rule->action), $vars);
+        call_user_func_array(array($ctrl, $method), $vars);
     }
 
     /**
