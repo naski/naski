@@ -15,18 +15,14 @@ abstract class Controller
     public $raw;
 
     private $_inputsValids = true;
-    private $_rule;
 
     /**
      *
      * @param Rule $rule La régle exécutée en cas d'un routing. Peut être nulle
      */
-    public function __construct($rule)
+    public function __construct()
     {
-        if ($rule != null) {
-            $this->_rule = $rule;
-            $this->buildInputs();
-        }
+        $this->buildInputs();
     }
 
     private static $fackedRaw = null;
@@ -52,9 +48,6 @@ abstract class Controller
 
         $this->raw = self::getRaw();
         $this->json = json_decode($this->raw, true);
-        if ($this->_rule->needJson && !$this->json) {
-            $this->_inputsValids = false;
-        }
 
     }
 

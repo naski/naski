@@ -21,16 +21,6 @@ class RoutingTest extends TestCase
         $this->expectOutputString("ok");
     }
 
-    public function testPostRuleBad()
-    {
-        $config = new Config();
-        $config->loadFile(__DIR__.'/routing_post.json');
-        $routing = Routing::buildFromConfig($config);
-        $_POST['username'] = 'john';
-        $routing->process('/login');
-        $this->expectOutputString("bad");
-    }
-
     public function testRestGetUser()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -59,30 +49,21 @@ class RoutingTest extends TestCase
         $config = new Config();
         $config->loadFile(__DIR__.'/routing_rest.json');
         $routing = Routing::buildFromConfig($config);
-        $out = $routing->process('/caca');
+        $out = $routing->process('/option');
         $this->assertTrue($out);
         $this->expectOutputString("options");
     }
 
     public function test404()
     {
+        $this->expectException(\Symfony\Component\Routing\Exception\ResourceNotFoundException::class);
+
         $_SERVER['REQUEST_METHOD'] = 'DELETE';
         $config = new Config();
         $config->loadFile(__DIR__.'/routing_rest.json');
         $routing = Routing::buildFromConfig($config);
         $out = $routing->process('/caca');
-        $this->assertTrue($out);
-        $this->expectOutputString("all");
     }
 
-    public function testJsonNeed()
-    {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
-        $config = new Config();
-        $config->loadFile(__DIR__.'/routing_rest.json');
-        $routing = Routing::buildFromConfig($config);
-         $routing->process('/rest/json');
-        $this->expectOutputString("NOJSON");
-    }
 
 }

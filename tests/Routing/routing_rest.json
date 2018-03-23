@@ -10,8 +10,7 @@
             "method": ["POST"],
             "path": "/rest/json",
             "controller": "RestController",
-            "action": "getJSON",
-            "needJson": true
+            "action": "getJSON"
         },
         {
             "method": ["GET"],
@@ -21,15 +20,9 @@
         },
         {
             "method": "OPTIONS",
-            "path": "*",
+            "path": "/option",
             "controller": "RestController",
             "action": "options"
-        },
-        {
-            "method": "*",
-            "path": "*",
-            "controller": "RestController",
-            "action": "all"
         }
     ]
 }

@@ -4,6 +4,7 @@ namespace Naski\Routing;
 
 use FastRoute\Dispatcher;
 use Naski\Config\Config;
+use ReflectionClass;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
@@ -22,10 +23,7 @@ class Routing
     /**
      * @var Dispatcher
      */
-    private $_dispatcher;
     private $_rulesArray = array(); // array<Rule>
-    private $_defaultRule = [];
-
 
     /**
      * @var Router
@@ -42,19 +40,34 @@ class Routing
      * @param  Config $config La config à charger, voir des exemples pour le schéma
      * @return self         Le Routing instancié
      */
-    public static function buildFromConfig(string $yaml_filename) :self
+    public static function buildFromYaml(string $yaml_filename) :self
     {
         $obj = new self();
         $obj->router = new Router(
             new YamlFileLoader(ROOT_SYSTEM),
             $yaml_filename
         );
-        $obj->routes = new RouteCollection();
+        return $obj;
+    }
+
+    /**
+     * Instancie un routing à partir d'une Config
+     * @param  Config $config La config à charger, voir des exemples pour le schéma
+     * @return self         Le Routing instancié
+     */
+    public static function buildFromConfig(Config $config) :self
+    {
+        $obj = new self();
+        foreach ($config['rules'] as $r) {
+            $obj->addRule(new Rule($r));
+        }
+
         return $obj;
     }
 
     public function __construct()
     {
+        $this->routes = new RouteCollection();
 
     }
 
@@ -77,12 +90,24 @@ class Routing
     {
         $name = str_replace('/', '_', $rule->path);
 
+        if (is_array($rule->method)) {
+            $methods = $rule->method;
+        } else {
+            $methods = [$rule->method];
+        }
+
+        $name .= '_' . implode('_', $methods);
+
         $this->routes->add($name, new Route(
             $rule->path,
             [
                 '_controller' => $rule->controller . '::' . $rule->action,
-                '_methods' => [$rule->method],
-            ]
+            ],
+            [],
+            [],
+            '',
+            [],
+            $methods
         ));
     }
 
@@ -98,24 +123,46 @@ class Routing
 
         $matcher = new UrlMatcher($this->routes, new RequestContext('/', $httpMethod));
 
-        $parameters = $matcher->match('/foo/bar');
-        $action = $parameters['_controller'];
+        $parameters = $matcher->match($path);
 
-        self::processRule($action, []);
+        if ($parameters) {
+            $action = $parameters['_controller'];
+
+            $action = explode('::', $action);
+            $controller = $action[0];
+            $methodName = $action[1];
+
+            $reflector = new ReflectionClass($controller);
+            $method = $reflector->getMethod($methodName);
+            $param_method = $method->getParameters();
+
+            $vars = [];
+            foreach ($param_method as $param) {
+                if ($parameters[$param->name]) {
+                    $vars[$param->name] = $parameters[$param->name];
+                } else {
+                    throw new \Exception('Parameter not found in path');
+                }
+            }
+
+            if ($processIt) {
+                self::processRule($controller, $methodName, $vars);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
-    private static function processRule($action, array $vars)
+    private static function processRule($controller, $action, array $vars)
     {
-        $action = explode('::', $action);
-        $controller = $action[0];
-        $method = $action[1];
-
         /**
          * @var $ctrl \Naski\Controller
          */
         $ctrl = new $controller();
         $ctrl->init();
-        call_user_func_array(array($ctrl, $method), $vars);
+        call_user_func_array(array($ctrl, $action), $vars);
     }
 
     /**
