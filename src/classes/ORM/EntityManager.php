@@ -2,24 +2,24 @@
 
 namespace Naski\ORM;
 
-use Naski\Pdo\AbstractDatabase;
+use Naski\Pdo\PdoDatabase;
 
 abstract class EntityManager
 {
 
     /**
-     * @return AbstractDatabase
+     * @return PdoDatabase
      */
-    protected abstract function getDb(): AbstractDatabase;
+    protected abstract function getDb(): PdoDatabase;
 
     /**
      * @param string $query
      * @param $type
      * @return Entity
      */
-    public function loadEntity(string $query, $type)
+    public function loadEntity(string $query, $type, $args = [])
     {
-        $entitys = $this->loadEntitys($query, $type);
+        $entitys = $this->loadEntitys($query, $type, $args);
         return $entitys[0] ?? null;
     }
 
@@ -29,10 +29,11 @@ abstract class EntityManager
      * @return array
      * @throws \Naski\Pdo\BadQueryException
      */
-    public function loadEntitys($query, $type)
+    public function loadEntitys($query, $type, $args = [])
     {
         $tab = array();
-        $q = $this->getDb()->query($query);
+        $q = $this->getDb()->getPdoInstance()->prepare($query);
+        $q->execute($args);
         while ($l = $q->fetch()) {
             $tab[] =  new $type($l);
         }
