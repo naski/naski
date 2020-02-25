@@ -271,7 +271,12 @@ abstract class AbstractDatabase
             $comparator  = $tests[$key];
             if ($comparator == '?') {
                 return "jsonb_exists($key_sql,$value)";
-            } else {
+            } else if ($comparator == '@>') {
+            	$value = str_replace("'", "", $value);
+				$value = str_replace("{", "", $value);
+				$value = str_replace("}", "", $value);
+				return "$key_sql ".$comparator.' \'{' . $value . '}\'';
+			} else {
                 return "$key_sql ".$comparator." $value";
             }
         }
