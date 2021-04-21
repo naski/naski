@@ -17,10 +17,6 @@
         ]
     },
     "require": {
-        "php": ">=7.2.0",
-        "jenssegers/date": "^3.5",
-        "phpunit/php-timer": "^1.0",
-        "webmozart/json": "^1.2",
-        "mustangostang/spyc": "^0.5.1"
+        "php": ">=7.2.0"
     }
 }

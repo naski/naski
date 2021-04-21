@@ -2,9 +2,6 @@
 
 namespace Naski\Config;
 
-use /** @noinspection PhpUndefinedClassInspection */
-    Spyc;
-
 class Config implements \ArrayAccess
 {
 
