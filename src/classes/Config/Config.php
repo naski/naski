@@ -2,6 +2,8 @@
 
 namespace Naski\Config;
 
+use Spyc;
+
 class Config implements \ArrayAccess
 {
 
