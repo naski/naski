@@ -1,9 +1,0 @@
-{
-    "websites": [
-        {
-            "name": "Site 2",
-            "src": "./",
-            "initFile": "bad.php"
-        }
-    ]
-}

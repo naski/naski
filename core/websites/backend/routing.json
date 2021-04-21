@@ -1,9 +1,0 @@
-{
-    "rules": [
-        {
-            "path": "/clean_cache",
-            "controller": "\\Naski\\Controllers\\Backend",
-            "action": "cleanCache"
-        }
-    ]
-}

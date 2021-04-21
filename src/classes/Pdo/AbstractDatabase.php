@@ -2,7 +2,6 @@
 
 namespace Naski\Pdo;
 
-use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
 abstract class AbstractDatabase
@@ -30,22 +29,13 @@ abstract class AbstractDatabase
 
     /**
      * @param array $connexionDatas
-     * @param Logger $logger
+     * @param LoggerInterface $logger
      * @internal param array $keys : host, dbname, username, password
      */
-    public function __construct(array $connexionDatas, Logger $logger = null)
+    public function __construct(array $connexionDatas, LoggerInterface $logger)
     {
-        if ($logger == null) {
-            $logger = new Logger('unused_logger');
-        }
-        $this->setLogger($logger);
-
+		$this->_logger = $logger;
         $this->_connexionDatas = $connexionDatas;
-    }
-
-    public function setLogger(Logger $logger)
-    {
-        $this->_logger = $logger;
     }
 
     // Appeler quand on veut faire des requetes dont on sait qu'elles risques d'échouer
